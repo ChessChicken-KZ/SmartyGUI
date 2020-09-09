@@ -1,6 +1,7 @@
 package kz.chesschicken.smartygui;
 
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.render.RenderHelper;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.TextRenderer;
@@ -63,11 +64,9 @@ public class SmartyGui implements StationMod
                 osstring.append("UNKNOWN");
             }
 
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             osstring.append("UNKNOWN");
-        } finally
-        {
+        } finally {
             osstring.append(" ").append(System.getProperty("os.version"));
         }
         return osstring.toString();
@@ -75,14 +74,12 @@ public class SmartyGui implements StationMod
 
     public static String getCPUINFO()
     {
-        try
-        {
+        try {
             return Files.lines(Paths.get("/proc/cpuinfo"))
                     .filter(line -> line.startsWith("model name"))
                     .map(line -> line.replaceAll(".*: ", ""))
                     .findFirst().orElse("");
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -117,8 +114,7 @@ public class SmartyGui implements StationMod
         GL11.glEnable(3553);
     }
 
-    public static void renderItem(ItemRenderer ir, TextRenderer fr, TextureManager textureManager, ItemInstance itemInstance, int x, int y)
-    {
+    public static void renderItem(ItemRenderer ir, TextRenderer fr, TextureManager textureManager, ItemInstance itemInstance, int x, int y) {
         GL11.glPushMatrix();
         GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
         RenderHelper.enableLighting();
@@ -133,38 +129,26 @@ public class SmartyGui implements StationMod
         GL11.glPopMatrix();
     }
 
-    public static void logMessageAs(String sender, String string)
-    {
+    public static void logMessageAs(String sender, String string) {
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [" + sender + "] " + string);
     }
 
     @Override
     public void preInit() {
-        Category allConfig = getDefaultConfig().getCategory("Main");
-        Property opt_mmd = allConfig.getProperty("optionsMainmenudebug");
-        if(opt_mmd.getStringValue() == null) opt_mmd.setValue(true);
-        Property opt_sw = allConfig.getProperty("optionsShowwaila");
-        if(opt_sw.getStringValue() == null) opt_sw.setValue(true);
-        Property opt_ash = allConfig.getProperty("optionsArmorstatus");
-        if(opt_ash.getStringValue() == null) opt_ash.setValue(true);
-        Property opt_igt = allConfig.getProperty("optionsIngametooltip");
-        if(opt_igt.getStringValue() == null) opt_igt.setValue(true);
-
-        Category gradientWaila = getDefaultConfig().getCategory("Waila");
-        Property rgbS_r = gradientWaila.getProperty("startGradientR");
-        if(rgbS_r.getStringValue() == null) rgbS_r.setValue(0);
-        Property rgbS_g = gradientWaila.getProperty("startGradientG");
-        if(rgbS_g.getStringValue() == null) rgbS_g.setValue(0);
-        Property rgbS_b = gradientWaila.getProperty("startGradientB");
-        if(rgbS_b.getStringValue() == null) rgbS_b.setValue(0);
-        Property rgbE_r = gradientWaila.getProperty("endGradientR");
-        if(rgbE_r.getStringValue() == null) rgbE_r.setValue(0);
-        Property rgbE_g = gradientWaila.getProperty("endGradientG");
-        if(rgbE_g.getStringValue() == null) rgbE_g.setValue(0);
-        Property rgbE_b = gradientWaila.getProperty("endGradientB");
-        if(rgbE_b.getStringValue() == null) rgbE_b.setValue(0);
-
         getDefaultConfig().load();
+
+        Category allConfig = getDefaultConfig().getCategory("Main");
+        Property opt_mmd = allConfig.getProperty("optionsMainmenudebug", true);
+        Property opt_sw = allConfig.getProperty("optionsShowwaila", true);
+        Property opt_ash = allConfig.getProperty("optionsArmorstatus", true);
+        Property opt_igt = allConfig.getProperty("optionsIngametooltip", true);
+        Category gradientWaila = getDefaultConfig().getCategory("Waila");
+        Property rgbS_r = gradientWaila.getProperty("startGradientR",0);
+        Property rgbS_g = gradientWaila.getProperty("startGradientG",0);
+        Property rgbS_b = gradientWaila.getProperty("startGradientB",0);
+        Property rgbE_r = gradientWaila.getProperty("endGradientR",0);
+        Property rgbE_g = gradientWaila.getProperty("endGradientG",0);
+        Property rgbE_b = gradientWaila.getProperty("endGradientB",0);
 
         getDefaultConfig().save();
 
