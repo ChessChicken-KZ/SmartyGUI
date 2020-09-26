@@ -9,6 +9,7 @@ import net.minecraft.client.render.TextRenderer;
 import net.minecraft.client.render.entity.ItemRenderer;
 import net.minecraft.client.resource.language.TranslationStorage;
 import net.minecraft.client.util.ScreenScaler;
+import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.hit.HitType;
 import net.modificationstation.stationloader.impl.common.StationLoader;
@@ -47,7 +48,7 @@ public class MixinInGameGui {
                 String motd = "X: " + ix + " Y: " + iy + " Z: " + iz;
 
                 if (BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)] != null) {
-                    motd2 = BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)].getTranslatedName() + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
+                    motd2 = TranslationStorage.getInstance().translate(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)].getTranslatedName()) + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
                 } else {
                     motd2 = "Undefined NA:NA";
                 }
@@ -119,12 +120,19 @@ public class MixinInGameGui {
             if(this.minecraft.player.getHeldItem().method_723() < 1)
             {
                 ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey());
+
             }else
             {
                 ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey()) + " | " + (this.minecraft.player.getHeldItem().method_723() - this.minecraft.player.getHeldItem().getDamage()) + "/" + this.minecraft.player.getHeldItem().method_723();
             }
+
+            if(this.minecraft.player.getHeldItem().itemId == ItemBase.clock.id)
+            {
+                ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey()) + " | " + (minecraft.level.isDaylight() ? "Day" : "Night");
+            }
             fr.drawTextWithShadow(ver23, (int) screenScaler.scaledWidth / 2 - (fr.getTextWidth(ver23) / 2), (int) screenScaler.scaledHeight - 50, 16777215);
         }
+
     }
 
 
@@ -144,8 +152,11 @@ public class MixinInGameGui {
 
             stringToSent = "OS: " + SmartyGui.getOSNAME();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 26, 14737632);
-            stringToSent = "CPU: " + SmartyGui.getCPUINFO();
-            fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 36, 14737632);
+            if(SmartyGui.getCPUINFO() != null)
+            {
+                stringToSent = "CPU: " + SmartyGui.getCPUINFO();
+                fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 36, 14737632);
+            }
             stringToSent = "GPU: " + GL11.glGetString(GL11.GL_RENDERER);
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 46, 14737632);
             stringToSent = GL11.glGetString(GL11.GL_VERSION) + " " + GL11.glGetString(GL11.GL_VENDOR);

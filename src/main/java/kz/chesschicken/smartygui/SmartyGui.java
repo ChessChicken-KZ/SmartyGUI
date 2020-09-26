@@ -1,7 +1,6 @@
 package kz.chesschicken.smartygui;
 
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.render.RenderHelper;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.TextRenderer;
@@ -27,12 +26,26 @@ public class SmartyGui implements StationMod
     public static boolean options_showwaila;
     public static boolean options_armorstatus;
     public static boolean options_ingametooltip;
+    public static boolean options_guifurnaceextended;
+    public static boolean options_nearplayerlist;
+
+    public static boolean test1 = false;
+
     public static int[] waila_rgbvalues = new int[6];
+
+    public static String joinString(String[] strings)
+    {
+        String s = "";
+        for(int i = 0; i < strings.length; i++) { s = s + " " + strings[i]; }
+        return s.trim();
+    }
+
 
 
 
     public static String getOSNAME()
     {
+
         StringBuilder osstring = new StringBuilder();
         try
         {
@@ -75,10 +88,16 @@ public class SmartyGui implements StationMod
     public static String getCPUINFO()
     {
         try {
-            return Files.lines(Paths.get("/proc/cpuinfo"))
-                    .filter(line -> line.startsWith("model name"))
-                    .map(line -> line.replaceAll(".*: ", ""))
-                    .findFirst().orElse("");
+            String osName = System.getProperty("os.name");
+            if (osName == null) {
+                throw new IOException("os.name not found");
+            }
+            osName = osName.toLowerCase(Locale.ENGLISH);
+            if(osName.contains("linux"))
+                return Files.lines(Paths.get("/proc/cpuinfo"))
+                        .filter(line -> line.startsWith("model name"))
+                        .map(line -> line.replaceAll(".*: ", ""))
+                        .findFirst().orElse("");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -142,6 +161,8 @@ public class SmartyGui implements StationMod
         Property opt_sw = allConfig.getProperty("optionsShowwaila", true);
         Property opt_ash = allConfig.getProperty("optionsArmorstatus", true);
         Property opt_igt = allConfig.getProperty("optionsIngametooltip", true);
+        Property opt_gfe = allConfig.getProperty("optionsExtendedFurnaceGui", true);
+        Property opt_npl = allConfig.getProperty("optionsNearPlayerList", true);
         Category gradientWaila = getDefaultConfig().getCategory("Waila");
         Property rgbS_r = gradientWaila.getProperty("startGradientR",0);
         Property rgbS_g = gradientWaila.getProperty("startGradientG",0);
@@ -156,13 +177,15 @@ public class SmartyGui implements StationMod
         options_showwaila = opt_sw.getBooleanValue();
         options_armorstatus = opt_ash.getBooleanValue();
         options_ingametooltip = opt_igt.getBooleanValue();
+        options_guifurnaceextended = opt_gfe.getBooleanValue();
+        options_nearplayerlist = opt_npl.getBooleanValue();
 
-        waila_rgbvalues[0] = rgbS_r.getIntValue();
-        waila_rgbvalues[1] = rgbS_g.getIntValue();
-        waila_rgbvalues[2] = rgbS_b.getIntValue();
-        waila_rgbvalues[3] = rgbE_r.getIntValue();
-        waila_rgbvalues[4] = rgbE_g.getIntValue();
-        waila_rgbvalues[5] = rgbE_b.getIntValue();
+        waila_rgbvalues[0] = ((rgbS_r.getIntValue() < 256 && rgbS_r.getIntValue() >= 0) ? rgbS_r.getIntValue() : 0);
+        waila_rgbvalues[1] = ((rgbS_g.getIntValue() < 256 && rgbS_g.getIntValue() >= 0) ? rgbS_g.getIntValue() : 0);
+        waila_rgbvalues[2] = ((rgbS_b.getIntValue() < 256 && rgbS_b.getIntValue() >= 0) ? rgbS_b.getIntValue() : 0);
+        waila_rgbvalues[3] = ((rgbE_r.getIntValue() < 256 && rgbE_r.getIntValue() >= 0) ? rgbE_r.getIntValue() : 0);
+        waila_rgbvalues[4] = ((rgbE_g.getIntValue() < 256 && rgbE_g.getIntValue() >= 0) ? rgbE_g.getIntValue() : 0);
+        waila_rgbvalues[5] = ((rgbE_b.getIntValue() < 256 && rgbE_b.getIntValue() >= 0) ? rgbE_b.getIntValue() : 0);
 
     }
 }

@@ -32,6 +32,8 @@ public class MixinMainMenu extends ScreenBase {
 
             stringToSent = "Using " + Mixin.class.getCanonicalName() + " as Injector";
             this.drawTextWithShadow(this.textManager, stringToSent, scaledWidth - this.textManager.getTextWidth(stringToSent) - 2, 22, 5263440);
+
+
         }
     }
 }
