@@ -31,7 +31,7 @@ public class MixinInGameGui {
 
 
     @Inject(method = "renderHud", at = @At("TAIL"))
-    public void renderWaila(float f, boolean flag, int i, int j, CallbackInfo ci) {
+    public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
 
         //Waila Part
         if (SmartyGui.options_showwaila && this.minecraft.hitResult != null && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud) {
@@ -50,7 +50,7 @@ public class MixinInGameGui {
                 if (BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)] != null) {
                     motd2 = TranslationStorage.getInstance().translate(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)].getTranslatedName()) + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
                 } else {
-                    motd2 = "Undefined NA:NA";
+                    motd2 = null;
                 }
 
                 if (this.minecraft.textRenderer.getTextWidth(motd) > this.minecraft.textRenderer.getTextWidth(motd2))
@@ -60,18 +60,14 @@ public class MixinInGameGui {
                     SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 36, 40, new Color(SmartyGui.waila_rgbvalues[0], SmartyGui.waila_rgbvalues[1], SmartyGui.waila_rgbvalues[2]).getRGB(), new Color(SmartyGui.waila_rgbvalues[3], SmartyGui.waila_rgbvalues[4], SmartyGui.waila_rgbvalues[5]).getRGB());
                 }
 
-
-
-                if(!motd.equalsIgnoreCase("Undefined NA:NA"))
-                {
+                if(motd2 != null)
                     SmartyGui.renderItem(ir,fr,this.minecraft.textureManager, new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)]), 10, 18);
-                }
-
-
-
+                else
+                    motd2 = "undefined";
 
                 fr.drawText(motd, 30, 18, 16777215);
                 fr.drawText(motd2, 30, 28, 16777215);
+
             } else {
                 /*
                  * Part with Entity
