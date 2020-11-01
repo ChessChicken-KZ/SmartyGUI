@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "smartygui",
+  "version": "1.0",
+
+  "name": "Smarty GUI",
+  "description": "Waila and Extended F3 Menu!",
+  "authors": [
+    "ChessChicken"
+  ],
+  "contact": {
+    "issues": "https://github.com/ChessChicken-Ru/SmartyGui/issues",
+    "sources": "https://github.com/ChessChicken-Ru/SmartyGui"
+  },
+
+  "license": "MIT",
+  "icon": "assets/smartygui/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "stationmod": [
+      "kz.chesschicken.smartygui.SmartyGui"
+    ]
+  },
+  "mixins": [
+    "smartygui.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

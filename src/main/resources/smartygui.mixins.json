@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "kz.chesschicken.smartygui.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "MixinInGameGui",
+    "MixinMainMenu",
+    "MixinGuiFurnace"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
