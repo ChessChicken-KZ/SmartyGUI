@@ -30,18 +30,8 @@ public class SmartyGui implements StationMod
     public static boolean options_nearplayerlist;
     public static boolean options_furnaceinfo;
 
-    public static boolean test1 = false;
 
     public static int[] waila_rgbvalues = new int[6];
-
-    public static String joinString(String[] strings)
-    {
-        String s = "";
-        for(int i = 0; i < strings.length; i++) { s = s + " " + strings[i]; }
-        return s.trim();
-    }
-
-
 
 
     public static String getOSNAME()
@@ -69,9 +59,8 @@ public class SmartyGui implements StationMod
                 osstring.append("MAC OS");
             } else if (osName.contains("sun os")
                     || osName.contains("sunos")
-                    || osName.contains("solaris")) {
-                osstring.append("POSIX UNIX");
-            } else if (osName.contains("hp-ux")
+                    || osName.contains("solaris")
+                    || osName.contains("hp-ux")
                     || osName.contains("aix")) {
                 osstring.append("POSIX UNIX");
             } else {
