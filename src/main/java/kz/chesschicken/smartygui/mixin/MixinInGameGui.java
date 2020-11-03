@@ -48,7 +48,7 @@ public class MixinInGameGui {
                 String motd = "X: " + ix + " Y: " + iy + " Z: " + iz;
 
                 if (BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)] != null) {
-                    motd2 = TranslationStorage.getInstance().method_995(new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)]).getTranslationKey()).trim() + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
+                    motd2 = TranslationStorage.getInstance().method_995(new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)], 1, this.minecraft.level.getTileMeta(ix,iy,iz)).getTranslationKey()).trim() + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
                 } else {
                     motd2 = null;
                 }
@@ -61,7 +61,7 @@ public class MixinInGameGui {
                 }
 
                 if(motd2 != null)
-                    SmartyGui.renderItem(ir,fr,this.minecraft.textureManager, new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)]), 10, 18);
+                    SmartyGui.renderItem(ir,fr,this.minecraft.textureManager, new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)], 1, this.minecraft.level.getTileMeta(ix,iy,iz)), 10, 18);
                 else
                     motd2 = "undefined";
 
