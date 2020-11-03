@@ -48,7 +48,7 @@ public class MixinInGameGui {
                 String motd = "X: " + ix + " Y: " + iy + " Z: " + iz;
 
                 if (BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)] != null) {
-                    motd2 = TranslationStorage.getInstance().translate(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)].getTranslatedName()) + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
+                    motd2 = TranslationStorage.getInstance().method_995(new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)]).getTranslationKey()).trim() + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
                 } else {
                     motd2 = null;
                 }
