@@ -66,12 +66,12 @@ dependencies {
 
 
 	compile "tk.valoeghese:ZoesteriaConfig:1.3.2"
-	modImplementation "net.modificationstation:StationLoader:1.+:dev"
 
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.modificationstation:StationLoader:1.+:dev"
 }
 
 processResources {

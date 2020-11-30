@@ -161,7 +161,7 @@ public class MixinInGameGui {
 
             stringToSent = "Loaded Fabric Mods: " + FabricLoader.getInstance().getAllMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 76, 14737632);
-            stringToSent = "Loaded SL Mods: " + StationLoader.INSTANCE.getAllMods().size();
+            stringToSent = "Loaded SL Mods: " + StationLoader.INSTANCE.getAllStationMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86, 14737632);
 
 
