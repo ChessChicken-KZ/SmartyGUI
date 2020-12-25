@@ -2,6 +2,7 @@ package kz.chesschicken.smartygui.mixin;
 
 
 import kz.chesschicken.smartygui.SmartyGui;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
 import net.minecraft.client.Minecraft;
@@ -9,6 +10,9 @@ import net.minecraft.client.render.TextRenderer;
 import net.minecraft.client.render.entity.ItemRenderer;
 import net.minecraft.client.resource.language.TranslationStorage;
 import net.minecraft.client.util.ScreenScaler;
+import net.minecraft.entity.Living;
+import net.minecraft.entity.Painting;
+import net.minecraft.entity.animal.Sheep;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.hit.HitType;
@@ -29,6 +33,7 @@ public class MixinInGameGui {
     @Shadow
     private Minecraft minecraft;
 
+    private int tickGui = 40;
 
     @Inject(method = "renderHud", at = @At("TAIL"))
     public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
@@ -86,6 +91,11 @@ public class MixinInGameGui {
 
                 fr.drawText(motd2, 10, 28, 16777215);
                 fr.drawText("ID: " + this.minecraft.hitResult.field_1989.entityId, 10, 38, 16777215);
+
+
+                //fr.drawText("Health: " + (this.minecraft.level.isClient ? this.minecraft.hitResult.field_1989.getDataTracker().getInt(30) : ((Living)minecraft.hitResult.field_1989).health), 10, 48, 16777215);
+                fr.drawText("Health: " + this.minecraft.hitResult.field_1989.getDataTracker().getInt(30), 10, 48, 16777215);
+
             }
         }
 

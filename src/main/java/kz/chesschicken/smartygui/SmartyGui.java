@@ -1,6 +1,8 @@
 package kz.chesschicken.smartygui;
 
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.render.RenderHelper;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.TextRenderer;
@@ -9,6 +11,7 @@ import net.minecraft.client.texture.TextureManager;
 import net.minecraft.item.ItemInstance;
 import net.modificationstation.stationloader.api.common.config.Category;
 import net.modificationstation.stationloader.api.common.config.Property;
+import net.modificationstation.stationloader.api.common.event.packet.PacketRegister;
 import net.modificationstation.stationloader.api.common.mod.StationMod;
 import org.lwjgl.opengl.GL11;
 
@@ -144,40 +147,41 @@ public class SmartyGui implements StationMod
 
     @Override
     public void preInit() {
-        getDefaultConfig().load();
+        //PacketRegister.EVENT.register(new PacketEntityHP());
 
-        Category allConfig = getDefaultConfig().getCategory("Main");
-        Property opt_mmd = allConfig.getProperty("optionsMainmenudebug", true);
-        Property opt_sw = allConfig.getProperty("optionsShowwaila", true);
-        Property opt_ash = allConfig.getProperty("optionsArmorstatus", true);
-        Property opt_igt = allConfig.getProperty("optionsIngametooltip", true);
-        Property opt_gfe = allConfig.getProperty("optionsExtendedFurnaceGui", true);
-        Property opt_npl = allConfig.getProperty("optionsNearPlayerList", true);
-        Property opt_fui = allConfig.getProperty("optionsFurnaceInfo", true);
-        Category gradientWaila = getDefaultConfig().getCategory("Waila");
-        Property rgbS_r = gradientWaila.getProperty("startGradientR",0);
-        Property rgbS_g = gradientWaila.getProperty("startGradientG",0);
-        Property rgbS_b = gradientWaila.getProperty("startGradientB",0);
-        Property rgbE_r = gradientWaila.getProperty("endGradientR",0);
-        Property rgbE_g = gradientWaila.getProperty("endGradientG",0);
-        Property rgbE_b = gradientWaila.getProperty("endGradientB",0);
+        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            Category allConfig = getDefaultConfig().getCategory("Main");
+            Property opt_mmd = allConfig.getProperty("optionsMainmenudebug", true);
+            Property opt_sw = allConfig.getProperty("optionsShowwaila", true);
+            Property opt_ash = allConfig.getProperty("optionsArmorstatus", true);
+            Property opt_igt = allConfig.getProperty("optionsIngametooltip", true);
+            Property opt_gfe = allConfig.getProperty("optionsExtendedFurnaceGui", true);
+            Property opt_npl = allConfig.getProperty("optionsNearPlayerList", true);
+            Property opt_fui = allConfig.getProperty("optionsFurnaceInfo", true);
+            Category gradientWaila = getDefaultConfig().getCategory("Waila");
+            Property rgbS_r = gradientWaila.getProperty("startGradientR", 0);
+            Property rgbS_g = gradientWaila.getProperty("startGradientG", 0);
+            Property rgbS_b = gradientWaila.getProperty("startGradientB", 0);
+            Property rgbE_r = gradientWaila.getProperty("endGradientR", 0);
+            Property rgbE_g = gradientWaila.getProperty("endGradientG", 0);
+            Property rgbE_b = gradientWaila.getProperty("endGradientB", 0);
 
-        getDefaultConfig().save();
+            getDefaultConfig().save();
 
-        options_mainmenudebug = opt_mmd.getBooleanValue();
-        options_showwaila = opt_sw.getBooleanValue();
-        options_armorstatus = opt_ash.getBooleanValue();
-        options_ingametooltip = opt_igt.getBooleanValue();
-        options_guifurnaceextended = opt_gfe.getBooleanValue();
-        options_nearplayerlist = opt_npl.getBooleanValue();
-        options_furnaceinfo = opt_fui.getBooleanValue();
+            options_mainmenudebug = opt_mmd.getBooleanValue();
+            options_showwaila = opt_sw.getBooleanValue();
+            options_armorstatus = opt_ash.getBooleanValue();
+            options_ingametooltip = opt_igt.getBooleanValue();
+            options_guifurnaceextended = opt_gfe.getBooleanValue();
+            options_nearplayerlist = opt_npl.getBooleanValue();
+            options_furnaceinfo = opt_fui.getBooleanValue();
 
-        waila_rgbvalues[0] = ((rgbS_r.getIntValue() < 256 && rgbS_r.getIntValue() >= 0) ? rgbS_r.getIntValue() : 0);
-        waila_rgbvalues[1] = ((rgbS_g.getIntValue() < 256 && rgbS_g.getIntValue() >= 0) ? rgbS_g.getIntValue() : 0);
-        waila_rgbvalues[2] = ((rgbS_b.getIntValue() < 256 && rgbS_b.getIntValue() >= 0) ? rgbS_b.getIntValue() : 0);
-        waila_rgbvalues[3] = ((rgbE_r.getIntValue() < 256 && rgbE_r.getIntValue() >= 0) ? rgbE_r.getIntValue() : 0);
-        waila_rgbvalues[4] = ((rgbE_g.getIntValue() < 256 && rgbE_g.getIntValue() >= 0) ? rgbE_g.getIntValue() : 0);
-        waila_rgbvalues[5] = ((rgbE_b.getIntValue() < 256 && rgbE_b.getIntValue() >= 0) ? rgbE_b.getIntValue() : 0);
-
+            waila_rgbvalues[0] = ((rgbS_r.getIntValue() < 256 && rgbS_r.getIntValue() >= 0) ? rgbS_r.getIntValue() : 0);
+            waila_rgbvalues[1] = ((rgbS_g.getIntValue() < 256 && rgbS_g.getIntValue() >= 0) ? rgbS_g.getIntValue() : 0);
+            waila_rgbvalues[2] = ((rgbS_b.getIntValue() < 256 && rgbS_b.getIntValue() >= 0) ? rgbS_b.getIntValue() : 0);
+            waila_rgbvalues[3] = ((rgbE_r.getIntValue() < 256 && rgbE_r.getIntValue() >= 0) ? rgbE_r.getIntValue() : 0);
+            waila_rgbvalues[4] = ((rgbE_g.getIntValue() < 256 && rgbE_g.getIntValue() >= 0) ? rgbE_g.getIntValue() : 0);
+            waila_rgbvalues[5] = ((rgbE_b.getIntValue() < 256 && rgbE_b.getIntValue() >= 0) ? rgbE_b.getIntValue() : 0);
+        }
     }
 }
