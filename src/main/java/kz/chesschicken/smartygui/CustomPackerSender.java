@@ -20,9 +20,6 @@ public class CustomPackerSender implements PacketRegister {
     public static String[] staticPlayerList;
     public static int maxplayerList;
 
-
-
-
     @Environment(EnvType.CLIENT)
     public static void queue_PacketGetList()
     {

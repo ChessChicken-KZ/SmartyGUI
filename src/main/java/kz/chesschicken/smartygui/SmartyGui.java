@@ -26,14 +26,14 @@ public class SmartyGui implements StationMod
 {
 
     public static boolean options_mainmenudebug;
-    public static boolean options_showwaila;
+    public static boolean options_showblock;
     public static boolean options_armorstatus;
     public static boolean options_ingametooltip;
     public static boolean options_guifurnaceextended;
     public static boolean options_playerlist;
 
 
-    public static int[] waila_rgbvalues = new int[6];
+    public static int[] showblock_rgbvalues = new int[6];
 
 
     public static String getOSNAME()
@@ -153,8 +153,8 @@ public class SmartyGui implements StationMod
             Property opt_mmd = allConfig.getProperty("optionsMainmenudebug", true);
             opt_mmd.setComment("Small debug info in main menu");
 
-            Property opt_sw = allConfig.getProperty("optionsShowwaila", true);
-            opt_sw.setComment("Waila module!");
+            Property opt_sb = allConfig.getProperty("optionsShowBlock", true);
+            opt_sb.setComment("ShowBlock module!");
 
             Property opt_ash = allConfig.getProperty("optionsArmorstatus", true);
             opt_ash.setComment("ArmorStatusHUD module!");
@@ -166,40 +166,40 @@ public class SmartyGui implements StationMod
             opt_gfe.setComment("Info in furnace gui (cook, burn time, etc.)");
 
             Property opt_opl = allConfig.getProperty("optionsPlayerList", true);
-            opt_opl.setComment("Coming soon");
+            opt_opl.setComment("PlayerList (config only client side)");
 
 
-            Category gradientWaila = getDefaultConfig().getCategory("Waila");
+            Category gradientShowBlock = getDefaultConfig().getCategory("ShowBlock");
 
-            Property rgbS_r = gradientWaila.getProperty("startGradientR", 0);
+            Property rgbS_r = gradientShowBlock.getProperty("startGradientR", 0);
             rgbS_r.setComment("Starting Red gradient color! (min: 0, max: 255)");
-            Property rgbS_g = gradientWaila.getProperty("startGradientG", 0);
+            Property rgbS_g = gradientShowBlock.getProperty("startGradientG", 0);
             rgbS_g.setComment("Starting Green gradient color! (min: 0, max: 255)");
-            Property rgbS_b = gradientWaila.getProperty("startGradientB", 0);
+            Property rgbS_b = gradientShowBlock.getProperty("startGradientB", 0);
             rgbS_b.setComment("Starting Blue gradient color! (min: 0, max: 255)");
-            Property rgbE_r = gradientWaila.getProperty("endGradientR", 0);
+            Property rgbE_r = gradientShowBlock.getProperty("endGradientR", 0);
             rgbE_r.setComment("Ending Red gradient color! (min: 0, max: 255)");
-            Property rgbE_g = gradientWaila.getProperty("endGradientG", 0);
+            Property rgbE_g = gradientShowBlock.getProperty("endGradientG", 0);
             rgbE_g.setComment("Ending Green gradient color! (min: 0, max: 255)");
-            Property rgbE_b = gradientWaila.getProperty("endGradientB", 0);
+            Property rgbE_b = gradientShowBlock.getProperty("endGradientB", 0);
             rgbE_b.setComment("Ending Blue gradient color! (min: 0, max: 255)");
 
             getDefaultConfig().save();
 
             options_mainmenudebug = opt_mmd.getBooleanValue();
-            options_showwaila = opt_sw.getBooleanValue();
+            options_showblock = opt_sb.getBooleanValue();
             options_armorstatus = opt_ash.getBooleanValue();
             options_ingametooltip = opt_igt.getBooleanValue();
             options_guifurnaceextended = opt_gfe.getBooleanValue();
             options_playerlist = opt_opl.getBooleanValue();
 
 
-            waila_rgbvalues[0] = ((rgbS_r.getIntValue() < 256 && rgbS_r.getIntValue() >= 0) ? rgbS_r.getIntValue() : 0);
-            waila_rgbvalues[1] = ((rgbS_g.getIntValue() < 256 && rgbS_g.getIntValue() >= 0) ? rgbS_g.getIntValue() : 0);
-            waila_rgbvalues[2] = ((rgbS_b.getIntValue() < 256 && rgbS_b.getIntValue() >= 0) ? rgbS_b.getIntValue() : 0);
-            waila_rgbvalues[3] = ((rgbE_r.getIntValue() < 256 && rgbE_r.getIntValue() >= 0) ? rgbE_r.getIntValue() : 0);
-            waila_rgbvalues[4] = ((rgbE_g.getIntValue() < 256 && rgbE_g.getIntValue() >= 0) ? rgbE_g.getIntValue() : 0);
-            waila_rgbvalues[5] = ((rgbE_b.getIntValue() < 256 && rgbE_b.getIntValue() >= 0) ? rgbE_b.getIntValue() : 0);
+            showblock_rgbvalues[0] = ((rgbS_r.getIntValue() < 256 && rgbS_r.getIntValue() >= 0) ? rgbS_r.getIntValue() : 0);
+            showblock_rgbvalues[1] = ((rgbS_g.getIntValue() < 256 && rgbS_g.getIntValue() >= 0) ? rgbS_g.getIntValue() : 0);
+            showblock_rgbvalues[2] = ((rgbS_b.getIntValue() < 256 && rgbS_b.getIntValue() >= 0) ? rgbS_b.getIntValue() : 0);
+            showblock_rgbvalues[3] = ((rgbE_r.getIntValue() < 256 && rgbE_r.getIntValue() >= 0) ? rgbE_r.getIntValue() : 0);
+            showblock_rgbvalues[4] = ((rgbE_g.getIntValue() < 256 && rgbE_g.getIntValue() >= 0) ? rgbE_g.getIntValue() : 0);
+            showblock_rgbvalues[5] = ((rgbE_b.getIntValue() < 256 && rgbE_b.getIntValue() >= 0) ? rgbE_b.getIntValue() : 0);
         }
     }
 }

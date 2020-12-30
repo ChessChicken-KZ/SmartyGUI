@@ -3,18 +3,14 @@ package kz.chesschicken.smartygui.mixin;
 
 import kz.chesschicken.smartygui.CustomPackerSender;
 import kz.chesschicken.smartygui.SmartyGui;
-import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.ScreenBase;
 import net.minecraft.client.render.TextRenderer;
 import net.minecraft.client.render.entity.ItemRenderer;
 import net.minecraft.client.resource.language.TranslationStorage;
 import net.minecraft.client.util.ScreenScaler;
 import net.minecraft.entity.Living;
-import net.minecraft.entity.Painting;
-import net.minecraft.entity.animal.Sheep;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.hit.HitType;
@@ -42,8 +38,8 @@ public class MixinInGameGui {
     @Inject(method = "renderHud", at = @At("TAIL"))
     public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
 
-        //Waila Part
-        if (SmartyGui.options_showwaila && this.minecraft.hitResult != null && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud) {
+        //ShowBlock Part
+        if (SmartyGui.options_showblock && this.minecraft.hitResult != null && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud) {
             TextRenderer fr = minecraft.textRenderer;
             ItemRenderer ir = new ItemRenderer();
             if (this.minecraft.hitResult.type == HitType.TILE) {
@@ -64,9 +60,9 @@ public class MixinInGameGui {
 
                 if (this.minecraft.textRenderer.getTextWidth(motd) > this.minecraft.textRenderer.getTextWidth(motd2))
                 {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 36, 40, new Color(SmartyGui.waila_rgbvalues[0], SmartyGui.waila_rgbvalues[1], SmartyGui.waila_rgbvalues[2]).getRGB(), new Color(SmartyGui.waila_rgbvalues[3], SmartyGui.waila_rgbvalues[4], SmartyGui.waila_rgbvalues[5]).getRGB());
+                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 36, 40, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
                 } else {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 36, 40, new Color(SmartyGui.waila_rgbvalues[0], SmartyGui.waila_rgbvalues[1], SmartyGui.waila_rgbvalues[2]).getRGB(), new Color(SmartyGui.waila_rgbvalues[3], SmartyGui.waila_rgbvalues[4], SmartyGui.waila_rgbvalues[5]).getRGB());
+                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 36, 40, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
                 }
 
                 if(motd2 != null)
@@ -87,9 +83,9 @@ public class MixinInGameGui {
                 String motd = "X: " + (int) ix + " Y: " + (int) iy + " Z: " + (int) iz;
                 String motd2 = "Entity: " + this.minecraft.hitResult.field_1989.getClass().getSimpleName();
                 if (this.minecraft.textRenderer.getTextWidth(motd) > this.minecraft.textRenderer.getTextWidth(motd2)) {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 16, 60, new Color(SmartyGui.waila_rgbvalues[0], SmartyGui.waila_rgbvalues[1], SmartyGui.waila_rgbvalues[2]).getRGB(), new Color(SmartyGui.waila_rgbvalues[3], SmartyGui.waila_rgbvalues[4], SmartyGui.waila_rgbvalues[5]).getRGB());
+                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 16, 60, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
                 } else {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 16, 60, new Color(SmartyGui.waila_rgbvalues[0], SmartyGui.waila_rgbvalues[1], SmartyGui.waila_rgbvalues[2]).getRGB(), new Color(SmartyGui.waila_rgbvalues[3], SmartyGui.waila_rgbvalues[4], SmartyGui.waila_rgbvalues[5]).getRGB());
+                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 16, 60, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
                 }
                 fr.drawText(motd, 10, 18, 16777215);
 
@@ -98,10 +94,7 @@ public class MixinInGameGui {
 
                 fr.drawText(
                         this.minecraft.hitResult.field_1989 instanceof Living
-                                ?
-                                "Health: " + (this.minecraft.level.isClient ? this.minecraft.hitResult.field_1989.getDataTracker().getInt(30) : String.valueOf(((Living)this.minecraft.hitResult.field_1989).health))
-                                :
-                                "entitybase mob, not living"
+                                ? "Health: " + this.minecraft.hitResult.field_1989.getDataTracker().getInt(30) : "Health: Unknown"
                         , 10, 48, 16777215);
 
             }
@@ -236,7 +229,7 @@ public class MixinInGameGui {
 
             stringToSent = "Loaded Fabric Mods: " + FabricLoader.getInstance().getAllMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 76, 14737632);
-            stringToSent = "Loaded SL Mods: " + StationLoader.INSTANCE.getAllStationMods().size();
+            stringToSent = "Loaded StationAPI Mods: " + StationLoader.INSTANCE.getAllStationMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86, 14737632);
 
 
