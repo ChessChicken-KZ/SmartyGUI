@@ -15,13 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinLiving extends EntityBase {
 
 
+    //oof coding
     private int curr = 999;
     @Shadow public int health;
 
     public MixinLiving(Level level) { super(level); }
 
-    @Inject(method = "initDataTracker", at = @At("TAIL"))
-    private void initData(CallbackInfo ci)
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void initData(Level arg, CallbackInfo ci)
     {
         dataTracker.startTracking(30, this.health);
     }
@@ -29,13 +30,7 @@ public abstract class MixinLiving extends EntityBase {
     @Inject(method = "tickHandSwing", at = @At("TAIL"))
     private void a1(CallbackInfo ci)
     {
-        if(curr == 999)
-            curr = this.health;
-        if(curr != this.health)
-        {
-            dataTracker.setInt(30, this.health);
-            curr = this.health;
-        }
+        dataTracker.setInt(30, this.health);
     }
 
 

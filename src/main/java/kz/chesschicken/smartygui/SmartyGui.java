@@ -30,8 +30,7 @@ public class SmartyGui implements StationMod
     public static boolean options_armorstatus;
     public static boolean options_ingametooltip;
     public static boolean options_guifurnaceextended;
-    public static boolean options_nearplayerlist;
-    public static boolean options_furnaceinfo;
+    public static boolean options_playerlist;
 
 
     public static int[] waila_rgbvalues = new int[6];
@@ -147,24 +146,43 @@ public class SmartyGui implements StationMod
 
     @Override
     public void preInit() {
-        //PacketRegister.EVENT.register(new PacketEntityHP());
+        PacketRegister.EVENT.register(new CustomPackerSender());
 
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             Category allConfig = getDefaultConfig().getCategory("Main");
             Property opt_mmd = allConfig.getProperty("optionsMainmenudebug", true);
+            opt_mmd.setComment("Small debug info in main menu");
+
             Property opt_sw = allConfig.getProperty("optionsShowwaila", true);
+            opt_sw.setComment("Waila module!");
+
             Property opt_ash = allConfig.getProperty("optionsArmorstatus", true);
+            opt_ash.setComment("ArmorStatusHUD module!");
+
             Property opt_igt = allConfig.getProperty("optionsIngametooltip", true);
+            opt_igt.setComment("InGame Tooltips module!");
+
             Property opt_gfe = allConfig.getProperty("optionsExtendedFurnaceGui", true);
-            Property opt_npl = allConfig.getProperty("optionsNearPlayerList", true);
-            Property opt_fui = allConfig.getProperty("optionsFurnaceInfo", true);
+            opt_gfe.setComment("Info in furnace gui (cook, burn time, etc.)");
+
+            Property opt_opl = allConfig.getProperty("optionsPlayerList", true);
+            opt_opl.setComment("Coming soon");
+
+
             Category gradientWaila = getDefaultConfig().getCategory("Waila");
+
             Property rgbS_r = gradientWaila.getProperty("startGradientR", 0);
+            rgbS_r.setComment("Starting Red gradient color! (min: 0, max: 255)");
             Property rgbS_g = gradientWaila.getProperty("startGradientG", 0);
+            rgbS_g.setComment("Starting Green gradient color! (min: 0, max: 255)");
             Property rgbS_b = gradientWaila.getProperty("startGradientB", 0);
+            rgbS_b.setComment("Starting Blue gradient color! (min: 0, max: 255)");
             Property rgbE_r = gradientWaila.getProperty("endGradientR", 0);
+            rgbE_r.setComment("Ending Red gradient color! (min: 0, max: 255)");
             Property rgbE_g = gradientWaila.getProperty("endGradientG", 0);
+            rgbE_g.setComment("Ending Green gradient color! (min: 0, max: 255)");
             Property rgbE_b = gradientWaila.getProperty("endGradientB", 0);
+            rgbE_b.setComment("Ending Blue gradient color! (min: 0, max: 255)");
 
             getDefaultConfig().save();
 
@@ -173,8 +191,8 @@ public class SmartyGui implements StationMod
             options_armorstatus = opt_ash.getBooleanValue();
             options_ingametooltip = opt_igt.getBooleanValue();
             options_guifurnaceextended = opt_gfe.getBooleanValue();
-            options_nearplayerlist = opt_npl.getBooleanValue();
-            options_furnaceinfo = opt_fui.getBooleanValue();
+            options_playerlist = opt_opl.getBooleanValue();
+
 
             waila_rgbvalues[0] = ((rgbS_r.getIntValue() < 256 && rgbS_r.getIntValue() >= 0) ? rgbS_r.getIntValue() : 0);
             waila_rgbvalues[1] = ((rgbS_g.getIntValue() < 256 && rgbS_g.getIntValue() >= 0) ? rgbS_g.getIntValue() : 0);
