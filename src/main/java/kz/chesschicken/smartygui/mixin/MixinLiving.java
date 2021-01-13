@@ -14,9 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Living.class)
 public abstract class MixinLiving extends EntityBase {
 
-
-    //oof coding
-    private int curr = 999;
     @Shadow public int health;
 
     public MixinLiving(Level level) { super(level); }

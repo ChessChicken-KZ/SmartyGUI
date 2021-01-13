@@ -6,49 +6,45 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.packet.AbstractPacket;
 import net.minecraft.server.MinecraftServer;
-import net.modificationstation.stationloader.api.common.event.packet.PacketRegister;
-import net.modificationstation.stationloader.api.common.factory.GeneralFactory;
-import net.modificationstation.stationloader.api.common.packet.CustomData;
-import net.modificationstation.stationloader.api.common.packet.PacketHelper;
-import uk.co.benjiweber.expressions.functions.QuadConsumer;
+import net.modificationstation.stationapi.api.common.event.packet.MessageListenerRegister;
+import net.modificationstation.stationapi.api.common.factory.GeneralFactory;
+import net.modificationstation.stationapi.api.common.packet.Message;
+import net.modificationstation.stationapi.api.common.packet.MessageListenerRegistry;
+import net.modificationstation.stationapi.api.common.packet.PacketHelper;
+import net.modificationstation.stationapi.api.common.registry.Identifier;
+import net.modificationstation.stationapi.api.common.registry.ModID;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiConsumer;
 
-public class CustomPackerSender implements PacketRegister {
+public class CustomPackerSender implements MessageListenerRegister {
     public static String[] staticPlayerList;
     public static int maxplayerList;
 
     @Environment(EnvType.CLIENT)
     public static void queue_PacketGetList()
     {
-        CustomData packet = GeneralFactory.INSTANCE.newInst(CustomData.class, "smartygui:playerlist");
+        Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlist");
         PacketHelper.INSTANCE.send((AbstractPacket) packet);
     }
 
 
 
-    @Override
-    public void registerPackets(QuadConsumer<Integer, Boolean, Boolean, Class<? extends AbstractPacket>> quadConsumer, Map<String, BiConsumer<PlayerBase, CustomData>> map) {
-        map.put("playerlist", this::handleSendPlayers);
-        map.put("playerlistResult", this::handleSendRes);
-    }
 
-    public void handleSendPlayers(PlayerBase playerBase, CustomData customData)
+
+    public void handleSendPlayers(PlayerBase playerBase, Message customData)
     {
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER)
         {
-            CustomData packet = GeneralFactory.INSTANCE.newInst(CustomData.class, "smartygui:playerlistResult");
-            packet.set(getPlayerNickList(((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverPlayerConnectionManager.players));
-            packet.set(new int[]{
+            Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlistResult");
+            packet.put(getPlayerNickList(((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverPlayerConnectionManager.players));
+            packet.put(new int[]{
                     ((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverProperties.getInteger("max-players", 20)
             });
             PacketHelper.INSTANCE.sendTo(playerBase, (AbstractPacket) packet);
         }
     }
 
-    public void handleSendRes(PlayerBase playerBase, CustomData customData)
+    public void handleSendRes(PlayerBase playerBase, Message customData)
     {
         staticPlayerList = customData.strings();
         maxplayerList = customData.ints()[0];
@@ -63,5 +59,12 @@ public class CustomPackerSender implements PacketRegister {
             toSend[i] = ((PlayerBase)players.get(i)).name;
         }
         return toSend;
+    }
+
+
+    @Override
+    public void registerMessageListeners(MessageListenerRegistry messageListenerRegistry, ModID modID) {
+        messageListenerRegistry.registerValue(Identifier.of(modID, "playerlist"), this::handleSendPlayers);
+        messageListenerRegistry.registerValue(Identifier.of(modID, "playerlistResult"), this::handleSendRes);
     }
 }

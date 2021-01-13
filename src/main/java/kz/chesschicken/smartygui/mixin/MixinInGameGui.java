@@ -14,7 +14,7 @@ import net.minecraft.entity.Living;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.hit.HitType;
-import net.modificationstation.stationloader.impl.common.StationLoader;
+import net.modificationstation.stationapi.impl.common.StationAPI;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -111,14 +111,14 @@ public class MixinInGameGui {
                 if(this.minecraft.player.inventory.armour[q] != null)
                 {
                     SmartyGui.renderItem(ir, fr, this.minecraft.textureManager, this.minecraft.player.inventory.armour[q], 1, scaledHeight - (minecraft.player.getHeldItem() != null ? 33 : 18) - (15 * q));
-                    fr.drawTextWithShadow(this.minecraft.player.inventory.armour[q].method_723() - this.minecraft.player.inventory.armour[q].getDamage() + "", 17, scaledHeight - (minecraft.player.getHeldItem() != null ? 28 : 13) - (15 * q), 16777215);
+                    fr.drawTextWithShadow(this.minecraft.player.inventory.armour[q].getDurability() - this.minecraft.player.inventory.armour[q].getDamage() + "", 17, scaledHeight - (minecraft.player.getHeldItem() != null ? 28 : 13) - (15 * q), 16777215);
                 }
             }
             if(minecraft.player.getHeldItem() != null)
             {
                 SmartyGui.renderItem(ir, fr, this.minecraft.textureManager, minecraft.player.getHeldItem(), 1, scaledHeight - 18);
                 fr.drawTextWithShadow(
-                        minecraft.player.getHeldItem().method_723() != 0 ? minecraft.player.getHeldItem().method_723() - minecraft.player.getHeldItem().getDamage() + "" : "", 17, scaledHeight - 13, 16777215);
+                        minecraft.player.getHeldItem().getDurability() != 0 ? minecraft.player.getHeldItem().getDurability() - minecraft.player.getHeldItem().getDamage() + "" : "", 17, scaledHeight - 13, 16777215);
 
             }
 
@@ -131,13 +131,13 @@ public class MixinInGameGui {
             ScreenScaler screenScaler = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight));
 
             String ver23;
-            if(this.minecraft.player.getHeldItem().method_723() < 1)
+            if(this.minecraft.player.getHeldItem().getDurability() < 1)
             {
                 ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey());
 
             }else
             {
-                ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey()) + " | " + (this.minecraft.player.getHeldItem().method_723() - this.minecraft.player.getHeldItem().getDamage()) + "/" + this.minecraft.player.getHeldItem().method_723();
+                ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey()) + " | " + (this.minecraft.player.getHeldItem().getDurability() - this.minecraft.player.getHeldItem().getDamage()) + "/" + this.minecraft.player.getHeldItem().getDurability();
             }
 
             if(this.minecraft.player.getHeldItem().itemId == ItemBase.clock.id)
@@ -229,7 +229,7 @@ public class MixinInGameGui {
 
             stringToSent = "Loaded Fabric Mods: " + FabricLoader.getInstance().getAllMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 76, 14737632);
-            stringToSent = "Loaded StationAPI Mods: " + StationLoader.INSTANCE.getAllStationMods().size();
+            stringToSent = "Loaded StationAPI Mods: " + StationAPI.INSTANCE.getModsToVerifyOnClient().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86, 14737632);
 
 

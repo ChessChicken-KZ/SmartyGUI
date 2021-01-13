@@ -9,10 +9,11 @@ import net.minecraft.client.render.TextRenderer;
 import net.minecraft.client.render.entity.ItemRenderer;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.item.ItemInstance;
-import net.modificationstation.stationloader.api.common.config.Category;
-import net.modificationstation.stationloader.api.common.config.Property;
-import net.modificationstation.stationloader.api.common.event.packet.PacketRegister;
-import net.modificationstation.stationloader.api.common.mod.StationMod;
+import net.modificationstation.stationapi.api.common.config.Category;
+import net.modificationstation.stationapi.api.common.config.Property;
+import net.modificationstation.stationapi.api.common.event.packet.MessageListenerRegister;
+import net.modificationstation.stationapi.api.common.mod.StationMod;
+import net.modificationstation.stationapi.api.common.registry.ModID;
 import org.lwjgl.opengl.GL11;
 
 import java.io.*;
@@ -31,6 +32,7 @@ public class SmartyGui implements StationMod
     public static boolean options_ingametooltip;
     public static boolean options_guifurnaceextended;
     public static boolean options_playerlist;
+    public static boolean options_lightweightgt;
 
 
     public static int[] showblock_rgbvalues = new int[6];
@@ -144,9 +146,10 @@ public class SmartyGui implements StationMod
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [" + sender + "] " + string);
     }
 
+
     @Override
-    public void preInit() {
-        PacketRegister.EVENT.register(new CustomPackerSender());
+    public void init(ModID modID) {
+        MessageListenerRegister.EVENT.register(new CustomPackerSender(), modID);
 
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             Category allConfig = getDefaultConfig().getCategory("Main");
@@ -167,6 +170,9 @@ public class SmartyGui implements StationMod
 
             Property opt_opl = allConfig.getProperty("optionsPlayerList", true);
             opt_opl.setComment("PlayerList (config only client side)");
+
+            Property opt_lgt = allConfig.getProperty("lightweightGuiTheme", false);
+            opt_lgt.setComment("Lightweight Gui theme (beta testing)");
 
 
             Category gradientShowBlock = getDefaultConfig().getCategory("ShowBlock");
@@ -192,6 +198,7 @@ public class SmartyGui implements StationMod
             options_ingametooltip = opt_igt.getBooleanValue();
             options_guifurnaceextended = opt_gfe.getBooleanValue();
             options_playerlist = opt_opl.getBooleanValue();
+            options_lightweightgt = opt_lgt.getBooleanValue();
 
 
             showblock_rgbvalues[0] = ((rgbS_r.getIntValue() < 256 && rgbS_r.getIntValue() >= 0) ? rgbS_r.getIntValue() : 0);
