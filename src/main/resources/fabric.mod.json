@@ -18,8 +18,11 @@
   "icon": "assets/smartygui/icon.png",
 
   "entrypoints": {
-    "stationapi:mod": [
+    "stationapi:mod_client": [
       "kz.chesschicken.smartygui.SmartyGui"
+    ],
+    "stationapi:mod_server": [
+      "kz.chesschicken.smartygui.SmartyGuiServer"
     ]
   },
   "mixins": [

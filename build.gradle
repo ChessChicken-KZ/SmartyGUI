@@ -73,19 +73,8 @@ dependencies {
 
 	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
 
-	def urlFile = { url, name ->
-		File file = new File("$buildDir/download/${name}.jar")
-		file.parentFile.mkdirs()
-		if (!file.exists()) {
-			new URL(url).withInputStream { downloadStream ->
-				file.withOutputStream { fileOut ->
-					fileOut << downloadStream
-				}
-			}
-		}
-		files(file.absolutePath)
-	}
-	compile urlFile("http://glass-launcher.net:8080/job/StationAPI/lastSuccessfulBuild/artifact/build/libs/StationAPI-2.0-dev.jar", "StationAPI")
+
+	modImplementation "com.github.ModificationStation:StationAPI:660082a:dev"
 }
 
 processResources {

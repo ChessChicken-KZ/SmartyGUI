@@ -115,11 +115,11 @@ public class SmartyGui implements StationMod
         Tessellator var15 = Tessellator.INSTANCE;
         var15.start();
         var15.colour(var8, var9, var10, var7);
-        var15.pos(x2, y1, 0.0D);
-        var15.pos(x1, y1, 0.0D);
+        var15.addVertex(x2, y1, 0.0D);
+        var15.addVertex(x1, y1, 0.0D);
         var15.colour(var12, var13, var14, var11);
-        var15.pos(x1, y2, 0.0D);
-        var15.pos(x2, y2, 0.0D);
+        var15.addVertex(x1, y2, 0.0D);
+        var15.addVertex(x2, y2, 0.0D);
         var15.draw();
         GL11.glShadeModel(7424);
         GL11.glDisable(3042);
@@ -151,7 +151,6 @@ public class SmartyGui implements StationMod
     public void init(ModID modID) {
         MessageListenerRegister.EVENT.register(new CustomPackerSender(), modID);
 
-        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
             Category allConfig = getDefaultConfig().getCategory("Main");
             Property opt_mmd = allConfig.getProperty("optionsMainmenudebug", true);
             opt_mmd.setComment("Small debug info in main menu");
@@ -172,7 +171,7 @@ public class SmartyGui implements StationMod
             opt_opl.setComment("PlayerList (config only client side)");
 
             Property opt_lgt = allConfig.getProperty("lightweightGuiTheme", false);
-            opt_lgt.setComment("Lightweight Gui theme (beta testing)");
+            opt_lgt.setComment("Lightweight Gui theme (тще шьздуьутеув)");
 
 
             Category gradientShowBlock = getDefaultConfig().getCategory("ShowBlock");
@@ -207,6 +206,6 @@ public class SmartyGui implements StationMod
             showblock_rgbvalues[3] = ((rgbE_r.getIntValue() < 256 && rgbE_r.getIntValue() >= 0) ? rgbE_r.getIntValue() : 0);
             showblock_rgbvalues[4] = ((rgbE_g.getIntValue() < 256 && rgbE_g.getIntValue() >= 0) ? rgbE_g.getIntValue() : 0);
             showblock_rgbvalues[5] = ((rgbE_b.getIntValue() < 256 && rgbE_b.getIntValue() >= 0) ? rgbE_b.getIntValue() : 0);
-        }
+
     }
 }
