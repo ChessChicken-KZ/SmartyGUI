@@ -4,16 +4,16 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerBase;
-import net.minecraft.packet.AbstractPacket;
 import net.minecraft.server.MinecraftServer;
 import net.modificationstation.stationapi.api.common.event.EventListener;
-import net.modificationstation.stationapi.api.common.event.ListenerPriority;
+import net.modificationstation.stationapi.api.common.event.packet.MessageListenerRegister;
 import net.modificationstation.stationapi.api.common.factory.GeneralFactory;
+import net.modificationstation.stationapi.api.common.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.common.packet.Message;
-import net.modificationstation.stationapi.api.common.packet.MessageListenerRegistry;
 import net.modificationstation.stationapi.api.common.packet.PacketHelper;
 import net.modificationstation.stationapi.api.common.registry.Identifier;
 import net.modificationstation.stationapi.api.common.registry.ModID;
+import net.modificationstation.stationapi.api.common.util.Null;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class CustomPacketSender
     public static void queue_PacketGetList()
     {
         Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlist");
-        PacketHelper.send((AbstractPacket) packet);
+        PacketHelper.send(packet);
     }
 
 
@@ -43,7 +43,7 @@ public class CustomPacketSender
             packet.put(new int[]{
                     ((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverProperties.getInteger("max-players", 20)
             });
-            PacketHelper.sendTo(playerBase, (AbstractPacket) packet);
+            PacketHelper.sendTo(playerBase, packet);
         }
     }
 
@@ -64,10 +64,16 @@ public class CustomPacketSender
         return toSend;
     }
 
+    @Entrypoint.ModID public static final ModID MOD_ID = Null.get();
 
-    @EventListener(priority = ListenerPriority.NORMAL)
-    public void registerMessageListeners(MessageListenerRegistry messageListenerRegistry, ModID modID) {
-        messageListenerRegistry.registerValue(Identifier.of(modID, "playerlist"), this::handleSendPlayers);
-        messageListenerRegistry.registerValue(Identifier.of(modID, "playerlistResult"), this::handleSendRes);
+    /*
+     * Look here!
+     * EventBUS!
+     */
+    @EventListener
+    public void registerMessageListeners(MessageListenerRegister messageListenerRegistry) {
+        messageListenerRegistry.registry.registerValue(Identifier.of(MOD_ID, "playerlist"), this::handleSendPlayers);
+        messageListenerRegistry.registry.registerValue(Identifier.of(MOD_ID, "playerlistResult"), this::handleSendRes);
+
     }
 }

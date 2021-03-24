@@ -41,59 +41,83 @@ public class MixinInGameGui {
     public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
 
         //ShowBlock Part
-        if (ConfigClass.enableShowBlock && this.minecraft.hitResult != null && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud) {
+        if (ConfigClass.enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
             TextRenderer fr = minecraft.textRenderer;
-            ItemRenderer ir = new ItemRenderer();
-            if (this.minecraft.hitResult.type == HitType.TILE) {
-                /*
-                 * Part with Block
-                 */
-                int ix = this.minecraft.hitResult.x;
-                int iy = this.minecraft.hitResult.y;
-                int iz = this.minecraft.hitResult.z;
+            ItemRenderer  ir = new ItemRenderer();
+            if (minecraft.hitResult.type == HitType.TILE) {
+                int ix = minecraft.hitResult.x;
+                int iy = minecraft.hitResult.y;
+                int iz = minecraft.hitResult.z;
                 String motd2;
                 String motd = "X: " + ix + " Y: " + iy + " Z: " + iz;
 
-                if (BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)] != null) {
-                    motd2 = TranslationStorage.getInstance().method_995(new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)], 1, this.minecraft.level.getTileMeta(ix,iy,iz)).getTranslationKey()).trim() + " " + this.minecraft.level.getTileId(ix, iy, iz) + ":" + this.minecraft.level.getTileMeta(ix, iy, iz);
-                } else {
-                    motd2 = null;
-                }
+                BlockBase currentBlock = BlockBase.BY_ID[minecraft.level.getTileId(ix, iy, iz)];
+                float h = currentBlock.getHardness();
 
-                if (this.minecraft.textRenderer.getTextWidth(motd) > this.minecraft.textRenderer.getTextWidth(motd2))
+                if (currentBlock != null) {
+                    motd2 = TranslationStorage.getInstance().method_995(new ItemInstance(
+                            currentBlock,
+                            1,
+                            minecraft.level.getTileMeta(ix,iy,iz)).getTranslationKey()).trim() + " " +
+                            currentBlock.id + ":" + minecraft.level.getTileMeta(ix,iy,iz) +
+                            " " + RenderUtils.getColorByHardness(h) + "H: " + h;
+                } else motd2 = null;
+
+                if(ConfigClass.showBlockModernStyle)
                 {
-                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 36, 40, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
-                } else {
-                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 36, 40, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
+                    int udp = fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 16;
+                    RenderUtils.gradientModern(25, 50, udp, 28 , 23 , 3, udp + 6);
                 }
-
-                if(motd2 != null)
-                    RenderUtils.renderItem(ir,fr,this.minecraft.textureManager, new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)], 1, this.minecraft.level.getTileMeta(ix,iy,iz)), 10, 18);
                 else
-                    motd2 = "undefined";
+
+                    RenderUtils.gradientRender(5, 13,
+                            fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 36,
+                            40,
+                            new Color(
+                                    ConfigClass.showblockRGB[0],
+                                    ConfigClass.showblockRGB[1],
+                                    ConfigClass.showblockRGB[2]).getRGB(),
+                            new Color(
+                                    ConfigClass.showblockRGB[3],
+                                    ConfigClass.showblockRGB[4],
+                                    ConfigClass.showblockRGB[5]).getRGB());
+                RenderUtils.renderItem(ir,fr,minecraft.textureManager,
+                        new ItemInstance(
+                                currentBlock.id,
+                                1,
+                                minecraft.level.getTileMeta(ix,iy,iz)), 10, 18);
 
                 fr.drawText(motd, 30, 18, 16777215);
                 fr.drawText(motd2, 30, 28, 16777215);
 
+
             } else {
-                /*
-                 * Part with Entity
-                 */
-                double ix = this.minecraft.hitResult.field_1989.x;
-                double iy = this.minecraft.hitResult.field_1989.y;
-                double iz = this.minecraft.hitResult.field_1989.z;
+                double ix = minecraft.hitResult.field_1989.x;
+                double iy = minecraft.hitResult.field_1989.y;
+                double iz = minecraft.hitResult.field_1989.z;
                 String motd = "X: " + (int) ix + " Y: " + (int) iy + " Z: " + (int) iz;
-                String motd2 = "Entity: " + this.minecraft.hitResult.field_1989.getClass().getSimpleName();
-                if (this.minecraft.textRenderer.getTextWidth(motd) > this.minecraft.textRenderer.getTextWidth(motd2)) {
-                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 16, 60, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
-                } else {
-                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 16, 60, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
-                }
+                String motd2 = "Entity: " + minecraft.hitResult.field_1989.getClass().getSimpleName();
+
+
+                if(ConfigClass.showBlockModernStyle)
+                    RenderUtils.gradientModern(30, 50, fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 16, 35 , 22 , 5, 0);
+                else
+                    RenderUtils.gradientRender(5, 13,
+                            fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 16,
+                            60,
+                            new Color(
+                                    ConfigClass.showblockRGB[0],
+                                    ConfigClass.showblockRGB[1],
+                                    ConfigClass.showblockRGB[2]).getRGB(),
+                            new Color(
+                                    ConfigClass.showblockRGB[3],
+                                    ConfigClass.showblockRGB[4],
+                                    ConfigClass.showblockRGB[5]).getRGB());
+
+
                 fr.drawText(motd, 10, 18, 16777215);
-
                 fr.drawText(motd2, 10, 28, 16777215);
-                fr.drawText("ID: " + this.minecraft.hitResult.field_1989.entityId, 10, 38, 16777215);
-
+                fr.drawText("ID: " + minecraft.hitResult.field_1989.entityId, 10, 38, 16777215);
                 fr.drawText(
                         this.minecraft.hitResult.field_1989 instanceof Living
                                 ? "Health: " + this.minecraft.hitResult.field_1989.getDataTracker().getInt(30) : "Health: Unknown"

@@ -71,6 +71,9 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
+	implementation "com.github.jhalterman:typetools:87240d6"
+	implementation "com.github.benjiman:expressions:7ed6748"
+
 	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
 
 

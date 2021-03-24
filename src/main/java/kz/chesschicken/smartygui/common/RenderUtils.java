@@ -52,4 +52,44 @@ public class RenderUtils {
         RenderHelper.disableLighting();
         GL11.glPopMatrix();
     }
+
+    public static void gradientModern(int var1, int var2, int length, int var4, int var5, int multiplier, int widthSize)
+    {
+        int var9 = var1 - var4 + 12;
+        int var10 = var2 - var5 - 12;
+        int j2 = length;
+        int l1 = widthSize;
+        if (j2 > l1) {
+            l1 = j2;
+        }
+
+        int j3 = 8 * multiplier;
+        int k3 = -267386864;
+        gradientRender(var9 - 3, var10 - 4, var9 + l1 + 3, ( var10 - 3), k3, k3);
+        gradientRender(var9 - 3, var10 + j3 + 3, var9 + l1 + 3, ( var10 + j3 + 4), k3, k3);
+        gradientRender(var9 - 3, var10 - 3, var9 + l1 + 3, ( var10 + j3 + 3), k3, k3);
+        gradientRender(var9 - 4, var10 - 3, var9 - 3, ( var10 + j3 + 3), k3, k3);
+        gradientRender(var9 + l1 + 3, var10 - 3, var9 + l1 + 4, ( var10 + j3 + 3), k3, k3);
+        int l3 = 1347420415;
+        int i4 = (l3 & 16711422) >> 1 | l3 & -16777216;
+        gradientRender(var9 - 3, var10 - 3 + 1, var9 - 3 + 1, ( var10 + j3 + 3 - 1), l3, i4);
+        gradientRender(var9 + l1 + 2, var10 - 3 + 1, var9 + l1 + 3, ( var10 + j3 + 3 - 1), l3, i4);
+        gradientRender(var9 - 3, var10 - 3, var9 + l1 + 3,( var10 - 3 + 1), l3, l3);
+        gradientRender(var9 - 3, var10 + j3 + 2, var9 + l1 + 3, (var10 + j3 + 3), i4, i4);
+
+    }
+
+
+    public static String getColorByHardness(float f)
+    {
+        if(f < 0f)
+            return "§b";
+        else if(f <= 1f)
+            return "§a";
+        else if(f > 1F && f <= 3f)
+            return "§e";
+
+        return "§c";
+    }
+
 }

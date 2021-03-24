@@ -18,7 +18,7 @@ public class ConfigClass {
     public static boolean enableInGameToolTip = true;
     public static boolean enableExtendedFurnaceInfo = true;
     public static boolean enablePlayerList = true;
-    public static boolean enableLightweightTheme = false;
+    public static boolean showBlockModernStyle = false;
 
     public static int[] showblockRGB = new int[6] /* Should return 0 if nothing */;
 
@@ -51,7 +51,7 @@ public class ConfigClass {
         map.put("enableInGameToolTip", enableInGameToolTip);
         map.put("enableExtendedFurnaceInfo", enableExtendedFurnaceInfo);
         map.put("enablePlayerList", enablePlayerList);
-        map.put("enableLightweightTheme", enableLightweightTheme);
+        map.put("showBlockModernStyle", showBlockModernStyle);
 
         map.put("showblockRGB_R_1", showblockRGB[0]);
         map.put("showblockRGB_G_1", showblockRGB[1]);
@@ -78,7 +78,7 @@ public class ConfigClass {
         enableInGameToolTip = Boolean.parseBoolean((String) map.get("enableInGameToolTip"));
         enableExtendedFurnaceInfo = Boolean.parseBoolean((String) map.get("enableExtendedFurnaceInfo"));
         enablePlayerList = Boolean.parseBoolean((String) map.get("enablePlayerList"));
-        enableLightweightTheme = Boolean.parseBoolean((String) map.get("enableLightweightTheme"));
+        showBlockModernStyle = Boolean.parseBoolean((String) map.get("showBlockModernStyle"));
 
         int tempValue;
 
