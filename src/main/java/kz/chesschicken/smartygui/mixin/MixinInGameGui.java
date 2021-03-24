@@ -40,7 +40,7 @@ public class MixinInGameGui {
     @Inject(method = "renderHud", at = @At("TAIL"))
     public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
 
-        //ShowBlock Part
+        /* ShowBlock Part */
         if (ConfigClass.enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
             TextRenderer fr = minecraft.textRenderer;
             ItemRenderer  ir = new ItemRenderer();
@@ -74,13 +74,13 @@ public class MixinInGameGui {
                             fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 36,
                             40,
                             new Color(
-                                    ConfigClass.showblockRGB[0],
-                                    ConfigClass.showblockRGB[1],
-                                    ConfigClass.showblockRGB[2]).getRGB(),
+                                    ConfigClass.showBlockRGB[0],
+                                    ConfigClass.showBlockRGB[1],
+                                    ConfigClass.showBlockRGB[2]).getRGB(),
                             new Color(
-                                    ConfigClass.showblockRGB[3],
-                                    ConfigClass.showblockRGB[4],
-                                    ConfigClass.showblockRGB[5]).getRGB());
+                                    ConfigClass.showBlockRGB[3],
+                                    ConfigClass.showBlockRGB[4],
+                                    ConfigClass.showBlockRGB[5]).getRGB());
                 RenderUtils.renderItem(ir,fr,minecraft.textureManager,
                         new ItemInstance(
                                 currentBlock.id,
@@ -106,13 +106,13 @@ public class MixinInGameGui {
                             fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 16,
                             60,
                             new Color(
-                                    ConfigClass.showblockRGB[0],
-                                    ConfigClass.showblockRGB[1],
-                                    ConfigClass.showblockRGB[2]).getRGB(),
+                                    ConfigClass.showBlockRGB[0],
+                                    ConfigClass.showBlockRGB[1],
+                                    ConfigClass.showBlockRGB[2]).getRGB(),
                             new Color(
-                                    ConfigClass.showblockRGB[3],
-                                    ConfigClass.showblockRGB[4],
-                                    ConfigClass.showblockRGB[5]).getRGB());
+                                    ConfigClass.showBlockRGB[3],
+                                    ConfigClass.showBlockRGB[4],
+                                    ConfigClass.showBlockRGB[5]).getRGB());
 
 
                 fr.drawText(motd, 10, 18, 16777215);
@@ -126,25 +126,54 @@ public class MixinInGameGui {
             }
         }
 
-        //ArmorStatus HUD part
-        if(ConfigClass.enableArmorStatusHUD && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud)
+        /* ArmorStatusHUD Part */
+        if(ConfigClass.enableArmorStatusHUD && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud)
         {
             TextRenderer fr = minecraft.textRenderer;
             ItemRenderer ir = new ItemRenderer();
-            int scaledHeight = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight)).getScaledHeight();
-            for(int q = 0; q < this.minecraft.player.inventory.armour.length; q++)
+            ScreenScaler sr = new ScreenScaler(minecraft.options, minecraft.actualWidth, minecraft.actualHeight);
+
+            int scaledWidth = 0;
+            boolean leftOrRight = false;
+            boolean topOrBottom = false;
+
+
+            if(ConfigClass.armorStatusHUDmode == 0 || ConfigClass.armorStatusHUDmode == 2) {
+                scaledWidth = sr.getScaledWidth() - 17;
+                leftOrRight = true;
+            }
+            else if(ConfigClass.armorStatusHUDmode == 1 || ConfigClass.armorStatusHUDmode == 3)
+                scaledWidth = 1;
+
+
+            if(ConfigClass.armorStatusHUDmode == 2 || ConfigClass.armorStatusHUDmode == 3)
+                topOrBottom = true;
+
+
+            for(int q = 0; q < minecraft.player.inventory.armour.length; q++)
             {
-                if(this.minecraft.player.inventory.armour[q] != null)
+                if(minecraft.player.inventory.armour[q] != null)
                 {
-                    RenderUtils.renderItem(ir, fr, this.minecraft.textureManager, this.minecraft.player.inventory.armour[q], 1, scaledHeight - (minecraft.player.getHeldItem() != null ? 33 : 18) - (15 * q));
-                    fr.drawTextWithShadow(this.minecraft.player.inventory.armour[q].getDurability() - this.minecraft.player.inventory.armour[q].getDamage() + "", 17, scaledHeight - (minecraft.player.getHeldItem() != null ? 28 : 13) - (15 * q), 16777215);
+                    String motd = minecraft.player.inventory.armour[q].getDurability() - minecraft.player.inventory.armour[q].getDamage() + "";
+                    RenderUtils.renderItem(ir, fr, minecraft.textureManager, minecraft.player.inventory.armour[q], scaledWidth,
+                            topOrBottom ? (15 * (3 - q)) : sr.getScaledHeight() - (minecraft.player.getHeldItem() != null ? 33 : 18) - (15 * q));
+
+                    fr.drawTextWithShadow(motd,
+                            leftOrRight ? scaledWidth - fr.getTextWidth(motd) : scaledWidth + 17,
+
+                            topOrBottom ? (15 * q) + 5 : sr.getScaledHeight() - (minecraft.player.getHeldItem() != null ? 28 : 13) - (15 * q), 16777215);
                 }
             }
             if(minecraft.player.getHeldItem() != null)
             {
-                RenderUtils.renderItem(ir, fr, this.minecraft.textureManager, minecraft.player.getHeldItem(), 1, scaledHeight - 18);
+                String motd = minecraft.player.getHeldItem().getDurability() != 0 ? minecraft.player.getHeldItem().getDurability() - minecraft.player.getHeldItem().getDamage() + "" : "";
+                RenderUtils.renderItem(ir, fr, minecraft.textureManager, minecraft.player.getHeldItem(), scaledWidth,
+                        topOrBottom ? 60 : sr.getScaledHeight() - 18);
                 fr.drawTextWithShadow(
-                        minecraft.player.getHeldItem().getDurability() != 0 ? minecraft.player.getHeldItem().getDurability() - minecraft.player.getHeldItem().getDamage() + "" : "", 17, scaledHeight - 13, 16777215);
+                        motd, leftOrRight ? scaledWidth - fr.getTextWidth(motd) : scaledWidth + 17,
+                        topOrBottom ? 65 : sr.getScaledHeight() - 13
+
+                        , 16777215);
 
             }
 

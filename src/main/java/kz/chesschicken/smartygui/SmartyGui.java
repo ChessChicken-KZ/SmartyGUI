@@ -2,9 +2,7 @@ package kz.chesschicken.smartygui;
 
 
 import kz.chesschicken.smartygui.common.ConfigClass;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.api.ClientModInitializer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class SmartyGui implements ModInitializer
+public class SmartyGui implements ClientModInitializer
 {
 
     public static String getOSNAME()
@@ -82,16 +80,8 @@ public class SmartyGui implements ModInitializer
     }
 
 
-    /**
-     * Client side init.
-     */
     @Override
-    public void onInitialize() {
-        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
-            return;
-        }
-
+    public void onInitializeClient() {
         ConfigClass.checkConfig();
     }
-
 }

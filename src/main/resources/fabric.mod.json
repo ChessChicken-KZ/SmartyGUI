@@ -18,11 +18,11 @@
   "icon": "assets/smartygui/icon.png",
 
   "entrypoints": {
+    "client": [
+      "kz.chesschicken.smartygui.SmartyGui"
+    ],
     "stationapi:event_bus": [
       "kz.chesschicken.smartygui.CustomPacketSender"
-    ],
-    "main": [
-      "kz.chesschicken.smartygui.SmartyGui"
     ]
   },
   "mixins": [
@@ -32,8 +32,5 @@
   "depends": {
     "minecraft": "1.0.0-beta.7.3",
     "stationapi":"*"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }

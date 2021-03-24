@@ -1,6 +1,7 @@
 package kz.chesschicken.smartygui.common;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lombok.SneakyThrows;
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -12,6 +13,7 @@ import java.util.Map;
 
 /* Lombok :O */
 public class ConfigClass {
+    public static boolean enableVersion = true;
     public static boolean enableMainMenuDebug = true;
     public static boolean enableShowBlock = true;
     public static boolean enableArmorStatusHUD = true;
@@ -20,10 +22,19 @@ public class ConfigClass {
     public static boolean enablePlayerList = true;
     public static boolean showBlockModernStyle = false;
 
-    public static int[] showblockRGB = new int[6] /* Should return 0 if nothing */;
+    /**
+     * Modes:
+     * 0 - Bottom Right
+     * 1 - Bottom Left
+     * 2 - Top Right
+     * 3 - Top Left
+     */
+    public static int armorStatusHUDmode = 0;
+
+    public static int[] showBlockRGB = new int[6] /* Should return 0 if nothing */;
 
 
-    private static final File configFile = new File(FabricLoader.getInstance().getGameDirectory(), "smartygui.config");
+    private static final File configFile = new File(FabricLoader.getInstance().getGameDirectory(), "smartygui.json");
 
 
     /**
@@ -32,11 +43,12 @@ public class ConfigClass {
     @SneakyThrows
     public static void checkConfig()
     {
+        System.out.println(configFile.getAbsolutePath());
         if(!configFile.exists())
-        {
             configFile.createNewFile();
-            saveConfig();
-        }else readConfig();
+        else readConfig();
+
+        saveConfig();
     }
 
     @SneakyThrows
@@ -45,6 +57,7 @@ public class ConfigClass {
         Map<String, Object> map = new HashMap<>();
         FileWriter fileWriter = new FileWriter(configFile);
 
+        map.put("enableVersion", enableVersion);
         map.put("enableMainMenuDebug", enableMainMenuDebug);
         map.put("enableShowBlock", enableShowBlock);
         map.put("enableArmorStatusHUD", enableArmorStatusHUD);
@@ -53,15 +66,17 @@ public class ConfigClass {
         map.put("enablePlayerList", enablePlayerList);
         map.put("showBlockModernStyle", showBlockModernStyle);
 
-        map.put("showblockRGB_R_1", showblockRGB[0]);
-        map.put("showblockRGB_G_1", showblockRGB[1]);
-        map.put("showblockRGB_B_1", showblockRGB[2]);
-        map.put("showblockRGB_R_2", showblockRGB[3]);
-        map.put("showblockRGB_G_2", showblockRGB[4]);
-        map.put("showblockRGB_B_2", showblockRGB[5]);
+        map.put("armorStatusHUDmode", armorStatusHUDmode);
+
+        map.put("showBlockRGB_R_1", showBlockRGB[0]);
+        map.put("showBlockRGB_G_1", showBlockRGB[1]);
+        map.put("showBlockRGB_B_1", showBlockRGB[2]);
+        map.put("showBlockRGB_R_2", showBlockRGB[3]);
+        map.put("showBlockRGB_G_2", showBlockRGB[4]);
+        map.put("showBlockRGB_B_2", showBlockRGB[5]);
 
 
-        new Gson().toJson(map, fileWriter);
+        new GsonBuilder().setPrettyPrinting().create().toJson(map, fileWriter);
         fileWriter.close();
 
     }
@@ -70,32 +85,42 @@ public class ConfigClass {
     public static void readConfig()
     {
         FileReader fileReader = new FileReader(configFile);
-        Map<?, ?> map = (new Gson()).fromJson(fileReader, Map.class);
+        Map<?, Object> map = (new Gson()).fromJson(fileReader, Map.class);
 
-        enableMainMenuDebug = Boolean.parseBoolean((String) map.get("enableMainMenuDebug"));
-        enableShowBlock = Boolean.parseBoolean((String) map.get("enableShowBlock"));
-        enableArmorStatusHUD = Boolean.parseBoolean((String) map.get("enableArmorStatusHUD"));
-        enableInGameToolTip = Boolean.parseBoolean((String) map.get("enableInGameToolTip"));
-        enableExtendedFurnaceInfo = Boolean.parseBoolean((String) map.get("enableExtendedFurnaceInfo"));
-        enablePlayerList = Boolean.parseBoolean((String) map.get("enablePlayerList"));
-        showBlockModernStyle = Boolean.parseBoolean((String) map.get("showBlockModernStyle"));
+        enableVersion = (boolean) map.get("enableVersion");
+        enableMainMenuDebug = (boolean) map.get("enableMainMenuDebug");
+        enableShowBlock = (boolean) map.get("enableShowBlock");
+        enableArmorStatusHUD = (boolean) map.get("enableArmorStatusHUD");
+        enableInGameToolTip = (boolean) map.get("enableInGameToolTip");
+        enableExtendedFurnaceInfo = (boolean) map.get("enableExtendedFurnaceInfo");
+        enablePlayerList = (boolean) map.get("enablePlayerList");
+        showBlockModernStyle = (boolean) map.get("showBlockModernStyle");
+        armorStatusHUDmode = getInt((double) map.get("armorStatusHUDmode"));
 
         int tempValue;
 
-        tempValue = Integer.parseInt((String) map.get("showblockRGB_R_1"));
-        showblockRGB[0] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
-        tempValue = Integer.parseInt((String) map.get("showblockRGB_G_1"));
-        showblockRGB[1] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
-        tempValue = Integer.parseInt((String) map.get("showblockRGB_B_1"));
-        showblockRGB[2] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
-        tempValue = Integer.parseInt((String) map.get("showblockRGB_R_2"));
-        showblockRGB[3] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
-        tempValue = Integer.parseInt((String) map.get("showblockRGB_G_2"));
-        showblockRGB[4] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
-        tempValue = Integer.parseInt((String) map.get("showblockRGB_B_2"));
-        showblockRGB[5] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
+        tempValue = getInt((double) map.get("showBlockRGB_R_1"));
+        showBlockRGB[0] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
+        tempValue = getInt((double) map.get("showBlockRGB_G_1"));
+        showBlockRGB[1] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
+        tempValue = getInt((double) map.get("showBlockRGB_B_1"));
+        showBlockRGB[2] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
+        tempValue = getInt((double) map.get("showBlockRGB_R_2"));
+        showBlockRGB[3] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
+        tempValue = getInt((double) map.get("showBlockRGB_G_2"));
+        showBlockRGB[4] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
+        tempValue = getInt((double) map.get("showBlockRGB_B_2"));
+        showBlockRGB[5] = ((tempValue < 256 && tempValue >= 0) ? tempValue : 0);
 
         fileReader.close();
+    }
+
+    /*
+     * Idk why but this works only
+     */
+    private static int getInt(double d)
+    {
+        return (int) d;
     }
 
 }
