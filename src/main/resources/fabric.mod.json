@@ -18,11 +18,11 @@
   "icon": "assets/smartygui/icon.png",
 
   "entrypoints": {
-    "stationapi:mod_client": [
-      "kz.chesschicken.smartygui.SmartyGui"
+    "stationapi:event_bus": [
+      "kz.chesschicken.smartygui.CustomPacketSender"
     ],
-    "stationapi:mod_server": [
-      "kz.chesschicken.smartygui.SmartyGuiServer"
+    "main": [
+      "kz.chesschicken.smartygui.SmartyGui"
     ]
   },
   "mixins": [

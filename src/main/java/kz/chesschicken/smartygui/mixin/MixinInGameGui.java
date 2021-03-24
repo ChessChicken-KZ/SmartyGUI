@@ -1,11 +1,14 @@
 package kz.chesschicken.smartygui.mixin;
 
 
-import kz.chesschicken.smartygui.CustomPackerSender;
+import kz.chesschicken.smartygui.CustomPacketSender;
 import kz.chesschicken.smartygui.SmartyGui;
+import kz.chesschicken.smartygui.common.ConfigClass;
+import kz.chesschicken.smartygui.common.RenderUtils;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.InGame;
 import net.minecraft.client.render.TextRenderer;
 import net.minecraft.client.render.entity.ItemRenderer;
 import net.minecraft.client.resource.language.TranslationStorage;
@@ -14,11 +17,10 @@ import net.minecraft.entity.Living;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.hit.HitType;
-import net.modificationstation.stationapi.impl.common.StationAPI;
+import net.modificationstation.stationapi.api.common.StationAPI;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import net.minecraft.client.gui.InGame;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -39,7 +41,7 @@ public class MixinInGameGui {
     public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
 
         //ShowBlock Part
-        if (SmartyGui.options_showblock && this.minecraft.hitResult != null && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud) {
+        if (ConfigClass.enableShowBlock && this.minecraft.hitResult != null && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud) {
             TextRenderer fr = minecraft.textRenderer;
             ItemRenderer ir = new ItemRenderer();
             if (this.minecraft.hitResult.type == HitType.TILE) {
@@ -60,13 +62,13 @@ public class MixinInGameGui {
 
                 if (this.minecraft.textRenderer.getTextWidth(motd) > this.minecraft.textRenderer.getTextWidth(motd2))
                 {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 36, 40, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
+                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 36, 40, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
                 } else {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 36, 40, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
+                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 36, 40, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
                 }
 
                 if(motd2 != null)
-                    SmartyGui.renderItem(ir,fr,this.minecraft.textureManager, new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)], 1, this.minecraft.level.getTileMeta(ix,iy,iz)), 10, 18);
+                    RenderUtils.renderItem(ir,fr,this.minecraft.textureManager, new ItemInstance(BlockBase.BY_ID[this.minecraft.level.getTileId(ix, iy, iz)], 1, this.minecraft.level.getTileMeta(ix,iy,iz)), 10, 18);
                 else
                     motd2 = "undefined";
 
@@ -83,9 +85,9 @@ public class MixinInGameGui {
                 String motd = "X: " + (int) ix + " Y: " + (int) iy + " Z: " + (int) iz;
                 String motd2 = "Entity: " + this.minecraft.hitResult.field_1989.getClass().getSimpleName();
                 if (this.minecraft.textRenderer.getTextWidth(motd) > this.minecraft.textRenderer.getTextWidth(motd2)) {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 16, 60, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
+                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd) + 16, 60, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
                 } else {
-                    SmartyGui.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 16, 60, new Color(SmartyGui.showblock_rgbvalues[0], SmartyGui.showblock_rgbvalues[1], SmartyGui.showblock_rgbvalues[2]).getRGB(), new Color(SmartyGui.showblock_rgbvalues[3], SmartyGui.showblock_rgbvalues[4], SmartyGui.showblock_rgbvalues[5]).getRGB());
+                    RenderUtils.gradientRender(5, 13, this.minecraft.textRenderer.getTextWidth(motd2) + 16, 60, new Color(ConfigClass.showblockRGB[0], ConfigClass.showblockRGB[1], ConfigClass.showblockRGB[2]).getRGB(), new Color(ConfigClass.showblockRGB[3], ConfigClass.showblockRGB[4], ConfigClass.showblockRGB[5]).getRGB());
                 }
                 fr.drawText(motd, 10, 18, 16777215);
 
@@ -101,7 +103,7 @@ public class MixinInGameGui {
         }
 
         //ArmorStatus HUD part
-        if(SmartyGui.options_armorstatus && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud)
+        if(ConfigClass.enableArmorStatusHUD && !this.minecraft.paused && this.minecraft.currentScreen == null && !this.minecraft.options.debugHud)
         {
             TextRenderer fr = minecraft.textRenderer;
             ItemRenderer ir = new ItemRenderer();
@@ -110,13 +112,13 @@ public class MixinInGameGui {
             {
                 if(this.minecraft.player.inventory.armour[q] != null)
                 {
-                    SmartyGui.renderItem(ir, fr, this.minecraft.textureManager, this.minecraft.player.inventory.armour[q], 1, scaledHeight - (minecraft.player.getHeldItem() != null ? 33 : 18) - (15 * q));
+                    RenderUtils.renderItem(ir, fr, this.minecraft.textureManager, this.minecraft.player.inventory.armour[q], 1, scaledHeight - (minecraft.player.getHeldItem() != null ? 33 : 18) - (15 * q));
                     fr.drawTextWithShadow(this.minecraft.player.inventory.armour[q].getDurability() - this.minecraft.player.inventory.armour[q].getDamage() + "", 17, scaledHeight - (minecraft.player.getHeldItem() != null ? 28 : 13) - (15 * q), 16777215);
                 }
             }
             if(minecraft.player.getHeldItem() != null)
             {
-                SmartyGui.renderItem(ir, fr, this.minecraft.textureManager, minecraft.player.getHeldItem(), 1, scaledHeight - 18);
+                RenderUtils.renderItem(ir, fr, this.minecraft.textureManager, minecraft.player.getHeldItem(), 1, scaledHeight - 18);
                 fr.drawTextWithShadow(
                         minecraft.player.getHeldItem().getDurability() != 0 ? minecraft.player.getHeldItem().getDurability() - minecraft.player.getHeldItem().getDamage() + "" : "", 17, scaledHeight - 13, 16777215);
 
@@ -125,7 +127,7 @@ public class MixinInGameGui {
         }
 
         //InGame ToolTip part
-        if(SmartyGui.options_ingametooltip && this.minecraft.player.getHeldItem() != null && !this.minecraft.paused && this.minecraft.currentScreen == null)
+        if(ConfigClass.enableInGameToolTip && this.minecraft.player.getHeldItem() != null && !this.minecraft.paused && this.minecraft.currentScreen == null)
         {
             TextRenderer fr = minecraft.textRenderer;
             ScreenScaler screenScaler = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight));
@@ -147,13 +149,13 @@ public class MixinInGameGui {
             fr.drawTextWithShadow(ver23, (int) screenScaler.scaledWidth / 2 - (fr.getTextWidth(ver23) / 2), (int) screenScaler.scaledHeight - 50, 16777215);
         }
 
-        if(SmartyGui.options_playerlist && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
+        if(ConfigClass.enablePlayerList && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
         {
             plTick();
 
             ScreenScaler screenScaler = new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight);
-            String[] playerList = CustomPackerSender.staticPlayerList;
-            int maxInt = CustomPackerSender.maxplayerList;
+            String[] playerList = CustomPacketSender.staticPlayerList;
+            int maxInt = CustomPacketSender.maxplayerList;
             int maxInt2 = maxInt;
 
             int param1;
@@ -168,12 +170,12 @@ public class MixinInGameGui {
 
 
             int variableWidth1 = (screenScaler.getScaledWidth() - param1 * param3) / 2;
-            SmartyGui.gradientRender(variableWidth1 - 1, (byte)10 - 1, variableWidth1 + param3 * param1, (byte)10 + 9 * maxInt2, Integer.MIN_VALUE, Integer.MIN_VALUE);
+            RenderUtils.gradientRender(variableWidth1 - 1, (byte)10 - 1, variableWidth1 + param3 * param1, (byte)10 + 9 * maxInt2, Integer.MIN_VALUE, Integer.MIN_VALUE);
 
             for (int i1 = 0; i1 < maxInt; ++i1) {
                 int textX = variableWidth1 + i1 % param1 * param3;
                 int textY = (byte)10 + i1 / param1 * 9;
-                SmartyGui.gradientRender(textX, textY, textX + param3 - 1, textY + 8, 553648127, 553648127);
+                RenderUtils.gradientRender(textX, textY, textX + param3 - 1, textY + 8, 553648127, 553648127);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 GL11.glEnable(GL11.GL_ALPHA_TEST);
 
@@ -190,12 +192,12 @@ public class MixinInGameGui {
     {
         if(tickGui == 40)
         {
-            CustomPackerSender.queue_PacketGetList();
+            CustomPacketSender.queue_PacketGetList();
             tickGui = 0;
         }else
             tickGui++;
 
-        if(CustomPackerSender.staticPlayerList != null)
+        if(CustomPacketSender.staticPlayerList != null)
             canRender = true;
     }
 

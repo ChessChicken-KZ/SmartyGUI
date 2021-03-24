@@ -74,7 +74,7 @@ dependencies {
 	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
 
 
-	modImplementation "com.github.ModificationStation:StationAPI:660082a:dev"
+	modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
 }
 
 processResources {

@@ -6,7 +6,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.packet.AbstractPacket;
 import net.minecraft.server.MinecraftServer;
-import net.modificationstation.stationapi.api.common.event.packet.MessageListenerRegister;
+import net.modificationstation.stationapi.api.common.event.EventListener;
+import net.modificationstation.stationapi.api.common.event.ListenerPriority;
 import net.modificationstation.stationapi.api.common.factory.GeneralFactory;
 import net.modificationstation.stationapi.api.common.packet.Message;
 import net.modificationstation.stationapi.api.common.packet.MessageListenerRegistry;
@@ -16,7 +17,9 @@ import net.modificationstation.stationapi.api.common.registry.ModID;
 
 import java.util.List;
 
-public class CustomPackerSender implements MessageListenerRegister {
+
+public class CustomPacketSender
+{
     public static String[] staticPlayerList;
     public static int maxplayerList;
 
@@ -24,7 +27,7 @@ public class CustomPackerSender implements MessageListenerRegister {
     public static void queue_PacketGetList()
     {
         Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlist");
-        PacketHelper.INSTANCE.send((AbstractPacket) packet);
+        PacketHelper.send((AbstractPacket) packet);
     }
 
 
@@ -40,7 +43,7 @@ public class CustomPackerSender implements MessageListenerRegister {
             packet.put(new int[]{
                     ((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverProperties.getInteger("max-players", 20)
             });
-            PacketHelper.INSTANCE.sendTo(playerBase, (AbstractPacket) packet);
+            PacketHelper.sendTo(playerBase, (AbstractPacket) packet);
         }
     }
 
@@ -62,7 +65,7 @@ public class CustomPackerSender implements MessageListenerRegister {
     }
 
 
-    @Override
+    @EventListener(priority = ListenerPriority.NORMAL)
     public void registerMessageListeners(MessageListenerRegistry messageListenerRegistry, ModID modID) {
         messageListenerRegistry.registerValue(Identifier.of(modID, "playerlist"), this::handleSendPlayers);
         messageListenerRegistry.registerValue(Identifier.of(modID, "playerlistResult"), this::handleSendRes);
