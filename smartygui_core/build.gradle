@@ -76,8 +76,6 @@ dependencies {
 
 	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
 
-
-	implementation project(':smartygui_stapi')
 }
 
 processResources {

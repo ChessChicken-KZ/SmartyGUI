@@ -4,7 +4,6 @@ package kz.chesschicken.smartygui.mixin;
 import kz.chesschicken.smartygui.SmartyGui;
 import kz.chesschicken.smartygui.common.ConfigClass;
 import kz.chesschicken.smartygui.common.RenderUtils;
-import kz.chesschicken.smartyguistapi.CustomPacketSender;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
 import net.minecraft.client.Minecraft;
@@ -17,7 +16,6 @@ import net.minecraft.entity.Living;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.hit.HitType;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,8 +31,6 @@ public class MixinInGameGui {
     @Shadow
     private Minecraft minecraft;
 
-    int tickGui = 40;
-    boolean canRender;
 
     @Inject(method = "renderHud", at = @At("TAIL"))
     public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
@@ -201,57 +197,10 @@ public class MixinInGameGui {
             fr.drawTextWithShadow(ver23, (int) screenScaler.scaledWidth / 2 - (fr.getTextWidth(ver23) / 2), (int) screenScaler.scaledHeight - 50, 16777215);
         }
 
-        if(ConfigClass.enablePlayerList && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
-        {
-            plTick();
 
-            ScreenScaler screenScaler = new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight);
-            String[] playerList = CustomPacketSender.staticPlayerList;
-            int maxInt = CustomPacketSender.maxplayerList;
-            int maxInt2 = maxInt;
-
-            int param1;
-            for (param1 = 1; maxInt2 > 20; maxInt2 = (maxInt + param1 - 1) / param1)
-                ++param1;
-
-            int param3 = 300 / param1;
-            if (param3 > 150)
-                param3 = 150;
-
-
-
-
-            int variableWidth1 = (screenScaler.getScaledWidth() - param1 * param3) / 2;
-            RenderUtils.gradientRender(variableWidth1 - 1, (byte)10 - 1, variableWidth1 + param3 * param1, (byte)10 + 9 * maxInt2, Integer.MIN_VALUE, Integer.MIN_VALUE);
-
-            for (int i1 = 0; i1 < maxInt; ++i1) {
-                int textX = variableWidth1 + i1 % param1 * param3;
-                int textY = (byte)10 + i1 / param1 * 9;
-                RenderUtils.gradientRender(textX, textY, textX + param3 - 1, textY + 8, 553648127, 553648127);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                GL11.glEnable(GL11.GL_ALPHA_TEST);
-
-                if (i1 < playerList.length) {
-                    minecraft.textRenderer.drawTextWithShadow(playerList[i1], textX, textY, 16777215);
-                }
-
-            }
-        }
 
     }
 
-    private void plTick()
-    {
-        if(tickGui == 40)
-        {
-            CustomPacketSender.queue_PacketGetList();
-            tickGui = 0;
-        }else
-            tickGui++;
-
-        if(CustomPacketSender.staticPlayerList != null)
-            canRender = true;
-    }
 
 
     @Inject(method = "renderHud", at = @At("TAIL"))
@@ -283,10 +232,6 @@ public class MixinInGameGui {
 
             stringToSent = "Loaded Fabric Mods: " + FabricLoader.getInstance().getAllMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 76, 14737632);
-            if(FabricLoader.getInstance().isModLoaded("stationapi")) {
-                stringToSent = "Loaded StationAPI Mods: " + CustomPacketSender.getModCount();
-                fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86, 14737632);
-            }
 
         }
     }

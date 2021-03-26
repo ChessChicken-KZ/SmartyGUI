@@ -1,12 +1,13 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "kz.chesschicken.smartygui.mixin",
+  "package": "kz.chesschicken.smartyguistapi.mixin",
   "compatibilityLevel": "JAVA_8",
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
+    "MixinList",
     "MixinLiving"
   ]
 }

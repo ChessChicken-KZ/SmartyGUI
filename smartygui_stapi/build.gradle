@@ -78,6 +78,9 @@ dependencies {
 
 
     modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
+
+    implementation project(':smartygui_core')
+
 }
 
 processResources {
