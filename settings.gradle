@@ -1,0 +1,3 @@
+rootProject.name = 'smartygui'
+include 'smartygui_core'
+include 'smartygui_stapi'

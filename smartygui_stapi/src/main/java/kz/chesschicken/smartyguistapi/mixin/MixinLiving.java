@@ -1,7 +1,5 @@
-package kz.chesschicken.smartygui.mixin;
+package kz.chesschicken.smartyguistapi.mixin;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityBase;
 import net.minecraft.entity.Living;
 import net.minecraft.level.Level;

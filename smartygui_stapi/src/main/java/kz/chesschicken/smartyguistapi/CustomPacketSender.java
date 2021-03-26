@@ -1,10 +1,11 @@
-package kz.chesschicken.smartygui;
+package kz.chesschicken.smartyguistapi;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.server.MinecraftServer;
+import net.modificationstation.stationapi.api.common.StationAPI;
 import net.modificationstation.stationapi.api.common.event.EventListener;
 import net.modificationstation.stationapi.api.common.event.packet.MessageListenerRegister;
 import net.modificationstation.stationapi.api.common.factory.GeneralFactory;
@@ -20,6 +21,10 @@ import java.util.List;
 
 public class CustomPacketSender
 {
+    public static int getModCount()
+    {
+        return StationAPI.INSTANCE.getModsToVerifyOnClient().size();
+    }
     public static String[] staticPlayerList;
     public static int maxplayerList;
 

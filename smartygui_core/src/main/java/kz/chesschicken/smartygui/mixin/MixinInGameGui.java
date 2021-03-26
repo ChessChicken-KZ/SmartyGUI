@@ -1,10 +1,10 @@
 package kz.chesschicken.smartygui.mixin;
 
 
-import kz.chesschicken.smartygui.CustomPacketSender;
 import kz.chesschicken.smartygui.SmartyGui;
 import kz.chesschicken.smartygui.common.ConfigClass;
 import kz.chesschicken.smartygui.common.RenderUtils;
+import kz.chesschicken.smartyguistapi.CustomPacketSender;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
 import net.minecraft.client.Minecraft;
@@ -17,7 +17,6 @@ import net.minecraft.entity.Living;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.hit.HitType;
-import net.modificationstation.stationapi.api.common.StationAPI;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -284,9 +283,10 @@ public class MixinInGameGui {
 
             stringToSent = "Loaded Fabric Mods: " + FabricLoader.getInstance().getAllMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 76, 14737632);
-            stringToSent = "Loaded StationAPI Mods: " + StationAPI.INSTANCE.getModsToVerifyOnClient().size();
-            fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86, 14737632);
-
+            if(FabricLoader.getInstance().isModLoaded("stationapi")) {
+                stringToSent = "Loaded StationAPI Mods: " + CustomPacketSender.getModCount();
+                fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86, 14737632);
+            }
 
         }
     }

@@ -22,7 +22,7 @@
       "kz.chesschicken.smartygui.SmartyGui"
     ],
     "stationapi:event_bus": [
-      "kz.chesschicken.smartygui.CustomPacketSender"
+      "kz.chesschicken.smartyguistapi.CustomPacketSender"
     ]
   },
   "mixins": [
@@ -30,7 +30,6 @@
   ],
 
   "depends": {
-    "minecraft": "1.0.0-beta.7.3",
-    "stationapi":"*"
+    "minecraft": "1.0.0-beta.7.3"
   }
 }

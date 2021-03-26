@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "smartyguistapi",
+  "version": "${version}",
+
+  "name": "Smarty GUI - StAPI",
+  "description": "Addon for Smarty GUI - StAPI possibilities.",
+  "authors": [
+    "ChessChicken"
+  ],
+  "contact": {
+    "homepage": "https://github.com/ChessChicken-KZ/SmartyGui/wiki",
+    "issues": "https://github.com/ChessChicken-Ru/SmartyGui/issues",
+    "sources": "https://github.com/ChessChicken-Ru/SmartyGui"
+  },
+
+  "license": "MIT",
+  "icon": "assets/smartygui/icon.png",
+
+  "entrypoints": {
+    "stationapi:event_bus": [
+      "kz.chesschicken.smartyguistapi.CustomPacketSender"
+    ]
+  },
+  "mixins": [
+    "smartyguistapi.mixins.json"
+  ],
+
+  "depends": {
+    "minecraft": "1.0.0-beta.7.3",
+    "stationapi":"*",
+    "smartygui": "*"
+  }
+}
