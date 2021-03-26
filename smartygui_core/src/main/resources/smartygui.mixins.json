@@ -10,8 +10,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "kz.chesschicken.smartyguistapi.mixin.MixinLiving"
-  ]
+  }
 }
