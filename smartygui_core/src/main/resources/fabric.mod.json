@@ -20,9 +20,6 @@
   "entrypoints": {
     "client": [
       "kz.chesschicken.smartygui.SmartyGui"
-    ],
-    "stationapi:event_bus": [
-      "kz.chesschicken.smartyguistapi.CustomPacketSender"
     ]
   },
   "mixins": [
