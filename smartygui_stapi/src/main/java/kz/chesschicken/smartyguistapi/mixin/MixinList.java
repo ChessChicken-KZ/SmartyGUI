@@ -1,6 +1,7 @@
 package kz.chesschicken.smartyguistapi.mixin;
 
 import kz.chesschicken.smartygui.SmartyGui;
+import kz.chesschicken.smartygui.common.ModConfig;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartyguistapi.CustomPacketSender;
 import net.minecraft.client.Minecraft;
@@ -23,13 +24,13 @@ public class MixinList {
 
     @Inject(method = "renderHud", at = @At("TAIL"))
     public void renderMain_stapi(float f, boolean flag, int i, int j, CallbackInfo ci) {
-        if(SmartyGui.enablePlayerList == 1 && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
+        if(ModConfig.getInstance().enablePlayerList && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
         {
             plTick();
 
             ScreenScaler screenScaler = new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight);
-            String[] playerList = CustomPacketSender.staticPlayerList;
-            int maxInt = CustomPacketSender.maxplayerList;
+            String[] playerList = CustomPacketSender.getInstance().staticPlayerList;
+            int maxInt = CustomPacketSender.getInstance().maxplayerList;
             int maxInt2 = maxInt;
 
             int param1;
@@ -65,22 +66,13 @@ public class MixinList {
     {
         if(tickGui == 40)
         {
-            CustomPacketSender.queue_PacketGetList();
+            CustomPacketSender.getInstance().requestPlayerList();
             tickGui = 0;
         }else
             tickGui++;
 
-        if(CustomPacketSender.staticPlayerList != null)
+        if(CustomPacketSender.getInstance().staticPlayerList != null)
             canRender = true;
-    }
-
-
-    @Inject(method = "renderHud", at = @At("TAIL"))
-    public void renderDebug_stapi(float f, boolean flag, int i, int j, CallbackInfo ci) {
-        int scaledWidth = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight)).getScaledWidth();
-        String stringToSent = "Loaded StationAPI Mods: " + CustomPacketSender.getModCount();
-        minecraft.textRenderer.drawTextWithShadow(stringToSent, scaledWidth - minecraft.textRenderer.getTextWidth(stringToSent) - 2, 86, 14737632);
-
     }
 
 

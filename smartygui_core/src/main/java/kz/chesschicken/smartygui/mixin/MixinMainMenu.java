@@ -1,6 +1,6 @@
 package kz.chesschicken.smartygui.mixin;
 
-import kz.chesschicken.smartygui.SmartyGui;
+import kz.chesschicken.smartygui.common.ModConfig;
 import net.minecraft.client.gui.screen.ScreenBase;
 import net.minecraft.client.gui.screen.menu.MainMenu;
 import net.minecraft.client.util.ScreenScaler;
@@ -18,7 +18,7 @@ public class MixinMainMenu extends ScreenBase {
     {
         String stringToSent;
         int scaledWidth = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight)).getScaledWidth();
-        if(SmartyGui.enableMainMenuDebug == 1)
+        if(ModConfig.getInstance().enableMainMenuDebug)
         {
             long var24 = Runtime.getRuntime().maxMemory();
             long var29 = Runtime.getRuntime().totalMemory();

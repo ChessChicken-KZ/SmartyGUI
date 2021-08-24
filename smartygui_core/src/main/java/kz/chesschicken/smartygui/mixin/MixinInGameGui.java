@@ -2,6 +2,7 @@ package kz.chesschicken.smartygui.mixin;
 
 
 import kz.chesschicken.smartygui.SmartyGui;
+import kz.chesschicken.smartygui.common.ModConfig;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
@@ -35,7 +36,7 @@ public class MixinInGameGui {
     public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
 
         /* ShowBlock Part */
-        if (SmartyGui.enableShowBlock == 1 && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
+        if (ModConfig.getInstance().enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
             TextRenderer fr = minecraft.textRenderer;
             ItemRenderer  ir = new ItemRenderer();
             if (minecraft.hitResult.type == HitType.TILE) {
@@ -57,7 +58,7 @@ public class MixinInGameGui {
                             " " + RenderUtils.getColorByHardness(h) + "H: " + h;
                 } else motd2 = null;
 
-                if(SmartyGui.showBlockModernStyle == 1)
+                if(ModConfig.getInstance().showBlockModernStyle)
                 {
                     int udp = fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 16;
                     RenderUtils.gradientModern(25, 50, udp, 28 , 23 , 3, udp + 6);
@@ -68,13 +69,13 @@ public class MixinInGameGui {
                             fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 36,
                             40,
                             new Color(
-                                    SmartyGui.showBlockRGB[0],
-                                    SmartyGui.showBlockRGB[1],
-                                    SmartyGui.showBlockRGB[2]).getRGB(),
+                                    ModConfig.getInstance().showBlockRGB[0],
+                                    ModConfig.getInstance().showBlockRGB[1],
+                                    ModConfig.getInstance().showBlockRGB[2]).getRGB(),
                             new Color(
-                                    SmartyGui.showBlockRGB[3],
-                                    SmartyGui.showBlockRGB[4],
-                                    SmartyGui.showBlockRGB[5]).getRGB());
+                                    ModConfig.getInstance().showBlockRGB[3],
+                                    ModConfig.getInstance().showBlockRGB[4],
+                                    ModConfig.getInstance().showBlockRGB[5]).getRGB());
                 RenderUtils.renderItem(ir,fr,minecraft.textureManager,
                         new ItemInstance(
                                 currentBlock.id,
@@ -93,20 +94,20 @@ public class MixinInGameGui {
                 String motd2 = "Entity: " + minecraft.hitResult.field_1989.getClass().getSimpleName();
 
 
-                if(SmartyGui.showBlockModernStyle == 1)
+                if(ModConfig.getInstance().showBlockModernStyle)
                     RenderUtils.gradientModern(30, 50, fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 16, 35 , 22 , 5, 0);
                 else
                     RenderUtils.gradientRender(5, 13,
                             fr.getTextWidth(fr.getTextWidth(motd) > fr.getTextWidth(motd2) ? motd : motd2) + 16,
                             60,
                             new Color(
-                                    SmartyGui.showBlockRGB[0],
-                                    SmartyGui.showBlockRGB[1],
-                                    SmartyGui.showBlockRGB[2]).getRGB(),
+                                    ModConfig.getInstance().showBlockRGB[0],
+                                    ModConfig.getInstance().showBlockRGB[1],
+                                    ModConfig.getInstance().showBlockRGB[2]).getRGB(),
                             new Color(
-                                    SmartyGui.showBlockRGB[3],
-                                    SmartyGui.showBlockRGB[4],
-                                    SmartyGui.showBlockRGB[5]).getRGB());
+                                    ModConfig.getInstance().showBlockRGB[3],
+                                    ModConfig.getInstance().showBlockRGB[4],
+                                    ModConfig.getInstance().showBlockRGB[5]).getRGB());
 
 
                 fr.drawText(motd, 10, 18, 16777215);
@@ -121,7 +122,7 @@ public class MixinInGameGui {
         }
 
         /* ArmorStatusHUD Part */
-        if(SmartyGui.enableArmorStatusHUD == 1 && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud)
+        if(ModConfig.getInstance().enableArmorStatusHUD && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud)
         {
             TextRenderer fr = minecraft.textRenderer;
             ItemRenderer ir = new ItemRenderer();
@@ -132,15 +133,15 @@ public class MixinInGameGui {
             boolean topOrBottom = false;
 
 
-            if(SmartyGui.armorStatusHUDmode == 0 || SmartyGui.armorStatusHUDmode == 2) {
+            if(ModConfig.getInstance().armorStatusHUDmode == 0 || ModConfig.getInstance().armorStatusHUDmode == 2) {
                 scaledWidth = sr.getScaledWidth() - 17;
                 leftOrRight = true;
             }
-            else if(SmartyGui.armorStatusHUDmode == 1 || SmartyGui.armorStatusHUDmode == 3)
+            else if(ModConfig.getInstance().armorStatusHUDmode == 1 || ModConfig.getInstance().armorStatusHUDmode == 3)
                 scaledWidth = 1;
 
 
-            if(SmartyGui.armorStatusHUDmode == 2 || SmartyGui.armorStatusHUDmode == 3)
+            if(ModConfig.getInstance().armorStatusHUDmode == 2 || ModConfig.getInstance().armorStatusHUDmode == 3)
                 topOrBottom = true;
 
 
@@ -174,7 +175,7 @@ public class MixinInGameGui {
         }
 
         //InGame ToolTip part
-        if(SmartyGui.enableInGameToolTip == 1 && this.minecraft.player.getHeldItem() != null && !this.minecraft.paused && this.minecraft.currentScreen == null)
+        if(ModConfig.getInstance().enableInGameToolTip && this.minecraft.player.getHeldItem() != null && !this.minecraft.paused && this.minecraft.currentScreen == null)
         {
             TextRenderer fr = minecraft.textRenderer;
             ScreenScaler screenScaler = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight));
