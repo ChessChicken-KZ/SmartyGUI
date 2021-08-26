@@ -1,13 +1,11 @@
 package kz.chesschicken.smartygui;
 
 
-import kz.chesschicken.smartygui.common.ModConfig;
+import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import lombok.SneakyThrows;
 import net.fabricmc.api.ClientModInitializer;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -69,10 +67,6 @@ public class SmartyGui implements ClientModInitializer
     @SneakyThrows
     @Override
     public void onInitializeClient() {
-        if(!ModConfig.getInstance().exists())
-            ModConfig.getInstance().createNewFile();
-        else ModConfig.getInstance().readConfig();
-
-        ModConfig.getInstance().saveConfig();
+        SmartyGuiConfig.INSTANCE.start();
     }
 }
