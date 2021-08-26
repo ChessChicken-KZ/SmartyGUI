@@ -22,7 +22,7 @@ public abstract class ConfigInstance {
 
     public Object getValue(String group, String property)
     {
-        return instance.getGroup(group).getProperty(property);
+        return instance.getGroup(group).getProperty(property).getValue();
     }
 
     public abstract void saveConfig();
