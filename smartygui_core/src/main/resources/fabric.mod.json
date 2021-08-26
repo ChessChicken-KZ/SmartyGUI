@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Smarty GUI",
-  "description": "ShowBlock and Extended F3 Menu!",
+  "description": "Lots of useful stuff for your game! Starting from ShowBlock (a.k.a. Waila), ArmorStatusHUD and to ToolTip.",
   "authors": [
     "ChessChicken-KZ"
   ],

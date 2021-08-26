@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = InGame.class)
 public class MixinList {
-    int tickGui = 40;
+    byte tickGui = 40;
     boolean canRender;
     @Shadow
     private Minecraft minecraft;
