@@ -2,6 +2,7 @@ package kz.chesschicken.smartygui.mixin;
 
 
 import kz.chesschicken.smartygui.SmartyGui;
+import kz.chesschicken.smartygui.common.APIDetector;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import net.fabricmc.loader.api.FabricLoader;
@@ -232,6 +233,20 @@ public class MixinInGameGui {
 
             stringToSent = "Loaded Fabric Mods: " + FabricLoader.getInstance().getAllMods().size();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 76, 14737632);
+
+            int q = 0;
+            if(APIDetector.INSTANCE.existStationAPI)
+            {
+                stringToSent = "StationAPI is present.";
+                fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86 + q, 14737632);
+                q += 10;
+            }
+            if(APIDetector.INSTANCE.existCursedLegacyAPI)
+            {
+                stringToSent = "CursedLegacyAPI is present.";
+                fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86 + q, 14737632);
+                q += 10;
+            }
 
         }
     }

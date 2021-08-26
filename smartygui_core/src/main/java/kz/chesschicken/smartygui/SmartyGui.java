@@ -1,8 +1,8 @@
 package kz.chesschicken.smartygui;
 
 
+import kz.chesschicken.smartygui.common.APIDetector;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
-import lombok.SneakyThrows;
 import net.fabricmc.api.ClientModInitializer;
 
 import java.io.IOException;
@@ -64,9 +64,9 @@ public class SmartyGui implements ClientModInitializer
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [" + sender + "] " + string);
     }
 
-    @SneakyThrows
     @Override
     public void onInitializeClient() {
         SmartyGuiConfig.INSTANCE.start();
+        APIDetector.INSTANCE.checkAPI();
     }
 }

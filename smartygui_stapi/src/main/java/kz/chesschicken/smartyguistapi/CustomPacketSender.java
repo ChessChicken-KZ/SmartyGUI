@@ -34,7 +34,7 @@ public class CustomPacketSender
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER)
         {
             Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlistResult");
-            packet.strings = (getPlayerNickList(((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverPlayerConnectionManager.players));
+            packet.strings = getPlayerNickList(((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverPlayerConnectionManager.players);
             packet.ints = (new int[]{
                     ((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverProperties.getInteger("max-players", 20)
             });

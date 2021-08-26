@@ -57,10 +57,9 @@ public class RenderUtils {
     {
         int var9 = var1 - var4 + 12;
         int var10 = var2 - var5 - 12;
-        int j2 = length;
         int l1 = widthSize;
-        if (j2 > l1) {
-            l1 = j2;
+        if (length > l1) {
+            l1 = length;
         }
 
         int j3 = 8 * multiplier;
