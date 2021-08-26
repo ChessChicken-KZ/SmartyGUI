@@ -2,8 +2,8 @@ package kz.chesschicken.smartygui.mixin;
 
 
 import kz.chesschicken.smartygui.SmartyGui;
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import kz.chesschicken.smartygui.common.RenderUtils;
+import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
 import net.minecraft.client.Minecraft;

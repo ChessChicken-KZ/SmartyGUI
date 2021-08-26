@@ -1,7 +1,7 @@
 package kz.chesschicken.smartyguistapi.mixin;
 
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import kz.chesschicken.smartygui.common.RenderUtils;
+import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import kz.chesschicken.smartyguistapi.CustomPacketSender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.InGame;
@@ -28,8 +28,8 @@ public class MixinList {
             plTick();
 
             ScreenScaler screenScaler = new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight);
-            String[] playerList = CustomPacketSender.getInstance().staticPlayerList;
-            int maxInt = CustomPacketSender.getInstance().maxplayerList;
+            String[] playerList = CustomPacketSender.staticPlayerList;
+            int maxInt = CustomPacketSender.maxplayerList;
             int maxInt2 = maxInt;
 
             int param1;
@@ -65,12 +65,12 @@ public class MixinList {
     {
         if(tickGui == 40)
         {
-            CustomPacketSender.getInstance().requestPlayerList();
+            CustomPacketSender.requestPlayerList();
             tickGui = 0;
         }else
             tickGui++;
 
-        if(CustomPacketSender.getInstance().staticPlayerList != null)
+        if(CustomPacketSender.staticPlayerList != null)
             canRender = true;
     }
 

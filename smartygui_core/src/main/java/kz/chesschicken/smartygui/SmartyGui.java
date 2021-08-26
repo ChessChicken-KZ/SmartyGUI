@@ -5,7 +5,7 @@ import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import lombok.SneakyThrows;
 import net.fabricmc.api.ClientModInitializer;
 
-import java.io.*;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

@@ -20,11 +20,11 @@ import java.util.List;
 
 public class CustomPacketSender
 {
-    public String[] staticPlayerList;
-    public int maxplayerList;
+    public static String[] staticPlayerList;
+    public static int maxplayerList;
 
     @Environment(EnvType.CLIENT)
-    public void requestPlayerList() {
+    public static void requestPlayerList() {
         Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlist");
         PacketHelper.send(packet);
     }
@@ -64,11 +64,5 @@ public class CustomPacketSender
     public void registerMessageListeners(MessageListenerRegistryEvent messageListenerRegistry) {
         messageListenerRegistry.registry.register(Identifier.of(MOD_ID, "playerlist"), this::handleSendPlayers);
         messageListenerRegistry.registry.register(Identifier.of(MOD_ID, "playerlistResult"), this::handleSendRes);
-
-    }
-
-    private static final CustomPacketSender INSTANCE = new CustomPacketSender();
-    public static CustomPacketSender getInstance() {
-        return INSTANCE;
     }
 }
