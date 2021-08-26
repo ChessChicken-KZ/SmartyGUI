@@ -2,19 +2,17 @@ package kz.chesschicken.smartygui.mixin;
 
 
 import kz.chesschicken.smartygui.SmartyGui;
+import kz.chesschicken.smartygui.client.showblock.ModuleArmorRender;
 import kz.chesschicken.smartygui.client.showblock.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.showblock.ModuleEntityRenderer;
+import kz.chesschicken.smartygui.client.showblock.ModuleToolTipRender;
 import kz.chesschicken.smartygui.common.APIDetector;
-import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.InGame;
 import net.minecraft.client.render.TextRenderer;
-import net.minecraft.client.render.entity.ItemRenderer;
-import net.minecraft.client.resource.language.TranslationStorage;
 import net.minecraft.client.util.ScreenScaler;
-import net.minecraft.item.ItemBase;
 import net.minecraft.util.hit.HitType;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,99 +34,45 @@ public class MixinInGameGui {
     @Unique
     private ModuleEntityRenderer renderEntity;
 
+    @Unique
+    private ModuleArmorRender renderStatus;
+
+    @Unique
+    private ModuleToolTipRender renderToolTip;
+
 
     @Inject(method = "renderHud", at = @At("TAIL"))
     public void injectRenderModules(float f, boolean flag, int i, int j, CallbackInfo ci) {
         if(renderBlock == null) renderBlock = new ModuleBlockRender(minecraft);
         if(renderEntity == null) renderEntity = new ModuleEntityRenderer(minecraft);
+        if(renderStatus == null) renderStatus = new ModuleArmorRender(minecraft);
+        if(renderToolTip == null) renderToolTip = new ModuleToolTipRender(minecraft);
 
         /* ShowBlock Part */
         if (SmartyGuiConfig.INSTANCE.enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
             if (minecraft.hitResult.type == HitType.TILE) {
                 renderBlock.updateBlock(minecraft.hitResult.x, minecraft.hitResult.y, minecraft.hitResult.z);
                 renderBlock.doBlockRendering(5, 13, SmartyGuiConfig.INSTANCE.showBlockModernStyle);
+                renderBlock.clean();
             } else {
                 renderEntity.updateEntity(minecraft.hitResult.field_1989);
                 renderEntity.doEntityRendering(5, 13, SmartyGuiConfig.INSTANCE.showBlockModernStyle);
+                renderEntity.clean();
             }
-            renderBlock.clean();
-            renderEntity.clean();
         }
 
         /* ArmorStatusHUD Part */
         if(SmartyGuiConfig.INSTANCE.enableArmorStatusHUD && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud)
         {
-            TextRenderer fr = minecraft.textRenderer;
-            ItemRenderer ir = new ItemRenderer();
-            ScreenScaler sr = new ScreenScaler(minecraft.options, minecraft.actualWidth, minecraft.actualHeight);
-
-            int scaledWidth = 0;
-            boolean leftOrRight = false;
-            boolean topOrBottom = false;
-
-
-            if(SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 0 || SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 2) {
-                scaledWidth = sr.getScaledWidth() - 17;
-                leftOrRight = true;
-            }
-            else if(SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 1 || SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 3)
-                scaledWidth = 1;
-
-
-            if(SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 2 || SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 3)
-                topOrBottom = true;
-
-
-            for(int q = 0; q < minecraft.player.inventory.armour.length; q++)
-            {
-                if(minecraft.player.inventory.armour[q] != null)
-                {
-                    String motd = minecraft.player.inventory.armour[q].getDurability() - minecraft.player.inventory.armour[q].getDamage() + "";
-                    RenderUtils.renderItem(ir, fr, minecraft.textureManager, minecraft.player.inventory.armour[q], scaledWidth,
-                            topOrBottom ? (15 * (3 - q)) : sr.getScaledHeight() - (minecraft.player.getHeldItem() != null ? 33 : 18) - (15 * q));
-
-                    fr.drawTextWithShadow(motd,
-                            leftOrRight ? scaledWidth - fr.getTextWidth(motd) : scaledWidth + 17,
-
-                            topOrBottom ? (15 * q) + 5 : sr.getScaledHeight() - (minecraft.player.getHeldItem() != null ? 28 : 13) - (15 * q), 16777215);
-                }
-            }
-            if(minecraft.player.getHeldItem() != null)
-            {
-                String motd = minecraft.player.getHeldItem().getDurability() != 0 ? minecraft.player.getHeldItem().getDurability() - minecraft.player.getHeldItem().getDamage() + "" : "";
-                RenderUtils.renderItem(ir, fr, minecraft.textureManager, minecraft.player.getHeldItem(), scaledWidth,
-                        topOrBottom ? 60 : sr.getScaledHeight() - 18);
-                fr.drawTextWithShadow(
-                        motd, leftOrRight ? scaledWidth - fr.getTextWidth(motd) : scaledWidth + 17,
-                        topOrBottom ? 65 : sr.getScaledHeight() - 13
-
-                        , 16777215);
-
-            }
-
+            renderStatus.doArmorStatusRender();
+            renderStatus.clean();
         }
 
         //InGame ToolTip part
-        if(SmartyGuiConfig.INSTANCE.enableInGameToolTip && this.minecraft.player.getHeldItem() != null && !this.minecraft.paused && this.minecraft.currentScreen == null)
+        if(SmartyGuiConfig.INSTANCE.enableInGameToolTip && !this.minecraft.paused && this.minecraft.currentScreen == null)
         {
-            TextRenderer fr = minecraft.textRenderer;
-            ScreenScaler screenScaler = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight));
-
-            String ver23;
-            if(this.minecraft.player.getHeldItem().getDurability() < 1)
-            {
-                ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey());
-
-            }else
-            {
-                ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey()) + " | " + (this.minecraft.player.getHeldItem().getDurability() - this.minecraft.player.getHeldItem().getDamage()) + "/" + this.minecraft.player.getHeldItem().getDurability();
-            }
-
-            if(this.minecraft.player.getHeldItem().itemId == ItemBase.clock.id)
-            {
-                ver23 = TranslationStorage.getInstance().method_995(this.minecraft.player.getHeldItem().getTranslationKey()) + " | " + (minecraft.level.isDaylight() ? "Day" : "Night");
-            }
-            fr.drawTextWithShadow(ver23, (int) screenScaler.scaledWidth / 2 - (fr.getTextWidth(ver23) / 2), (int) screenScaler.scaledHeight - 50, 16777215);
+            renderToolTip.doTooltipRender(this.minecraft.player.getHeldItem(), f);
+            renderToolTip.clean();
         }
 
 
@@ -151,11 +95,11 @@ public class MixinInGameGui {
             fr.drawTextWithShadow("World Time: " + this.minecraft.player.level.getLevelTime(), 2, 120, 14737632);
             fr.drawTextWithShadow("World Name: " + this.minecraft.player.level.getProperties().getName(), 2, 128, 14737632);
 
-            stringToSent = "OS: " + SmartyGui.getOSNAME();
+            stringToSent = "OS: " + SmartyGui.getFullOperatingSystemName();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 26, 14737632);
-            if(SmartyGui.getCPUINFO() != null)
+            if(SmartyGui.getProcessorInfo() != null)
             {
-                stringToSent = "CPU: " + SmartyGui.getCPUINFO();
+                stringToSent = "CPU: " + SmartyGui.getProcessorInfo();
                 fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 36, 14737632);
             }
             stringToSent = "GPU: " + GL11.glGetString(GL11.GL_RENDERER);

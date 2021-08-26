@@ -6,45 +6,59 @@ import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class SmartyGui implements ClientModInitializer
 {
+    public static String getFullOperatingSystemName()
+    {
+        String name = System.getProperty("os.name");
+        if(name == null) return "Unknown";
 
-    public static String getOSNAME()
+        return name + " " + System.getProperty("os.version");
+    }
+
+    public static String getFormattedOperatingSystemName()
     {
 
         StringBuilder osstring = new StringBuilder();
         try
         {
-            String osName = System.getProperty("os.name");
-            if (osName == null) {
-                throw new IOException("os.name not found");
-            }
-            osName = osName.toLowerCase(Locale.ENGLISH);
-            if (osName.contains("windows")) {
-                osstring.append("WINDOWS");
-            } else if (osName.contains("mpe/ix")
-                    || osName.contains("freebsd")
-                    || osName.contains("irix")
-                    || osName.contains("digital unix")
-                    || osName.contains("unix")) {
-                osstring.append("UNIX");
-            } else if(osName.contains("linux")){
-                osstring.append("LINUX");
-            } else if (osName.contains("mac os")) {
-                osstring.append("MAC OS");
-            } else if (osName.contains("sun os")
-                    || osName.contains("sunos")
-                    || osName.contains("solaris")
-                    || osName.contains("hp-ux")
-                    || osName.contains("aix")) {
-                osstring.append("POSIX UNIX");
+            String name = System.getProperty("os.name");
+            if (name == null) throw new Exception("os.name not found");
+
+            name = name.toLowerCase(Locale.ENGLISH);
+            //windows
+            if (name.contains("windows")) {
+                osstring.append("Windows");
+
+                //unix os
+            } else if (name.contains("mpe/ix")
+                    || name.contains("freebsd")
+                    || name.contains("irix")
+                    || name.contains("digital unix")
+                    || name.contains("unix")) {
+                osstring.append("Unix");
+
+                //linux
+            } else if(name.contains("linux")){
+                osstring.append("Linux");
+
+                //macos
+            } else if (name.contains("mac os")) {
+                osstring.append("Mac OS");
+
+                //other unix
+            } else if (name.contains("sun os")
+                    || name.contains("sunos")
+                    || name.contains("solaris")
+                    || name.contains("hp-ux")
+                    || name.contains("aix")) {
+                osstring.append("Posix Unix");
             } else {
-                osstring.append("UNKNOWN");
+                osstring.append(name.toUpperCase());
             }
 
         } catch (Exception ex) {
@@ -55,7 +69,7 @@ public class SmartyGui implements ClientModInitializer
         return osstring.toString();
     }
 
-    public static String getCPUINFO()
+    public static String getProcessorInfo()
     {
         return System.getenv("PROCESSOR_IDENTIFIER");
     }
