@@ -3,19 +3,19 @@
   "id": "smartyguistapi",
   "version": "${version}",
 
-  "name": "Smarty GUI - StAPI",
-  "description": "Addon for Smarty GUI - StAPI possibilities.",
+  "name": "SmartyStation - SmartyGui addon",
+  "description": "Addon for Smarty GUI - StAPI possibilities, player list and other features.",
   "authors": [
     "ChessChicken-KZ"
   ],
   "contact": {
     "homepage": "https://github.com/ChessChicken-KZ/SmartyGui/wiki",
-    "issues": "https://github.com/ChessChicken-Ru/SmartyGui/issues",
-    "sources": "https://github.com/ChessChicken-Ru/SmartyGui"
+    "issues": "https://github.com/ChessChicken-KZ/SmartyGui/issues",
+    "sources": "https://github.com/ChessChicken-KZ/SmartyGui"
   },
 
   "license": "MIT",
-  "icon": "assets/smartygui/icon.png",
+  "icon": "assets/smartyguistapi/icon.png",
 
   "entrypoints": {
     "stationapi:event_bus": [

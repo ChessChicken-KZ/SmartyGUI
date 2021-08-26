@@ -3,10 +3,13 @@ package kz.chesschicken.smartygui.client.showblock;
 import kz.chesschicken.smartygui.client.ModuleRender;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.entity.ItemRenderer;
 import net.minecraft.client.util.ScreenScaler;
 
+@Environment(EnvType.CLIENT)
 public class ModuleArmorRender extends ModuleRender {
     private boolean leftOrRight;
     private boolean topOrBottom;
