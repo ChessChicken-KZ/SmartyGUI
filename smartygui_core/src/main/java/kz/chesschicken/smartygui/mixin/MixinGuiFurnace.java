@@ -16,7 +16,7 @@ public class MixinGuiFurnace extends ScreenBase
     @Shadow private TileEntityFurnace furnace;
 
     @Inject(method = "renderForeground", at = @At("TAIL"))
-    private void addtext(CallbackInfo callbackInfo)
+    private void injectFurnaceInfo(CallbackInfo callbackInfo)
     {
         if(SmartyGuiConfig.INSTANCE.enableExtendedFurnaceInfo) {
             this.textManager.drawText("Burn: " + Math.round(furnace.burnTime > 0 ? ((furnace.burnTime * 100) / furnace.fuelTime) : 0) + "%", 5, 6, 4210752);

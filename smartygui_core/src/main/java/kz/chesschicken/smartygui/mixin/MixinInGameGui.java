@@ -33,7 +33,7 @@ public class MixinInGameGui {
 
 
     @Inject(method = "renderHud", at = @At("TAIL"))
-    public void renderMain(float f, boolean flag, int i, int j, CallbackInfo ci) {
+    public void injectRenderModules(float f, boolean flag, int i, int j, CallbackInfo ci) {
 
         /* ShowBlock Part */
         if (SmartyGuiConfig.INSTANCE.enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
@@ -204,7 +204,7 @@ public class MixinInGameGui {
 
 
     @Inject(method = "renderHud", at = @At("TAIL"))
-    public void renderDebug(float f, boolean flag, int i, int j, CallbackInfo ci) {
+    public void injectRenderAdditionalDebug(float f, boolean flag, int i, int j, CallbackInfo ci) {
         //F3 Extended debug
         if (this.minecraft.options.debugHud) {
             TextRenderer fr = minecraft.textRenderer;
@@ -237,7 +237,7 @@ public class MixinInGameGui {
     }
 
     @Inject(method = "addChatMessage", at = @At("TAIL"))
-    public void logMessage(String string, CallbackInfo ci)
+    public void injectLogMessage(String string, CallbackInfo ci)
     {
         SmartyGui.logMessageAs(this.getClass().getSimpleName(), "[CHAT] " + string);
     }

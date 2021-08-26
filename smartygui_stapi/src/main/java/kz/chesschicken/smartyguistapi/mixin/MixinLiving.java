@@ -17,26 +17,26 @@ public abstract class MixinLiving extends EntityBase {
     public MixinLiving(Level level) { super(level); }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void initData(Level arg, CallbackInfo ci)
+    private void injectInitData(Level arg, CallbackInfo ci)
     {
         dataTracker.startTracking(30, this.health);
     }
 
     @Inject(method = "tickHandSwing", at = @At("TAIL"))
-    private void a1(CallbackInfo ci)
+    private void injectUpdateDataTick(CallbackInfo ci)
     {
         dataTracker.setInt(30, this.health);
     }
 
 
     @Inject(method = "applyDamage", at = @At("TAIL"))
-    private void lmao(CallbackInfo ci)
+    private void injectUpdateDataDamage(CallbackInfo ci)
     {
         dataTracker.setInt(30, this.health);
     }
 
     @Inject(method = "addHealth", at = @At("TAIL"))
-    private void lmao1(CallbackInfo ci)
+    private void injectUpdateDataAdd(CallbackInfo ci)
     {
         dataTracker.setInt(30, this.health);
     }

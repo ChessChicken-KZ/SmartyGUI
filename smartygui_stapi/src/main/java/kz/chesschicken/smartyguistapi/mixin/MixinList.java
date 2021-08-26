@@ -22,10 +22,10 @@ public class MixinList {
     private Minecraft minecraft;
 
     @Inject(method = "renderHud", at = @At("TAIL"))
-    public void renderMain_stapi(float f, boolean flag, int i, int j, CallbackInfo ci) {
+    public void injectRenderPlayerList(float f, boolean flag, int i, int j, CallbackInfo ci) {
         if(SmartyGuiConfig.INSTANCE.enablePlayerList && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
         {
-            plTick();
+            doTicking();
 
             ScreenScaler screenScaler = new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight);
             String[] playerList = CustomPacketSender.staticPlayerList;
@@ -61,7 +61,7 @@ public class MixinList {
         }
     }
 
-    private void plTick()
+    private void doTicking()
     {
         if(tickGui == 40)
         {

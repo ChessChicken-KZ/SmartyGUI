@@ -14,7 +14,7 @@ public class MixinMainMenu extends ScreenBase {
 
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void renderThis(int mouseX, int mouseY, float delta, CallbackInfo ci)
+    public void injectRenderMainMenuDebug(int mouseX, int mouseY, float delta, CallbackInfo ci)
     {
         String stringToSent;
         int scaledWidth = (new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight)).getScaledWidth();
