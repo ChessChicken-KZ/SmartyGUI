@@ -25,7 +25,7 @@ public class CustomPacketSender
 
     @Environment(EnvType.CLIENT)
     public static void requestPlayerList() {
-        Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlist");
+        Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartyguistapi:playerlist");
         PacketHelper.send(packet);
     }
 
@@ -33,7 +33,7 @@ public class CustomPacketSender
     public void handleSendPlayers(PlayerBase playerBase, Message customData) {
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER)
         {
-            Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartygui:playerlistResult");
+            Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartyguistapi:playerlistResult");
             packet.strings = getPlayerNickList(((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverPlayerConnectionManager.players);
             packet.ints = (new int[]{
                     ((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverProperties.getInteger("max-players", 20)
