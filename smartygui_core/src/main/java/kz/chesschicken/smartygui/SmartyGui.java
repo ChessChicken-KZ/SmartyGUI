@@ -4,6 +4,7 @@ package kz.chesschicken.smartygui;
 import kz.chesschicken.smartygui.common.APIDetector;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -64,9 +65,11 @@ public class SmartyGui implements ClientModInitializer
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [" + sender + "] " + string);
     }
 
+    public static boolean moduleStAPI;
     @Override
     public void onInitializeClient() {
         SmartyGuiConfig.INSTANCE.start();
         APIDetector.INSTANCE.checkAPI();
+        moduleStAPI = FabricLoader.getInstance().isModLoaded("smartyguistapi");
     }
 }
