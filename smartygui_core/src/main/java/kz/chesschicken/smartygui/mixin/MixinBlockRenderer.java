@@ -18,7 +18,9 @@ public class MixinBlockRenderer {
             shift = At.Shift.AFTER
     ))
     private void injectLoadColour(BlockBase arg, int i, float f, CallbackInfo ci) {
-        float[] co = RenderUtils.convertIntToFloatRGB(ModuleBlockRender.currentBlockColour);
-        GL11.glColor4f(co[0] * f, co[1] * f, co[2] * f, 1.0F);
+        if(ModuleBlockRender.amIBeingCaused == 1) {
+            float[] co = RenderUtils.convertIntToFloatRGB(ModuleBlockRender.currentBlockColour);
+            GL11.glColor4f(co[0] * f, co[1] * f, co[2] * f, 1.0F);
+        }
     }
 }

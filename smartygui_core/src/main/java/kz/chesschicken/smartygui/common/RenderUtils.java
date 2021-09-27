@@ -1,5 +1,6 @@
 package kz.chesschicken.smartygui.common;
 
+import kz.chesschicken.smartygui.client.showblock.ModuleBlockRender;
 import net.minecraft.client.render.RenderHelper;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.TextRenderer;
@@ -39,6 +40,7 @@ public class RenderUtils {
     }
 
     public static void renderItem(ItemRenderer ir, TextRenderer fr, TextureManager textureManager, ItemInstance itemInstance, int x, int y) {
+        ModuleBlockRender.amIBeingCaused = 1;
         GL11.glPushMatrix();
         GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
         RenderHelper.enableLighting();
@@ -51,6 +53,7 @@ public class RenderUtils {
         GL11.glDisable(32826);
         RenderHelper.disableLighting();
         GL11.glPopMatrix();
+        ModuleBlockRender.amIBeingCaused = 0;
     }
 
     public static void gradientModern(int var1, int var2, int length, int var4, int var5, int multiplier, int widthSize)

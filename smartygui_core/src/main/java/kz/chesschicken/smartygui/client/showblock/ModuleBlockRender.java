@@ -18,6 +18,7 @@ public class ModuleBlockRender extends ModuleRender {
     private String stringBlockCoordinates;
     private String stringBlockProperties;
     public static int currentBlockColour;
+    public static byte amIBeingCaused = 0;
 
     private final ItemRenderer itemRenderer;
 
