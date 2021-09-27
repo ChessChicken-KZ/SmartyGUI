@@ -6,7 +6,8 @@
   "client": [
     "MixinGuiFurnace",
     "MixinInGameGui",
-    "MixinMainMenu"
+    "MixinMainMenu",
+    "MixinBlockRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

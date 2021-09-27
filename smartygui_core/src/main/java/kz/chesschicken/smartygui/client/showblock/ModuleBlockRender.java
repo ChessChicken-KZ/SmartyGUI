@@ -17,6 +17,7 @@ public class ModuleBlockRender extends ModuleRender {
     private int currentBlockMeta;
     private String stringBlockCoordinates;
     private String stringBlockProperties;
+    public static int currentBlockColour;
 
     private final ItemRenderer itemRenderer;
 
@@ -29,7 +30,7 @@ public class ModuleBlockRender extends ModuleRender {
     {
         this.currentBlockID = this.minecraft.level.getTileId(blockX, blockY, blockZ);
         this.currentBlockMeta = this.minecraft.level.getTileMeta(blockX, blockY, blockZ);
-
+        currentBlockColour = BlockBase.BY_ID[currentBlockID].getColourMultiplier(this.minecraft.level, blockX, blockY, blockZ);
 
         this.stringBlockCoordinates = "X: " + blockX + " Y: " + blockY + " Z: " + blockZ;
 
@@ -38,7 +39,6 @@ public class ModuleBlockRender extends ModuleRender {
                 " " + currentBlockID + ":" + currentBlockMeta + " §" +
                 RenderUtils.getColorByHardness(BlockBase.BY_ID[currentBlockID].getHardness()) + "H: " +
                 BlockBase.BY_ID[currentBlockID].getHardness();
-
     }
 
     public void clean()
@@ -63,10 +63,10 @@ public class ModuleBlockRender extends ModuleRender {
             RenderUtils.gradientRender(x, y,
                     Math.max(textRenderer.getTextWidth(stringBlockCoordinates), textRenderer.getTextWidth(stringBlockProperties)) + 36,
                     40,
-                    RenderUtils.getColour(SmartyGuiConfig.INSTANCE.showBlockRGB[0],
+                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[0],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[1],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[2]),
-                    RenderUtils.getColour(SmartyGuiConfig.INSTANCE.showBlockRGB[3],
+                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[3],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[4],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[5]));
 

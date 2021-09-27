@@ -48,10 +48,10 @@ public class ModuleEntityRenderer extends ModuleRender
             RenderUtils.gradientRender(x, y,
                     Math.max(textRenderer.getTextWidth(stringEntityCoordinates), textRenderer.getTextWidth(stringEntityName)) + 16,
                     65,
-                    RenderUtils.getColour(SmartyGuiConfig.INSTANCE.showBlockRGB[0],
+                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[0],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[1],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[2]),
-                    RenderUtils.getColour(SmartyGuiConfig.INSTANCE.showBlockRGB[3],
+                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[3],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[4],
                             SmartyGuiConfig.INSTANCE.showBlockRGB[5]));
 

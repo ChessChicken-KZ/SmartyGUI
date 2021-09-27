@@ -78,11 +78,16 @@ public class RenderUtils {
 
     }
 
-    public static int getColour(int r, int g, int b){
-        r = (r << 16) & 0x00FF0000;
-        g = (g << 8) & 0x0000FF00;
-        b = b & 0x000000FF;
-        return 0xFF000000 | r | g | b;
+    public static int convertRGBToInt(int r, int g, int b) {
+        return 0xFF000000 | ((r << 16) & 0x00FF0000) | ((g << 8) & 0x0000FF00) | (b & 0x000000FF);
+    }
+
+    public static int[] convertIntToRGB(int i) {
+        return new int[] {i >> 16, i >> 8 & 255, i & 255};
+    }
+
+    public static float[] convertIntToFloatRGB(int i) {
+        return new float[] {((i >> 16 & 255) / 255.0F), ((i >> 8 & 255) / 255.0F), ((i & 255) / 255.0F)};
     }
 
     public static char getColorByHardness(float f)
