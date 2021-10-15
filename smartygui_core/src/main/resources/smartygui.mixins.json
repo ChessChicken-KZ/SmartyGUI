@@ -4,12 +4,15 @@
   "package": "kz.chesschicken.smartygui.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
+    "MixinBlockRenderer",
     "MixinGuiFurnace",
     "MixinInGameGui",
-    "MixinMainMenu",
-    "MixinBlockRenderer"
+    "MixinMainMenu"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "patch.MixinStoneSlab"
+  ]
 }
