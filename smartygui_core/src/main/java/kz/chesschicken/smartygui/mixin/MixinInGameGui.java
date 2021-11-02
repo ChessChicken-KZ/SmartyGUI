@@ -62,20 +62,16 @@ public class MixinInGameGui {
         }
 
         /* ArmorStatusHUD Part */
-        if(SmartyGuiConfig.INSTANCE.enableArmorStatusHUD && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud)
-        {
+        if(SmartyGuiConfig.INSTANCE.enableArmorStatusHUD && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud) {
             renderStatus.doArmorStatusRender();
             renderStatus.clean();
         }
 
         //InGame ToolTip part
-        if(SmartyGuiConfig.INSTANCE.enableInGameToolTip && !this.minecraft.paused && this.minecraft.currentScreen == null)
-        {
+        if(SmartyGuiConfig.INSTANCE.enableInGameToolTip && !this.minecraft.paused && this.minecraft.currentScreen == null) {
             renderToolTip.doTooltipRender(this.minecraft.player.getHeldItem(), f);
             renderToolTip.clean();
         }
-
-
 
     }
 
@@ -129,14 +125,8 @@ public class MixinInGameGui {
     }
 
     @Inject(method = "addChatMessage", at = @At("TAIL"))
-    public void injectLogMessage(String string, CallbackInfo ci)
-    {
+    public void injectLogMessage(String string, CallbackInfo ci) {
         SmartyGui.logMessageAs(this.getClass().getSimpleName(), "[CHAT] " + string);
     }
-
-
-
-
-
 
 }

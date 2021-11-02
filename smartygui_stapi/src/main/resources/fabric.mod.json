@@ -3,7 +3,7 @@
   "id": "smartyguistapi",
   "version": "${version}",
 
-  "name": "SmartyStation - SmartyGui addon",
+  "name": "SmartyStation - SmartyGUI addon",
   "description": "Addon for Smarty GUI - StAPI possibilities, player list and other features.",
   "authors": [
     "ChessChicken-KZ"

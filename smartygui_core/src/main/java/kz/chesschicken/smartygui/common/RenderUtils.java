@@ -93,8 +93,7 @@ public class RenderUtils {
         return new float[] {((i >> 16 & 255) / 255.0F), ((i >> 8 & 255) / 255.0F), ((i & 255) / 255.0F)};
     }
 
-    public static char getColorByHardness(float f)
-    {
+    public static char getColorByHardness(float f) {
         if(f < 0f)
             return 'b';
         else if(f <= 1f)

@@ -3,8 +3,8 @@
   "id": "smartygui",
   "version": "${version}",
 
-  "name": "Smarty GUI",
-  "description": "Lots of useful stuff for your game! Starting from ShowBlock (a.k.a. Waila), ArmorStatusHUD and to ToolTip.",
+  "name": "SmartyGUI",
+  "description": "ShowBlock (a.k.a. Waila), ArmorStatusHUD, ToolTip and some additional info in F3.",
   "authors": [
     "ChessChicken-KZ"
   ],

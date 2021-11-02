@@ -11,8 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Furnace.class)
-public class MixinGuiFurnace extends ScreenBase
-{
+public class MixinGuiFurnace extends ScreenBase {
     @Shadow private TileEntityFurnace furnace;
 
     @Inject(method = "renderForeground", at = @At("TAIL"))
