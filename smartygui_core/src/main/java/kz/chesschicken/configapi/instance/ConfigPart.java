@@ -1,31 +1,27 @@
-package kz.chesschicken.smartygui.common.configapi.instance;
+package kz.chesschicken.configapi.instance;
 
 public class ConfigPart {
+
     private String commentary = "";
     private final String name;
 
-    ConfigPart(String s)
-    {
+    ConfigPart(String s) {
         this.name = s;
     }
 
-    public void setCommentary(String s)
-    {
+    public void setCommentary(String s) {
         this.commentary = s;
     }
 
-    public boolean isCommentaryPresent()
-    {
+    public boolean isCommentaryPresent() {
         return this.commentary.length() > 0;
     }
 
-    public String getCommentary()
-    {
+    public String getCommentary() {
         return this.commentary;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 }

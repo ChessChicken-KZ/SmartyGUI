@@ -1,10 +1,10 @@
 package kz.chesschicken.smartygui.common;
 
-import kz.chesschicken.smartygui.common.configapi.ConfigInstance;
-import kz.chesschicken.smartygui.common.configapi.instance.Group;
-import kz.chesschicken.smartygui.common.configapi.instance.Property;
+import kz.chesschicken.configapi.ConfigInstance;
+import kz.chesschicken.configapi.instance.Group;
+import kz.chesschicken.configapi.instance.Property;
 
-public class SmartyGuiConfig extends ConfigInstance{
+public class SmartyGUIConfig extends ConfigInstance{
 
     public boolean enableVersion = true;
     public boolean enableMainMenuDebug = true;
@@ -26,7 +26,7 @@ public class SmartyGuiConfig extends ConfigInstance{
 
     public int[] showBlockRGB = new int[6] /* Should return 0 if nothing */;
 
-    private SmartyGuiConfig() {
+    private SmartyGUIConfig() {
         super("smartygui");
     }
 
@@ -85,5 +85,5 @@ public class SmartyGuiConfig extends ConfigInstance{
         showBlockRGB[5] = (int) getValue("rgbShowBlock","showBlockRGB_B_2");
     }
 
-    public static SmartyGuiConfig INSTANCE = new SmartyGuiConfig();
+    public static SmartyGUIConfig INSTANCE = new SmartyGUIConfig();
 }

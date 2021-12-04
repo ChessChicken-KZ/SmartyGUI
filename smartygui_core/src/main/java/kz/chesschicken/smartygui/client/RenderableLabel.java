@@ -31,7 +31,6 @@ public class RenderableLabel extends DrawableHelper {
                 this.fillGradient(mouseX + 9, mouseY - 15, mouseX + 15 + minecraft.textRenderer.getTextWidth(s), mouseY - 1, -1073741824, -1073741824);
                 minecraft.textRenderer.drawTextWithShadow(s, mouseX + 12, mouseY - 12, -1);
             }
-
         }
     }
 

@@ -1,15 +1,14 @@
-package kz.chesschicken.smartygui.common.configapi;
+package kz.chesschicken.configapi;
 
 public abstract class ConfigInstance {
+
     protected Configuration instance;
 
-    public ConfigInstance(String name)
-    {
+    public ConfigInstance(String name) {
         instance = new Configuration(name);
     }
 
-    public void start()
-    {
+    public void start() {
         if(!instance.exists()) {
             saveConfig();
             instance.save();
@@ -20,8 +19,7 @@ public abstract class ConfigInstance {
         }
     }
 
-    public Object getValue(String group, String property)
-    {
+    public Object getValue(String group, String property) {
         return instance.getGroup(group).getProperty(property).getValue();
     }
 

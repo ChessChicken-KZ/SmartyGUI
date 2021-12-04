@@ -1,25 +1,24 @@
-package kz.chesschicken.smartygui.common.configapi.instance;
+package kz.chesschicken.configapi.instance;
 
-import kz.chesschicken.smartygui.common.configapi.EnumPropertyType;
+import kz.chesschicken.configapi.EnumPropertyType;
 
-public class Property extends ConfigPart
-{
+public class Property extends ConfigPart {
+
     private EnumPropertyType type;
     private Object value;
-    public Property(String s, Object o) {
+
+    Property(String s, Object o) {
         super(s);
         value = o;
         type = EnumPropertyType.parseObject(o);
     }
 
-    public void setOther(Object o, boolean f)
-    {
+    public void setOtherValue(Object o, boolean f) {
         value = o;
         if(f) type = EnumPropertyType.parseObject(o);
     }
 
-    public Object getValue()
-    {
+    public Object getValue() {
         return value;
     }
 

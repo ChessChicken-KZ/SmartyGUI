@@ -7,7 +7,6 @@ import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.server.MinecraftServer;
 import net.modificationstation.stationapi.api.event.registry.MessageListenerRegistryEvent;
-import net.modificationstation.stationapi.api.factory.GeneralFactory;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.packet.Message;
 import net.modificationstation.stationapi.api.packet.PacketHelper;
@@ -25,15 +24,13 @@ public class CustomPacketSender
 
     @Environment(EnvType.CLIENT)
     public static void requestPlayerList() {
-        Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartyguistapi:playerlist");
-        PacketHelper.send(packet);
+        PacketHelper.send(new Message(Identifier.of("smartyguistapi:playerlist")));
     }
 
 
     public void handleSendPlayers(PlayerBase playerBase, Message customData) {
-        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER)
-        {
-            Message packet = GeneralFactory.INSTANCE.newInst(Message.class, "smartyguistapi:playerlistResult");
+        if(FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
+            Message packet = new Message(Identifier.of("smartyguistapi:playerlistResult"));
             packet.strings = getPlayerNickList(((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverPlayerConnectionManager.players);
             packet.ints = (new int[]{
                     ((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverProperties.getInteger("max-players", 20)

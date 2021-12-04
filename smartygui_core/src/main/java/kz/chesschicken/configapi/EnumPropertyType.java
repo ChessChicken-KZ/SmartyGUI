@@ -1,4 +1,4 @@
-package kz.chesschicken.smartygui.common.configapi;
+package kz.chesschicken.configapi;
 
 public enum EnumPropertyType {
     BOOLEAN(Boolean.class),
@@ -9,18 +9,16 @@ public enum EnumPropertyType {
     STRING_ARRAY(String.class);
 
     private final Class<?> extending;
-    EnumPropertyType(Class<?> c)
-    {
+
+    EnumPropertyType(Class<?> c) {
         this.extending = c;
     }
 
-    public Class<?> getType()
-    {
+    public Class<?> getTypeClass() {
         return this.extending;
     }
 
-    public static EnumPropertyType parseObject(Object o)
-    {
+    public static EnumPropertyType parseObject(Object o) {
         if(o instanceof Boolean)
             return EnumPropertyType.BOOLEAN;
         if(o instanceof String)
@@ -31,7 +29,6 @@ public enum EnumPropertyType {
             return EnumPropertyType.DOUBLE;
         if(o instanceof Float)
             return EnumPropertyType.FLOAT;
-
         return EnumPropertyType.STRING;
     }
 }

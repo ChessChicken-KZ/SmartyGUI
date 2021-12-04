@@ -1,11 +1,12 @@
-package kz.chesschicken.smartygui.common.configapi.instance;
+package kz.chesschicken.configapi.instance;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group extends ConfigPart
-{
+public class Group extends ConfigPart {
+
     private final List<Property> properties;
+
     Group(String s) {
         super(s);
         properties = new ArrayList<>();
@@ -20,13 +21,10 @@ public class Group extends ConfigPart
         properties.add(property);
     }
 
-    public Property getProperty(String propertyName)
-    {
+    public Property getProperty(String propertyName) {
         for(Property p : properties)
-        {
             if(p.getName().equalsIgnoreCase(propertyName))
                 return p;
-        }
         return null;
     }
 

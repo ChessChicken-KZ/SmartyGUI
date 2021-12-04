@@ -2,7 +2,7 @@ package kz.chesschicken.smartygui.client.showblock;
 
 import kz.chesschicken.smartygui.client.ModuleRender;
 import kz.chesschicken.smartygui.common.RenderUtils;
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.SmartyGUIConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockBase;
@@ -64,12 +64,12 @@ public class ModuleBlockRender extends ModuleRender {
             RenderUtils.gradientRender(x, y,
                     Math.max(textRenderer.getTextWidth(stringBlockCoordinates), textRenderer.getTextWidth(stringBlockProperties)) + 36,
                     40,
-                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[0],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[1],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[2]),
-                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[3],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[4],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[5]));
+                    RenderUtils.convertRGBToInt(SmartyGUIConfig.INSTANCE.showBlockRGB[0],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[1],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[2]),
+                    RenderUtils.convertRGBToInt(SmartyGUIConfig.INSTANCE.showBlockRGB[3],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[4],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[5]));
 
         RenderUtils.renderItem(itemRenderer,textRenderer, minecraft.textureManager,
                 new ItemInstance(

@@ -8,7 +8,7 @@ dependencies {
     implementation "com.github.mineLdiver:expressions:2fa66db"
     implementation "com.github.mineLdiver:UnsafeEvents:7efec57"
 
-    modImplementation 'com.github.ModificationStation:StationAPI:ec7ce06'
+    modImplementation 'com.github.ModificationStation:StationAPI:3553da6dd4'
 
     implementation project(':smartygui_core')
 }

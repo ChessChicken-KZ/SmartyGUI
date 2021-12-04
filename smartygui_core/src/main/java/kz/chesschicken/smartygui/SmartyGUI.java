@@ -2,27 +2,23 @@ package kz.chesschicken.smartygui;
 
 
 import kz.chesschicken.smartygui.common.APIDetector;
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.SmartyGUIConfig;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class SmartyGui implements ClientModInitializer
-{
-    public static String getFullOperatingSystemName()
-    {
+public class SmartyGUI implements ClientModInitializer {
+
+    public static String getFullOperatingSystemName() {
         String name = System.getProperty("os.name");
         if(name == null) return "Unknown";
 
         return name + " " + System.getProperty("os.version");
     }
 
-    public static String getFormattedOperatingSystemName()
-    {
-
+    public static String getFormattedOperatingSystemName() {
         StringBuilder osstring = new StringBuilder();
         try
         {
@@ -69,8 +65,7 @@ public class SmartyGui implements ClientModInitializer
         return osstring.toString();
     }
 
-    public static String getProcessorInfo()
-    {
+    public static String getProcessorInfo() {
         return System.getenv("PROCESSOR_IDENTIFIER");
     }
 
@@ -79,11 +74,9 @@ public class SmartyGui implements ClientModInitializer
         System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [" + sender + "] " + string);
     }
 
-    public static boolean moduleStAPI;
     @Override
     public void onInitializeClient() {
-        SmartyGuiConfig.INSTANCE.start();
+        SmartyGUIConfig.INSTANCE.start();
         APIDetector.INSTANCE.checkAPI();
-        moduleStAPI = FabricLoader.getInstance().isModLoaded("smartyguistapi");
     }
 }

@@ -2,7 +2,7 @@ package kz.chesschicken.smartygui.client.showblock;
 
 import kz.chesschicken.smartygui.client.ModuleRender;
 import kz.chesschicken.smartygui.common.RenderUtils;
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.SmartyGUIConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -21,10 +21,10 @@ public class ModuleArmorRender extends ModuleRender {
 
         itemRenderer = new ItemRenderer();
 
-        if(SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 0 || SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 2)
+        if(SmartyGUIConfig.INSTANCE.armorStatusHUDmode == 0 || SmartyGUIConfig.INSTANCE.armorStatusHUDmode == 2)
             leftOrRight = true;
 
-        if(SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 2 || SmartyGuiConfig.INSTANCE.armorStatusHUDmode == 3)
+        if(SmartyGUIConfig.INSTANCE.armorStatusHUDmode == 2 || SmartyGUIConfig.INSTANCE.armorStatusHUDmode == 3)
             topOrBottom = true;
     }
 

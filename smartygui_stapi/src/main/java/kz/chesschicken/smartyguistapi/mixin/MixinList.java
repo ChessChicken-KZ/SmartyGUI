@@ -1,7 +1,7 @@
 package kz.chesschicken.smartyguistapi.mixin;
 
 import kz.chesschicken.smartygui.common.RenderUtils;
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.SmartyGUIConfig;
 import kz.chesschicken.smartyguistapi.CustomPacketSender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.InGame;
@@ -23,7 +23,7 @@ public class MixinList {
 
     @Inject(method = "renderHud", at = @At("TAIL"))
     public void injectRenderPlayerList(float f, boolean flag, int i, int j, CallbackInfo ci) {
-        if(SmartyGuiConfig.INSTANCE.enablePlayerList && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
+        if(SmartyGUIConfig.INSTANCE.enablePlayerList && Keyboard.isKeyDown(Keyboard.KEY_TAB) && minecraft.level.isClient)
         {
             doTicking();
 

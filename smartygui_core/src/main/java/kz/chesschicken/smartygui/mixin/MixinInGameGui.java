@@ -1,13 +1,13 @@
 package kz.chesschicken.smartygui.mixin;
 
 
-import kz.chesschicken.smartygui.SmartyGui;
+import kz.chesschicken.smartygui.SmartyGUI;
 import kz.chesschicken.smartygui.client.showblock.ModuleArmorRender;
 import kz.chesschicken.smartygui.client.showblock.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.showblock.ModuleEntityRenderer;
 import kz.chesschicken.smartygui.client.showblock.ModuleToolTipRender;
 import kz.chesschicken.smartygui.common.APIDetector;
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.SmartyGUIConfig;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.InGame;
@@ -49,26 +49,26 @@ public class MixinInGameGui {
         if(renderToolTip == null) renderToolTip = new ModuleToolTipRender(minecraft);
 
         /* ShowBlock Part */
-        if (SmartyGuiConfig.INSTANCE.enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
+        if (SmartyGUIConfig.INSTANCE.enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
             if (minecraft.hitResult.type == HitType.TILE) {
                 renderBlock.updateBlock(minecraft.hitResult.x, minecraft.hitResult.y, minecraft.hitResult.z);
-                renderBlock.doBlockRendering(5, 13, SmartyGuiConfig.INSTANCE.showBlockModernStyle);
+                renderBlock.doBlockRendering(5, 13, SmartyGUIConfig.INSTANCE.showBlockModernStyle);
                 renderBlock.clean();
             } else {
                 renderEntity.updateEntity(minecraft.hitResult.field_1989);
-                renderEntity.doEntityRendering(5, 13, SmartyGuiConfig.INSTANCE.showBlockModernStyle);
+                renderEntity.doEntityRendering(5, 13, SmartyGUIConfig.INSTANCE.showBlockModernStyle);
                 renderEntity.clean();
             }
         }
 
         /* ArmorStatusHUD Part */
-        if(SmartyGuiConfig.INSTANCE.enableArmorStatusHUD && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud) {
+        if(SmartyGUIConfig.INSTANCE.enableArmorStatusHUD && !minecraft.paused && minecraft.currentScreen == null && !minecraft.options.debugHud && !minecraft.options.hideHud) {
             renderStatus.doArmorStatusRender();
             renderStatus.clean();
         }
 
         //InGame ToolTip part
-        if(SmartyGuiConfig.INSTANCE.enableInGameToolTip && !this.minecraft.paused && this.minecraft.currentScreen == null) {
+        if(SmartyGUIConfig.INSTANCE.enableInGameToolTip && !this.minecraft.paused && this.minecraft.currentScreen == null) {
             renderToolTip.doTooltipRender(this.minecraft.player.getHeldItem(), f);
             renderToolTip.clean();
         }
@@ -91,11 +91,10 @@ public class MixinInGameGui {
             fr.drawTextWithShadow("World Time: " + this.minecraft.player.level.getLevelTime(), 2, 120, 14737632);
             fr.drawTextWithShadow("World Name: " + this.minecraft.player.level.getProperties().getName(), 2, 128, 14737632);
 
-            stringToSent = "OS: " + SmartyGui.getFullOperatingSystemName();
+            stringToSent = "OS: " + SmartyGUI.getFullOperatingSystemName();
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 26, 14737632);
-            if(SmartyGui.getProcessorInfo() != null)
-            {
-                stringToSent = "CPU: " + SmartyGui.getProcessorInfo();
+            if(SmartyGUI.getProcessorInfo() != null) {
+                stringToSent = "CPU: " + SmartyGUI.getProcessorInfo();
                 fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 36, 14737632);
             }
             stringToSent = "GPU: " + GL11.glGetString(GL11.GL_RENDERER);
@@ -108,14 +107,12 @@ public class MixinInGameGui {
             fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 76, 14737632);
 
             int q = 0;
-            if(APIDetector.INSTANCE.existStationAPI)
-            {
+            if(APIDetector.INSTANCE.existStationAPI) {
                 stringToSent = "StationAPI is present.";
                 fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86 + q, 14737632);
                 q += 10;
             }
-            if(APIDetector.INSTANCE.existCursedLegacyAPI)
-            {
+            if(APIDetector.INSTANCE.existCursedLegacyAPI) {
                 stringToSent = "CursedLegacyAPI is present.";
                 fr.drawTextWithShadow(stringToSent, scaledWidth - fr.getTextWidth(stringToSent) - 2, 86 + q, 14737632);
                 q += 10;
@@ -126,7 +123,7 @@ public class MixinInGameGui {
 
     @Inject(method = "addChatMessage", at = @At("TAIL"))
     public void injectLogMessage(String string, CallbackInfo ci) {
-        SmartyGui.logMessageAs(this.getClass().getSimpleName(), "[CHAT] " + string);
+        SmartyGUI.logMessageAs(this.getClass().getSimpleName(), "[CHAT] " + string);
     }
 
 }

@@ -1,9 +1,9 @@
 package kz.chesschicken.smartygui.client.showblock;
 
-import kz.chesschicken.smartygui.SmartyGui;
 import kz.chesschicken.smartygui.client.ModuleRender;
+import kz.chesschicken.smartygui.common.APIDetector;
 import kz.chesschicken.smartygui.common.RenderUtils;
-import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.SmartyGUIConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -48,12 +48,12 @@ public class ModuleEntityRenderer extends ModuleRender
             RenderUtils.gradientRender(x, y,
                     Math.max(textRenderer.getTextWidth(stringEntityCoordinates), textRenderer.getTextWidth(stringEntityName)) + 16,
                     65,
-                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[0],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[1],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[2]),
-                    RenderUtils.convertRGBToInt(SmartyGuiConfig.INSTANCE.showBlockRGB[3],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[4],
-                            SmartyGuiConfig.INSTANCE.showBlockRGB[5]));
+                    RenderUtils.convertRGBToInt(SmartyGUIConfig.INSTANCE.showBlockRGB[0],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[1],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[2]),
+                    RenderUtils.convertRGBToInt(SmartyGUIConfig.INSTANCE.showBlockRGB[3],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[4],
+                            SmartyGUIConfig.INSTANCE.showBlockRGB[5]));
 
         textRenderer.drawText(stringEntityCoordinates, x + 5, y + 5, 16777215);
         textRenderer.drawText(stringEntityName, x + 5, y + 15, 16777215);
@@ -65,7 +65,7 @@ public class ModuleEntityRenderer extends ModuleRender
     {
         if(entityBase instanceof Living)
         {
-            if(SmartyGui.moduleStAPI)
+            if(APIDetector.INSTANCE.moduleStAPI)
                 return "Health: " + (entityBase.getDataTracker().getInt(30));
 
             if(!minecraft.level.isClient)
