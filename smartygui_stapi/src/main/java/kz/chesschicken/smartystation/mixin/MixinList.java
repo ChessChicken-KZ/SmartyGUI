@@ -1,8 +1,8 @@
-package kz.chesschicken.smartyguistapi.mixin;
+package kz.chesschicken.smartystation.mixin;
 
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUIConfig;
-import kz.chesschicken.smartyguistapi.CustomPacketSender;
+import kz.chesschicken.smartystation.CustomPacketSender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.InGame;
 import net.minecraft.client.util.ScreenScaler;

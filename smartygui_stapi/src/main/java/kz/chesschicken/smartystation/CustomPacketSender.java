@@ -1,4 +1,4 @@
-package kz.chesschicken.smartyguistapi;
+package kz.chesschicken.smartystation;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -24,13 +24,13 @@ public class CustomPacketSender
 
     @Environment(EnvType.CLIENT)
     public static void requestPlayerList() {
-        PacketHelper.send(new Message(Identifier.of("smartyguistapi:playerlist")));
+        PacketHelper.send(new Message(Identifier.of("smartystation:playerlist")));
     }
 
 
     public void handleSendPlayers(PlayerBase playerBase, Message customData) {
         if(FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
-            Message packet = new Message(Identifier.of("smartyguistapi:playerlistResult"));
+            Message packet = new Message(Identifier.of("smartystation:playerlistResult"));
             packet.strings = getPlayerNickList(((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverPlayerConnectionManager.players);
             packet.ints = (new int[]{
                     ((MinecraftServer) FabricLoader.getInstance().getGameInstance()).serverProperties.getInteger("max-players", 20)

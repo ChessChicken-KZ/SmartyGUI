@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "smartyguistapi",
+  "id": "smartystation",
   "version": "${version}",
 
   "name": "SmartyStation - SmartyGUI addon",
@@ -15,15 +15,15 @@
   },
 
   "license": "MIT",
-  "icon": "assets/smartyguistapi/icon.png",
+  "icon": "assets/smartystation/icon.png",
 
   "entrypoints": {
     "stationapi:event_bus": [
-      "kz.chesschicken.smartyguistapi.CustomPacketSender"
+      "kz.chesschicken.smartystation.CustomPacketSender"
     ]
   },
   "mixins": [
-    "smartyguistapi.mixins.json"
+    "smartystation.mixins.json"
   ],
 
   "depends": {

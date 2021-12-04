@@ -11,7 +11,7 @@ public class APIDetector {
     public void checkAPI() {
         existStationAPI = FabricLoader.getInstance().isModLoaded("stationapi");
         existCursedLegacyAPI = FabricLoader.getInstance().isModLoaded("api");
-        moduleStAPI = FabricLoader.getInstance().isModLoaded("smartyguistapi");
+        moduleStAPI = FabricLoader.getInstance().isModLoaded("smartystation");
     }
 
     private APIDetector() {

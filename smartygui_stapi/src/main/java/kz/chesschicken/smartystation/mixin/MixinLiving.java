@@ -1,4 +1,4 @@
-package kz.chesschicken.smartyguistapi.mixin;
+package kz.chesschicken.smartystation.mixin;
 
 import net.minecraft.entity.EntityBase;
 import net.minecraft.entity.Living;
