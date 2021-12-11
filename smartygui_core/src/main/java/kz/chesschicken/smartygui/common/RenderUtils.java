@@ -52,11 +52,7 @@ public class RenderUtils {
     public static void gradientModern(int var1, int var2, int length, int var4, int var5, int multiplier, int widthSize) {
         int var9 = var1 - var4 + 12;
         int var10 = var2 - var5 - 12;
-        int l1 = widthSize;
-        if (length > l1) {
-            l1 = length;
-        }
-
+        int l1 = Math.max(length, widthSize);
         int j3 = 8 * multiplier;
         int k3 = -267386864;
         gradientRender(var9 - 3, var10 - 4, var9 + l1 + 3, ( var10 - 3), k3, k3);

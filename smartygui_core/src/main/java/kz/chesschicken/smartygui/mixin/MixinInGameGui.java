@@ -1,6 +1,5 @@
 package kz.chesschicken.smartygui.mixin;
 
-
 import kz.chesschicken.smartygui.SmartyGUI;
 import kz.chesschicken.smartygui.client.showblock.ModuleArmorRender;
 import kz.chesschicken.smartygui.client.showblock.ModuleBlockRender;

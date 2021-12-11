@@ -28,11 +28,20 @@ public class Group extends ConfigPart {
         return null;
     }
 
+    /**
+     * The method returns the list of {@link kz.chesschicken.configapi.instance.Property} of the object.
+     * @return list of properties.
+     */
     public List<Property> getProperties() {
         return this.properties;
     }
 
-    public static Group createGroup(String s) {
-        return new Group(s);
+    /**
+     * The method generates a {@link kz.chesschicken.configapi.instance.Group} instance.
+     * @param name name of a group.
+     * @return generated instance.
+     */
+    public static Group createGroup(String name) {
+        return new Group(name);
     }
 }
