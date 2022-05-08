@@ -1,7 +1,29 @@
-.gradle
-**/build/
-!src/**/build/
+# MCP's not to be published folders.
+bin/
+eclipse/
+conf/
+docs/
+jars/
+lib/
+logs/
+reobf/
+runtime/
+src_utc/
+temp/
 
-.idea
+# .bat/sh files.
+cleanup.bat
+decompile.bat
+recompile.bat
+reobfuscate.bat
+setup.bat
+setup.sh
+startclient.bat
+startserver.bat
+updatemcp.bat
+updatemd5.bat
 
-run/
+# Minecraft unnecessary src folders.
+src/minecraft_server/
+src/minecraft/net/minecraft/client/
+src/minecraft/net/minecraft/isom/
