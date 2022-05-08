@@ -49,7 +49,7 @@ public class ModuleArmorRender extends ModuleRender {
     }
 
     /**
-     * Render code for armour status HUD.
+     * Render code for armor status HUD.
      */
     public void doArmorStatusRender() {
         ScaledResolution sr = new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight);

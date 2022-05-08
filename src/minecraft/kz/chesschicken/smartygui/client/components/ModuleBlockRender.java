@@ -23,7 +23,6 @@ import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import kz.chesschicken.smartygui.common.plugins.event.IOverrideBlockRender;
-import kz.chesschicken.smartygui.common.plugins.Byte$String;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
@@ -82,8 +81,6 @@ public class ModuleBlockRender extends ModuleRender {
                 " " + currentBlockID + ":" + currentBlockMeta + " ";
         this.stringBlockHardness = "H: " + Block.blocksList[currentBlockID].getHardness();
         this.colourType = getColorByHardness(Block.blocksList[currentBlockID].getHardness());
-        
-        this._debug = true;
     }
     
     public void __updateBlockDebug() {
@@ -98,6 +95,7 @@ public class ModuleBlockRender extends ModuleRender {
                 " " + currentBlockID + ":" + currentBlockMeta + " ";
     	this.stringBlockHardness = "H: " + Block.blocksList[currentBlockID].getHardness();
     	this.colourType = getColorByHardness(Block.blocksList[currentBlockID].getHardness());
+        this._debug = true;
     }
 
     @Override
@@ -130,15 +128,15 @@ public class ModuleBlockRender extends ModuleRender {
 
         int[] realXY = new int[] {0, 0};
         
-        Byte$String[] vals = null;
+        String[][] vals = null;
         byte f = 0;
         if(!_debug) {
-	        vals = new Byte$String[blockDescPlugins.length];
+	        vals = new String[blockDescPlugins.length][];
 	        for(int q = 0; q < vals.length; q++)
 	        	vals[q] = blockDescPlugins[q].getAdditionalBlockDescription(currentBlockID, currentBlockMeta, minecraft.theWorld, minecraft.objectMouseOver.blockX, minecraft.objectMouseOver.blockY, minecraft.objectMouseOver.blockZ);
 	        
-	        for(Byte$String q : vals) {
-	        	if(q != null) f += q.value_byte;
+	        for(String[] q : vals) {
+	        	if(q != null) f += q.length;
 	        }
         }
         
@@ -165,7 +163,7 @@ public class ModuleBlockRender extends ModuleRender {
 	        for(int q = 0; q < vals.length; q++) {
 	        	if(vals[q] == null)
 	        		continue;
-	        	for(String h : vals[q].value_strings) {
+	        	for(String h : vals[q]) {
 	                textRenderer.drawString(h, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
 	                f++;
 	        	}

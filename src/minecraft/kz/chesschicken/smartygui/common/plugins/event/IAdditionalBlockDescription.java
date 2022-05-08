@@ -15,11 +15,10 @@
  */
 package kz.chesschicken.smartygui.common.plugins.event;
 
-import kz.chesschicken.smartygui.common.plugins.Byte$String;
 import net.minecraft.src.World;
 
 public interface IAdditionalBlockDescription {
 	
-	Byte$String getAdditionalBlockDescription(int id, int meta, World world, int x, int y, int z);
+	String[] getAdditionalBlockDescription(int id, int meta, World world, int x, int y, int z);
 	
 }

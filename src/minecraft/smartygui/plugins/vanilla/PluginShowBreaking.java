@@ -17,7 +17,6 @@ package smartygui.plugins.vanilla;
 
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
-import kz.chesschicken.smartygui.common.plugins.Byte$String;
 import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
@@ -40,15 +39,15 @@ public class PluginShowBreaking extends AbstractSmartyPlugin implements IAdditio
 	}
 	
 	@Override
-	public Byte$String getAdditionalBlockDescription(int id, int meta, World world, int x, int y, int z) {
+	public String[] getAdditionalBlockDescription(int id, int meta, World world, int x, int y, int z) {
 		if(this.mc == null)
 			this.mc = ModLoader.getMinecraftInstance();
 
 		if(this.mc.ingameGUI.damageGuiPartialTime > 0.0F) {
-			return new Byte$String((byte) 1, new String[] {"Breaking: " + Math.round(this.mc.ingameGUI.damageGuiPartialTime * 100) + "%"});
+			return new String[] {"Breaking: " + Math.round(this.mc.ingameGUI.damageGuiPartialTime * 100) + "%"};
 		}
 		
-		return Byte$String.EMPTY;
+		return null;
 	}
 
 

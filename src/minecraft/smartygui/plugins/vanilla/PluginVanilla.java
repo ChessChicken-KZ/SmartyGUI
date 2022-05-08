@@ -20,7 +20,6 @@ import org.lwjgl.input.Keyboard;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
-import kz.chesschicken.smartygui.common.plugins.Byte$String;
 import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
@@ -56,9 +55,9 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 	}
 	
 	@Override
-	public Byte$String getAdditionalBlockDescription(int id, int meta, World world, int x, int y, int z) {
+	public String[] getAdditionalBlockDescription(int id, int meta, World world, int x, int y, int z) {
 		if(Block.crops.blockID == id) {
-			return new Byte$String((byte) 1, new String[] {"Age: " + getAge(meta) + "%"});
+			return new String[] {"Age: " + getAge(meta) + "%"};
 		}
 
 		if((Block.signPost.blockID == id || Block.signWall.blockID == id) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
@@ -66,11 +65,11 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 			byte q = 0;
 			for(String a : sign.signText)
 				if(a.length() > 0) q++;
-			if(q == 0) return Byte$String.EMPTY;
-			return new Byte$String((byte)sign.signText.length, sign.signText);
+			if(q == 0) return null;
+			return sign.signText;
 		}
 		
-		return Byte$String.EMPTY;
+		return null;
 	}
 
 	@Override
