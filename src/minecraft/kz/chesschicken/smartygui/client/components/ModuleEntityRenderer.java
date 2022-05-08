@@ -136,7 +136,7 @@ public class ModuleEntityRenderer extends ModuleRender {
     	String h = getEntityBaseHealth();
     	
     	String[][] vals = null;
-        byte f = 0;
+        byte f = (byte) (h != null ? 1 : 0);
         if(!_debug) {
 	        vals = new String[entityDescPlugins.length][];
 	        for(int q = 0; q < vals.length; q++)
@@ -148,11 +148,11 @@ public class ModuleEntityRenderer extends ModuleRender {
         }
     	
     	if(config.showBlockModernStyle && !config.transparency)
-        	realXY = RenderUtils.modernRenderByAnchor(x, y, Math.max(textRenderer.getStringWidth(stringEntityCoordinates), textRenderer.getStringWidth(stringEntityName)) + 43, ((h != null) ? 45 : 35) + (f * 10), anchor);
+        	realXY = RenderUtils.modernRenderByAnchor(x, y, Math.max(textRenderer.getStringWidth(stringEntityCoordinates), textRenderer.getStringWidth(stringEntityName)) + 43, 35 + (f * 10), anchor);
         else
         	realXY = RenderUtils.gradientRenderByAnchor(x, y,
                     Math.max(textRenderer.getStringWidth(stringEntityCoordinates), textRenderer.getStringWidth(stringEntityName)) + 46,
-                    ((h != null) ? 48 : 38) + (f * 10),
+                    38 + (f * 10),
                     config.showBlockRGB[0],
                     config.showBlockRGB[1],
                     anchor, config.transparency);
@@ -166,12 +166,12 @@ public class ModuleEntityRenderer extends ModuleRender {
         	textRenderer.drawString(h, realXY[0] + 5 + 35, realXY[1] + 35, config.showBlockRGB[2]);
         
         if(!_debug) {
-	        f = 0;
+	        f = (byte) (h != null ? 1 : 0);
 	        for(int q = 0; q < vals.length; q++) {
 	        	if(vals[q] == null)
 	        		continue;
 	        	for(String he : vals[q]) {
-	                textRenderer.drawString(he, realXY[0] + 25, realXY[1] + 25 + ((f + (h != null ? 1 : 0)) * 10), config.showBlockRGB[2]);
+	                textRenderer.drawString(he, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
 	                f++;
 	        	}
 	        }
