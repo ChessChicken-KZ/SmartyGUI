@@ -3,10 +3,9 @@
 SmartyGUI — a modification that adds a bunch of useful things to the game!
 
 Currently adds:
-
-    Block/Entity Viewer HUD.
-    Armor Status HUD.
-    Tooltip.
+- Block/Entity Viewer HUD.
+- Armor Status HUD.
+- Tooltip.
 
 ## Installation (Players/Users)
 
