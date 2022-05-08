@@ -15,12 +15,13 @@
  */
 package net.minecraft.src;
 
+import kz.chesschicken.smartygui.modloader.IModMenuDesc;
 import smartygui.plugins.vanilla.PluginShowBreaking;
 import smartygui.plugins.vanilla.PluginVanilla;
 
-public class mod_SmartyGUI_VPl extends BaseMod {
+public class mod_SmartyGUI_PfV extends BaseMod implements IModMenuDesc {
 
-	public mod_SmartyGUI_VPl() {
+	public mod_SmartyGUI_PfV() {
 	}
 	
 	@Override
@@ -31,7 +32,22 @@ public class mod_SmartyGUI_VPl extends BaseMod {
 	
 	@Override
 	public String Version() {
-		return "0.1v - for SmartyGUI ML2.2";
+		return "0.1v - for SmartyGUI ML-2.2";
+	}
+
+	@Override
+	public String Name() {
+		return "SmartyGUI - Plugins for Vanilla";
+	}
+
+	@Override
+	public String Description() {
+		return "A set of plugins for vanilla to enchance the gameplay with SmartyGUI.";
+	}
+
+	@Override
+	public String Icon() {
+		return "/smartygui/icon.png";
 	}
 
 }
