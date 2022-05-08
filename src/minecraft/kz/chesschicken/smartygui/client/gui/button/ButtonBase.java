@@ -88,7 +88,7 @@ public class ButtonBase extends GuiButton {
 					this.drawRect(a + 2, b + 2, a + 8 + mc.fontRenderer.getStringWidth(this.stringA), b + 14, Color.BLACK.getIntArgbPre());
 					this.drawString(mc.fontRenderer, this.stringA, a + 5, b + 4, 0xFFFFFF);
 				} else tickA--;
-			}else if(tickA != 100) tickA = 100;
+			}else if(tickA != 60) tickA = 60;
 		}
 	}
 	

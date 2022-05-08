@@ -21,8 +21,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import kz.chesschicken.smartygui.common.plugins.EnumEventTypes;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface GetClassifiedEvents {

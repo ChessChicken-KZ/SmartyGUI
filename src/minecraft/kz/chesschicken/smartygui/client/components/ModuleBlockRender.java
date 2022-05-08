@@ -20,7 +20,7 @@ import java.util.Random;
 import kz.chesschicken.smartygui.common.ModuleRender;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
-import kz.chesschicken.smartygui.common.plugins.EnumEventTypes;
+import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import kz.chesschicken.smartygui.common.plugins.event.IOverrideBlockRender;
 import kz.chesschicken.smartygui.common.plugins.Byte$String;
@@ -40,15 +40,16 @@ public class ModuleBlockRender extends ModuleRender {
     private byte colourType;
 
     private final RenderItem itemRenderer;
-    private final IAdditionalBlockDescription[] fun_;
-    private final IOverrideBlockRender[] fun_2;
+    private final IAdditionalBlockDescription[] blockDescPlugins;
+    private final IOverrideBlockRender[] renderOverridePlugins;
 
+    private boolean _debug = false;
 
     public ModuleBlockRender(Minecraft minecraft, SmartyGUI config) {
         super(minecraft, config);
         this.itemRenderer = new RenderItem();
-        this.fun_ = this.pluginManager.__getEventsReady(EnumEventTypes.ADDITIONAL_BLOCK_DESCRIPTION, new IAdditionalBlockDescription[0], IAdditionalBlockDescription.class);
-        this.fun_2 = this.pluginManager.__getEventsReady(EnumEventTypes.OVERRIDE_BLOCK_RENDER, new IOverrideBlockRender[0], IOverrideBlockRender.class);
+        this.blockDescPlugins = this.pluginManager.__getEventsReady(EnumEventTypes.ADDITIONAL_BLOCK_DESCRIPTION, new IAdditionalBlockDescription[0], IAdditionalBlockDescription.class);
+        this.renderOverridePlugins = this.pluginManager.__getEventsReady(EnumEventTypes.OVERRIDE_BLOCK_RENDER, new IOverrideBlockRender[0], IOverrideBlockRender.class);
     }
     
     /**
@@ -81,6 +82,8 @@ public class ModuleBlockRender extends ModuleRender {
                 " " + currentBlockID + ":" + currentBlockMeta + " ";
         this.stringBlockHardness = "H: " + Block.blocksList[currentBlockID].getHardness();
         this.colourType = getColorByHardness(Block.blocksList[currentBlockID].getHardness());
+        
+        this._debug = true;
     }
     
     public void __updateBlockDebug() {
@@ -127,15 +130,17 @@ public class ModuleBlockRender extends ModuleRender {
 
         int[] realXY = new int[] {0, 0};
         
-        Byte$String[] vals = new Byte$String[fun_.length];
-        for(int q = 0; q < vals.length; q++)
-        	vals[q] = fun_[q].getAdditionalBlockDescription(currentBlockID, currentBlockMeta, minecraft.theWorld, minecraft.objectMouseOver.blockX, minecraft.objectMouseOver.blockY, minecraft.objectMouseOver.blockZ);
-        
+        Byte$String[] vals = null;
         byte f = 0;
-        for(Byte$String q : vals) {
-        	if(q != null) f += q.value_byte;
+        if(!_debug) {
+	        vals = new Byte$String[blockDescPlugins.length];
+	        for(int q = 0; q < vals.length; q++)
+	        	vals[q] = blockDescPlugins[q].getAdditionalBlockDescription(currentBlockID, currentBlockMeta, minecraft.theWorld, minecraft.objectMouseOver.blockX, minecraft.objectMouseOver.blockY, minecraft.objectMouseOver.blockZ);
+	        
+	        for(Byte$String q : vals) {
+	        	if(q != null) f += q.value_byte;
+	        }
         }
-        
         
         if(config.showBlockModernStyle && !config.transparency)
             realXY = RenderUtils.modernRenderByAnchor(x, y, Math.max(textRenderer.getStringWidth(stringBlockCoordinates), textRenderer.getStringWidth(stringBlockProperties + stringBlockHardness)) + 33, 23 + (f * 10), anchor);
@@ -143,7 +148,7 @@ public class ModuleBlockRender extends ModuleRender {
         	realXY = RenderUtils.gradientRenderByAnchor(x, y, Math.max(textRenderer.getStringWidth(stringBlockCoordinates), textRenderer.getStringWidth(stringBlockProperties + stringBlockHardness)) + 36, 26 + (f * 10), config.showBlockRGB[0], config.showBlockRGB[1], anchor, config.transparency);
 
         boolean e = false;
-        for(IOverrideBlockRender g : fun_2) {
+        for(IOverrideBlockRender g : renderOverridePlugins) {
         	boolean j = g.overrideHUDItemRenderer(currentBlockID, currentBlockMeta, minecraft.theWorld, itemRenderer, realXY[0] + 5, realXY[1] + 5, minecraft.objectMouseOver.blockX, minecraft.objectMouseOver.blockY, minecraft.objectMouseOver.blockZ);
         	if(!e) e = j;
         }
@@ -155,14 +160,16 @@ public class ModuleBlockRender extends ModuleRender {
         textRenderer.drawString(stringBlockProperties, realXY[0] + 25, realXY[1] + 15, config.showBlockRGB[2]);;
         textRenderer.drawString(stringBlockHardness, realXY[0] + 25 + textRenderer.getStringWidth(stringBlockProperties), realXY[1] + 15, colourType == 0 ? 0x55FFFF : (colourType == 1 ? 0x55FF55 : (colourType == 2 ? 0xFFFF00 : 0xFF0000)));
         
-        f = 0;
-        for(int q = 0; q < vals.length; q++) {
-        	if(vals[q] == null)
-        		continue;
-        	for(String h : vals[q].value_strings) {
-                textRenderer.drawString(h, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
-                f++;
-        	}
+        if(!_debug) {
+	        f = 0;
+	        for(int q = 0; q < vals.length; q++) {
+	        	if(vals[q] == null)
+	        		continue;
+	        	for(String h : vals[q].value_strings) {
+	                textRenderer.drawString(h, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
+	                f++;
+	        	}
+	        }
         }
     }
 }

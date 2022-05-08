@@ -21,6 +21,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 
 public class SmartyGuiPlugins {

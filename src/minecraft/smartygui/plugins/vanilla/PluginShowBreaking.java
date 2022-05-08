@@ -18,7 +18,7 @@ package smartygui.plugins.vanilla;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
 import kz.chesschicken.smartygui.common.plugins.Byte$String;
-import kz.chesschicken.smartygui.common.plugins.EnumEventTypes;
+import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import net.minecraft.client.Minecraft;

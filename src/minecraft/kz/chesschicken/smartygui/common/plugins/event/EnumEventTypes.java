@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.common.plugins;
+package kz.chesschicken.smartygui.common.plugins.event;
 
+/*
+ * List of events, that can be used.
+ * <br>
+ * {@link EnumEventTypes#ADDITIONAL_BLOCK_DESCRIPTION} - see {@link IAdditionalBlockDescription}.
+ * <br>
+ * {@link EnumEventTypes#OVERRIDE_BLOCK_RENDER} - see {@link IOverrideBlockRender}.
+ */
 public enum EnumEventTypes {
 	ADDITIONAL_BLOCK_DESCRIPTION,
 	ADDITIONAL_ENTITY_DESCRIPTION,

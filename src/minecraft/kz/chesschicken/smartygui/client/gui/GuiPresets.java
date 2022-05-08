@@ -15,6 +15,7 @@
  */
 package kz.chesschicken.smartygui.client.gui;
 
+import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import net.minecraft.src.GuiButton;
@@ -26,6 +27,8 @@ public class GuiPresets extends GuiScreen {
 	private final GuiDragInterface homeScreen;
 	
 	private int[] axy = new int[3];
+
+	private ModuleBlockRender debug1;
 	
 	public GuiPresets(SmartyGUI smartygui, GuiDragInterface homeScreen) {
 		this.instance = smartygui;
@@ -50,6 +53,9 @@ public class GuiPresets extends GuiScreen {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
+		this.debug1 = new ModuleBlockRender(this.mc, instance);
+		this.debug1.__updateBlockDebug();
+		
 		/* Presets mode*/
 		this.controlList.add(new ButtonBase(99, this.width / 2 - 10, this.height / 2 - 10, 20, 20, "X"));
 		
@@ -101,6 +107,7 @@ public class GuiPresets extends GuiScreen {
 	@Override
 	public void drawScreen(int a, int b, float f) {
 		super.drawScreen(a, b, f);
+		debug1.doBlockRendering(instance.getX(), instance.getY(), instance.getAnchor());
 	}
 
 }

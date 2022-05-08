@@ -19,9 +19,7 @@ import kz.chesschicken.smartygui.client.components.ModuleArmorRender;
 import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.components.ModuleEntityRenderer;
 import kz.chesschicken.smartygui.client.components.ModuleToolTipRender;
-import kz.chesschicken.smartygui.client.gui.GuiDragInterface;
 import kz.chesschicken.smartygui.client.gui.GuiHome;
-import kz.chesschicken.smartygui.client.gui.GuiPresets;
 import kz.chesschicken.smartygui.common.plugins.SmartyGuiPlugins;
 import kz.chesschicken.smartygui.modloader.IDeFabricated;
 import kz.chesschicken.smartygui.modloader.SystemUtils;
@@ -118,16 +116,6 @@ public class SmartyGUI implements IDeFabricated<mod_SmartyGUI> {
     	this.renderStatus.update();
     }
 
-    /**
-     * In class method for checking the possibility to be rendered correctly.
-     * @param minecraft Minecraft instance.
-     * @return "Can the HUD be rendered" value.
-     */
-    boolean __friendlyGUIEnv(Minecraft minecraft) {
-    	return (minecraft.currentScreen == null && !minecraft.isGamePaused) ||
-    			minecraft.currentScreen instanceof GuiDragInterface || minecraft.currentScreen instanceof GuiPresets;
-    }
-
     @Override
     public void onTickGame(Minecraft minecraft) {
         if(renderBlock == null) renderBlock = new ModuleBlockRender(minecraft, this);
@@ -142,13 +130,13 @@ public class SmartyGUI implements IDeFabricated<mod_SmartyGUI> {
         }
         
         /* ArmorStatusHUD Part */
-        if(CONFIG.enableArmorStatusHUD && __friendlyGUIEnv(minecraft) && !minecraft.gameSettings.showDebugInfo && !minecraft.gameSettings.hideGUI) {
+        if(CONFIG.enableArmorStatusHUD && minecraft.currentScreen == null && !minecraft.isGamePaused && !minecraft.gameSettings.showDebugInfo && !minecraft.gameSettings.hideGUI) {
             renderStatus.doArmorStatusRender();
             renderStatus.clean();
         }
 
         /* ShowBlock Part */
-        if (CONFIG.enableShowBlock && minecraft.objectMouseOver != null && __friendlyGUIEnv(minecraft) && !Minecraft.isDebugInfoEnabled() && !minecraft.gameSettings.hideGUI) {
+        if (CONFIG.enableShowBlock && minecraft.objectMouseOver != null && minecraft.currentScreen == null && !minecraft.isGamePaused && !Minecraft.isDebugInfoEnabled() && !minecraft.gameSettings.hideGUI) {
             if (minecraft.objectMouseOver.typeOfHit == EnumMovingObjectType.TILE) {
                 renderBlock.updateBlock(minecraft.objectMouseOver.blockX, minecraft.objectMouseOver.blockY, minecraft.objectMouseOver.blockZ);
                 renderBlock.doBlockRendering(xV, yV, aV);
@@ -161,7 +149,7 @@ public class SmartyGUI implements IDeFabricated<mod_SmartyGUI> {
         }
 
         /* F3 Extended Output */
-        if (minecraft.gameSettings.showDebugInfo) {
+        if (minecraft.gameSettings.showDebugInfo && CONFIG.enableDebugF3) {
             FontRenderer fr = minecraft.fontRenderer;
             String stringToSent;
             int scaledWidth = (new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight)).getScaledWidth();

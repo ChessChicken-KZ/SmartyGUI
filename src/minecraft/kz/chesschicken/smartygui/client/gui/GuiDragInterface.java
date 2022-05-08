@@ -15,6 +15,7 @@
  */
 package kz.chesschicken.smartygui.client.gui;
 
+import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.client.gui.button.ButtonImage;
 import kz.chesschicken.smartygui.common.SmartyGUI;
@@ -33,6 +34,8 @@ public class GuiDragInterface extends GuiScreen {
 	private int factorMove = 1;
 	private ButtonBase[] f = new ButtonBase[3];
 	private ButtonBase[] m = new ButtonBase[12];
+
+	private ModuleBlockRender debug1;
 	
 	private boolean anyChanges() {
 		return instance.CONFIG.factorX != instance.getX() || instance.CONFIG.factorY != instance.getY();
@@ -48,6 +51,8 @@ public class GuiDragInterface extends GuiScreen {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
+		this.debug1 = new ModuleBlockRender(this.mc, instance);
+		this.debug1.__updateBlockDebug();
 		
 		int bX_base = 5;
 		int bY_base = 15;
@@ -175,7 +180,8 @@ public class GuiDragInterface extends GuiScreen {
 		
 		for(Object f : this.controlList)
 			((ButtonBase) f).drawTooltip(this.mc, var1, var2);
-		
+
+		debug1.doBlockRendering(instance.getX(), instance.getY(), instance.getAnchor());
 	}
 	
 }

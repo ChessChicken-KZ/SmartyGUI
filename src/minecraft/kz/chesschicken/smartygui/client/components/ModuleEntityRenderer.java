@@ -51,6 +51,10 @@ public class ModuleEntityRenderer extends ModuleRender {
         this.stringEntityName = entityBase instanceof EntityPlayer ? "Player: " + ((EntityPlayer)entityBase).username : "Entity: " + EntityList.getEntityString(entityBase);
         this.stringEntityID = "ID: " + entityBase.entityId;
     }
+    
+    public void __updateEntityDebug() {
+    	updateEntity((Entity) minecraft.theWorld.getLoadedEntityList().get(0));
+    }
 
     @Override
     public void clean() {
