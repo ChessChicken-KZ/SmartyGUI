@@ -59,18 +59,17 @@ public class mod_SmartyGUI extends BaseMod implements IModMenuDesc {
 
 	@Override
 	public String Name() {
-		return null;
+		return "SmartyGUI";
 	}
 
 	@Override
 	public String Description() {
-		return "";
+		return "SmartyGUI - Block/Entity viewer, armor status and tooltip HUD.";
 	}
 
 	@Override
 	public String Icon() {
-		// TODO Auto-generated method stub
-		return null;
+		return "/smartygui/icon.png";
 	}
 
 }
