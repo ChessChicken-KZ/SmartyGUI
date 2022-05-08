@@ -21,6 +21,8 @@ package kz.chesschicken.smartygui.common.plugins.event;
  * {@link EnumEventTypes#ADDITIONAL_BLOCK_DESCRIPTION} - see {@link IAdditionalBlockDescription}.
  * <br>
  * {@link EnumEventTypes#OVERRIDE_BLOCK_RENDER} - see {@link IOverrideBlockRender}.
+ * <br>
+ * {@link EnumEventTypes#ADDITIONAL_ENTITY_DESCRIPTION} - see {@link IAdditionalEntityDescription}.
  */
 public enum EnumEventTypes {
 	ADDITIONAL_BLOCK_DESCRIPTION,

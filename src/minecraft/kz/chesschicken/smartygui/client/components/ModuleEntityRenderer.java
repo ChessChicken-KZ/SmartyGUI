@@ -20,6 +20,8 @@ import org.lwjgl.opengl.GL11;
 import kz.chesschicken.smartygui.common.ModuleRender;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
+import kz.chesschicken.smartygui.common.plugins.event.IAdditionalEntityDescription;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityList;
@@ -34,8 +36,13 @@ public class ModuleEntityRenderer extends ModuleRender {
     private String stringEntityID;
     private Entity entityBase;
 
+    private boolean _debug = false;
+    
+    private final IAdditionalEntityDescription[] entityDescPlugins;
+
     public ModuleEntityRenderer(Minecraft minecraft, SmartyGUI config) {
         super(minecraft, config);
+        this.entityDescPlugins = this.pluginManager.__getEventsReady(EnumEventTypes.ADDITIONAL_ENTITY_DESCRIPTION, new IAdditionalEntityDescription[0], IAdditionalEntityDescription.class);
     }
 
     /**
@@ -54,6 +61,7 @@ public class ModuleEntityRenderer extends ModuleRender {
     
     public void __updateEntityDebug() {
     	updateEntity((Entity) minecraft.theWorld.getLoadedEntityList().get(0));
+        this._debug = true;
     }
 
     @Override
@@ -127,12 +135,24 @@ public class ModuleEntityRenderer extends ModuleRender {
     	int[] realXY = new int[] {0, 0};
     	String h = getEntityBaseHealth();
     	
+    	String[][] vals = null;
+        byte f = 0;
+        if(!_debug) {
+	        vals = new String[entityDescPlugins.length][];
+	        for(int q = 0; q < vals.length; q++)
+	        	vals[q] = entityDescPlugins[q].getAdditionalEntityDescription(this.entityBase);
+	        
+	        for(String[] q : vals) {
+	        	if(q != null) f += q.length;
+	        }
+        }
+    	
     	if(config.showBlockModernStyle && !config.transparency)
-        	realXY = RenderUtils.modernRenderByAnchor(x, y, Math.max(textRenderer.getStringWidth(stringEntityCoordinates), textRenderer.getStringWidth(stringEntityName)) + 43, (h != null) ? 45 : 35, anchor);
+        	realXY = RenderUtils.modernRenderByAnchor(x, y, Math.max(textRenderer.getStringWidth(stringEntityCoordinates), textRenderer.getStringWidth(stringEntityName)) + 43, ((h != null) ? 45 : 35) + (f * 10), anchor);
         else
         	realXY = RenderUtils.gradientRenderByAnchor(x, y,
                     Math.max(textRenderer.getStringWidth(stringEntityCoordinates), textRenderer.getStringWidth(stringEntityName)) + 46,
-                    (h != null) ? 48 : 38,
+                    ((h != null) ? 48 : 38) + (f * 10),
                     config.showBlockRGB[0],
                     config.showBlockRGB[1],
                     anchor, config.transparency);
@@ -145,5 +165,16 @@ public class ModuleEntityRenderer extends ModuleRender {
         if(h != null)
         	textRenderer.drawString(h, realXY[0] + 5 + 35, realXY[1] + 35, config.showBlockRGB[2]);
         
+        if(!_debug) {
+	        f = 0;
+	        for(int q = 0; q < vals.length; q++) {
+	        	if(vals[q] == null)
+	        		continue;
+	        	for(String he : vals[q]) {
+	                textRenderer.drawString(he, realXY[0] + 25, realXY[1] + 25 + ((f + (h != null ? 1 : 0)) * 10), config.showBlockRGB[2]);
+	                f++;
+	        	}
+	        }
+        }
     }
 }

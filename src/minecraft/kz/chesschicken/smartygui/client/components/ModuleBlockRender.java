@@ -38,11 +38,11 @@ public class ModuleBlockRender extends ModuleRender {
     private String stringBlockHardness;
     private byte colourType;
 
+    private boolean _debug = false;
+    
     private final RenderItem itemRenderer;
     private final IAdditionalBlockDescription[] blockDescPlugins;
     private final IOverrideBlockRender[] renderOverridePlugins;
-
-    private boolean _debug = false;
 
     public ModuleBlockRender(Minecraft minecraft, SmartyGUI config) {
         super(minecraft, config);
