@@ -24,33 +24,26 @@ import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import net.minecraft.src.GuiButton;
 
 public class GuiAppearanceConfig extends BaseGUIStyle {
-	private static final String[] a_ash1 = new String[] {
-			"Bottom Right",
-			"Bottom Left",
-			"Top Right",
-			"Top Left"
-	};
+	
+	private static final String[] a_ash1 = new String[] { "Bottom Right", "Bottom Left", "Top Right", "Top Left" };
 	
 	private ButtonEnum<EnumTheme> themeButton;
 	private boolean a_darkTheme;
 	private boolean a_mmdebug;
 	private boolean a_modernStyle;
 	private boolean a_transparency;
-	
-	private int a_ashmode;
+	private byte a_ashmode;
 
-	
-	
 	public GuiAppearanceConfig(SmartyGUI a) {
 		super(a);
 		this.a_darkTheme = SmartyGuiConfig.darkTheme;
 		this.a_modernStyle = instance.CONFIG.showBlockModernStyle;
 		this.a_transparency = instance.CONFIG.transparency;
 		this.a_mmdebug = instance.CONFIG.enableDebugF3;
-		this.a_ashmode = instance.CONFIG.armorStatusHUDmode;
+		this.a_ashmode = (byte) instance.CONFIG.armorStatusHUDmode;
 	}
 	
-	private void _setString5(GuiButton a) {
+	void __setASH_String(GuiButton a) {
 		a.displayString = "Armor HUD: " + a_ash1[a_ashmode];
 	}
 
@@ -73,17 +66,15 @@ public class GuiAppearanceConfig extends BaseGUIStyle {
 		this.controlList.add(new ButtonToggle(53, this.width / 2 - 91, this.height / 4 + 56, 90, 20, "Modern Style"));
 		((ButtonToggle)this.controlList.get(4)).updateState(this.a_modernStyle);
 
-		
 		//Transparency
 		this.controlList.add(new ButtonToggle(54, this.width / 2 + 1, this.height / 4 + 56, 90, 20, "Transparency"));
 		((ButtonToggle)this.controlList.get(5)).updateState(this.a_transparency);
 		
-		//AS HUD Mode
+		//ArmorStatus HUD Mode
 		this.controlList.add(new ButtonBase(55, this.width / 2 - 91, this.height / 4 + 80, 182, 20, ""));
-		_setString5((GuiButton)this.controlList.get(6));
+		__setASH_String((GuiButton)this.controlList.get(6));
 		
 		this.controlList.add(new ButtonBase(150, this.width / 2 - 91, this.height / 4 + 104, 182, 20, "Save and Close"));
-		
 	}
 
 	@Override
@@ -123,8 +114,8 @@ public class GuiAppearanceConfig extends BaseGUIStyle {
 		}
 		
 		case 55: {
-			a_ashmode = (a_ashmode + 1 < a_ash1.length) ? a_ashmode + 1 : 0;
-			_setString5(var1);
+			a_ashmode = (byte) ((a_ashmode + 1 < a_ash1.length) ? a_ashmode + 1 : 0);
+			__setASH_String(var1);
 			break;
 		}
 		
@@ -136,11 +127,10 @@ public class GuiAppearanceConfig extends BaseGUIStyle {
 			instance.CONFIG.enableDebugF3 = a_mmdebug;
 			instance.CONFIG.armorStatusHUDmode = a_ashmode;
 			instance.CONFIG.forceSave();
-			instance.update___ArS();
+			instance.updateASHUD();
 			mc.displayGuiScreen(new GuiHome(instance));
 			break;
 		}
-		
 		}
 	}
 	

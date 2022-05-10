@@ -28,16 +28,21 @@ import net.minecraft.src.ScaledResolution;
 public class GuiDragInterface extends GuiScreen {
 	
 	private final SmartyGUI instance;
+	
 	public int backupX, backupY, backupA;
+	private int factorMove = 1;
 	private boolean saveState = false;
 	
-	private int factorMove = 1;
-	private ButtonBase[] f = new ButtonBase[3];
-	private ButtonBase[] m = new ButtonBase[12];
-
-	private ModuleBlockRender debug1;
+	/** Moving factor control buttons. */
+	private ButtonBase[] m = new ButtonBase[3];
 	
-	private boolean anyChanges() {
+	/** General control buttons. */
+	private ButtonBase[] g = new ButtonBase[12];
+	
+	/** Debug instance of ModuleBlockRender. */
+	private ModuleBlockRender s;
+	
+	boolean __anyChanges() {
 		return instance.CONFIG.factorX != instance.getX() || instance.CONFIG.factorY != instance.getY();
 	}
 	
@@ -51,32 +56,33 @@ public class GuiDragInterface extends GuiScreen {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
-		this.debug1 = new ModuleBlockRender(this.mc, instance);
-		this.debug1.__updateBlockDebug();
+		
+		this.s = new ModuleBlockRender(this.mc, instance);
+		this.s.__updateBlockDebug();
 		
 		int bX_base = 5;
 		int bY_base = 15;
 		
-		/* CENTER */ this.controlList.add(m[0] = new ButtonImage(0, bX_base, bY_base, 80, 0, "Center the UI"));
-		/* UP */ this.controlList.add(m[1] = new ButtonImage(1, bX_base + 22, bY_base, 16, 0, "Move Up"));
-		/* Presets */ this.controlList.add(m[2] = new ButtonImage(7, bX_base + 44, bY_base, 96, 0, "Revert Changes"));
+		/* CENTER */ this.controlList.add(g[0] = new ButtonImage(0, bX_base, bY_base, 80, 0, "Center the UI"));
+		/* UP */ this.controlList.add(g[1] = new ButtonImage(1, bX_base + 22, bY_base, 16, 0, "Move Up"));
+		/* Presets */ this.controlList.add(g[2] = new ButtonImage(7, bX_base + 44, bY_base, 96, 0, "Revert Changes"));
 		
-		/* < */ this.controlList.add(m[3] = new ButtonImage(2, bX_base, bY_base + 22, 0, 0, "Move Left"));
-		/* FIX */ this.controlList.add(m[4] = new ButtonBase(3, bX_base + 22, bY_base + 22, 20, 20, "FIX", "WIP"));
-		/* > */ this.controlList.add(m[5] = new ButtonImage(4, bX_base + 44, bY_base + 22, 32, 0, "Move Right"));
+		/* < */ this.controlList.add(g[3] = new ButtonImage(2, bX_base, bY_base + 22, 0, 0, "Move Left"));
+		/* FIX */ this.controlList.add(g[4] = new ButtonBase(3, bX_base + 22, bY_base + 22, 20, 20, "FIX", "WIP"));
+		/* > */ this.controlList.add(g[5] = new ButtonImage(4, bX_base + 44, bY_base + 22, 32, 0, "Move Right"));
 		
-		/* SAVE */ this.controlList.add(m[6] = new ButtonImage(5, bX_base, bY_base + 44, 64, 0, "Save to Config"));
-		/* DOWN */ this.controlList.add(m[7] = new ButtonImage(6, bX_base + 22, bY_base + 44, 48, 0, "Move Down"));
-		/* RESET */ this.controlList.add(m[8] = new ButtonImage(14, bX_base + 44, bY_base + 44, 112, 0, "Load Presets"));
+		/* SAVE */ this.controlList.add(g[6] = new ButtonImage(5, bX_base, bY_base + 44, 64, 0, "Save to Config"));
+		/* DOWN */ this.controlList.add(g[7] = new ButtonImage(6, bX_base + 22, bY_base + 44, 48, 0, "Move Down"));
+		/* RESET */ this.controlList.add(g[8] = new ButtonImage(14, bX_base + 44, bY_base + 44, 112, 0, "Load Presets"));
 		
-		this.controlList.add(f[0] = new ButtonBase(8, bX_base, bY_base + 66, 20, 20, "1x", "1x Moving Factor"));
-		f[0].enabled = false;
-		this.controlList.add(f[1] = new ButtonBase(9, bX_base + 22, bY_base + 66, 20, 20, "5x", "5x Moving Factor"));
-		this.controlList.add(f[2] = new ButtonBase(10, bX_base + 44, bY_base + 66, 20, 20, "10x", "10x Moving Factor"));
+		this.controlList.add(m[0] = new ButtonBase(8, bX_base, bY_base + 66, 20, 20, "1x", "1x Moving Factor"));
+		m[0].enabled = false;
+		this.controlList.add(m[1] = new ButtonBase(9, bX_base + 22, bY_base + 66, 20, 20, "5x", "5x Moving Factor"));
+		this.controlList.add(m[2] = new ButtonBase(10, bX_base + 44, bY_base + 66, 20, 20, "10x", "10x Moving Factor"));
 		
-		/* ANCHLEFT */ this.controlList.add(m[9] = new ButtonImage(11, bX_base + 66, bY_base, 0, 16, "Set Anchor to the left side"));
-		/* ANCHCENTER */ this.controlList.add(m[10] = new ButtonImage(12, bX_base + 66, bY_base + 22, 16, 16, "Set Anchor to the center"));
-		/* ANCHRIGHT */ this.controlList.add(m[11] = new ButtonImage(13, bX_base + 66, bY_base + 44, 32, 16, "Set Anchor to the right side"));
+		/* ANCHLEFT */ this.controlList.add(g[9] = new ButtonImage(11, bX_base + 66, bY_base, 0, 16, "Set Anchor to the left side"));
+		/* ANCHCENTER */ this.controlList.add(g[10] = new ButtonImage(12, bX_base + 66, bY_base + 22, 16, 16, "Set Anchor to the center"));
+		/* ANCHRIGHT */ this.controlList.add(g[11] = new ButtonImage(13, bX_base + 66, bY_base + 44, 32, 16, "Set Anchor to the right side"));
 		
 		
 		updateScreen();
@@ -84,23 +90,22 @@ public class GuiDragInterface extends GuiScreen {
 	
 	@Override
 	public void updateScreen() {
-		((GuiButton)this.controlList.get(6)).enabled = anyChanges();
+		((GuiButton)this.controlList.get(6)).enabled = __anyChanges();
 	}
 	
 	@Override
 	protected void actionPerformed(GuiButton var1) {
 		if(!var1.enabled || !var1.enabled2)
 			return;
-		
 		switch(var1.id) {
 		
 		case 8:
 		case 9:
 		case 10: {
 			this.factorMove = var1.id == 8 ? 1 : (var1.id == 9 ? 5 : (var1.id == 10 ? 10 : 0));
-			for(GuiButton a : f)
+			for(GuiButton a : m)
 				a.enabled = true;
-			f[var1.id - 8].enabled = false;
+			m[var1.id - 8].enabled = false;
 			break;
 		}
 		
@@ -157,19 +162,19 @@ public class GuiDragInterface extends GuiScreen {
 	
 	@Override
     public void onGuiClosed() {
-		if(anyChanges()) {
+		if(__anyChanges()) {
 			instance.applyNewXY(backupX, backupY);
 			instance.applyNewAnchor(backupA);
 		}
     }
-
+	
 	@Override
 	public void drawScreen(int var1, int var2, float var3) {
 		super.drawScreen(var1, var2, var3);
 
 		this.mc.fontRenderer.drawStringWithShadow("Move, Drag & Setup", 2, 2, 0xFFFFFF);
 		
-		if(anyChanges() || saveState) {
+		if(__anyChanges() || saveState) {
 			this.mc.fontRenderer.drawStringWithShadow("From: " + backupX + " " + backupY, 2, this.height - 30, 0xFFFFFF);
 			this.mc.fontRenderer.drawStringWithShadow("To: " + instance.getX() + " " + instance.getY() , 2, this.height - 20, 0xFFFFFF);
 			this.mc.fontRenderer.drawStringWithShadow("Delta: " + (instance.getX() - backupX) + " " + (instance.getY() - backupY) , 2, this.height - 10, 0xFFFFFF);
@@ -181,7 +186,7 @@ public class GuiDragInterface extends GuiScreen {
 		for(Object f : this.controlList)
 			((ButtonBase) f).drawTooltip(this.mc, var1, var2);
 
-		debug1.doBlockRendering(instance.getX(), instance.getY(), instance.getAnchor());
+		s.doBlockRendering(instance.getX(), instance.getY(), instance.getAnchor());
 	}
 	
 }

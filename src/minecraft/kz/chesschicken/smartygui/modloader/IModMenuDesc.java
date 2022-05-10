@@ -15,10 +15,15 @@
  */
 package kz.chesschicken.smartygui.modloader;
 
+/**
+ * I think this class should be implemented inside mod_XXX.java files.
+ */
 public interface IModMenuDesc {
+	
 	String Name();
 	
 	String Description();
 
 	String Icon();
+	
 }

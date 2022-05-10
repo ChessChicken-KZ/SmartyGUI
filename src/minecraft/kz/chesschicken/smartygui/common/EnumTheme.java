@@ -16,7 +16,7 @@
 package kz.chesschicken.smartygui.common;
 
 /**
- * Enum for themes.
+ * Enums for themes.
  * Themes should be hardcoded, NO any flexible ways to add custom content things.
  */
 public enum EnumTheme {

@@ -28,16 +28,25 @@ public class GuiColourConfig extends BaseGUIStyle {
 	
 	private TextFieldNum[] textFields1 = new TextFieldNum[4];
 
+	/** 0 - text. 1 - 1st colour. 2 - 2nd colour. */
+	private byte mode = -1;
+	/** Debug instance of ModuleBlockRender. */
+	private ModuleBlockRender d;
+	
+	private int[] guiColours;
+	private int[] backupA;
+	private ButtonBase[] buttonsMove;
+	private boolean eskerty;
+	private boolean updateS;
+	
 	public GuiColourConfig(SmartyGUI smartygui) {
 		super(smartygui);
-		__updateVals1();
-		this.backupA = new int[] {
-				smartygui.CONFIG.showBlockRGB[0], smartygui.CONFIG.showBlockRGB[1], smartygui.CONFIG.showBlockRGB[2]
-		};
+		__updateValues();
+		this.backupA = new int[] { smartygui.CONFIG.showBlockRGB[0], smartygui.CONFIG.showBlockRGB[1], smartygui.CONFIG.showBlockRGB[2] };
 		this.buttonsMove = new ButtonBase[8];
 	}
 	
-	void __updateVals1() {
+	void __updateValues() {
 		int[] text1 = RenderUtils.getRGBAFromInt(instance.CONFIG.showBlockRGB[0]);
 		int[] c1 = RenderUtils.getRGBAFromInt(instance.CONFIG.showBlockRGB[1]);
 		int[] c2 = RenderUtils.getRGBAFromInt(instance.CONFIG.showBlockRGB[2]);
@@ -48,54 +57,61 @@ public class GuiColourConfig extends BaseGUIStyle {
 		};
 	}
 	
-	/**
-	 * 0 - Text
-	 * 1 - 1st Colour
-	 * 2 - 2nd Colour
-	 */
-	private byte mode = -1;
-	private ModuleBlockRender debug1;
+	void __checkOptions() {
+		eskerty = this.instance.CONFIG.transparency || this.instance.CONFIG.showBlockModernStyle;
+		((GuiButton)this.controlList.get(1)).enabled = ((GuiButton)this.controlList.get(2)).enabled = !eskerty;
+	}
 	
-	private int[] guiColours;
-	private int[] backupA;
-	private ButtonBase[] buttonsMove;
-	private boolean eskerty;
-	private boolean updateS;
+	String __parseNumString(String d, int a) {
+		if(d.length() < 1) d = "0";
+		int q = (Integer.parseInt(d) + a);
+		if(q > 255) return "255";
+		if(q < 0) return "0";
+		return String.valueOf(q);
+	}
+	
+	public void updateColours() {
+		for(int i = 0; i < 4; i++) {
+			if(this.textFields1[i].getText().length() < 1)
+				this.textFields1[i].setText("0");
+			this.guiColours[i + (4 * mode)] = Integer.parseInt(this.textFields1[i].getText());
+		}
+		this.instance.CONFIG.showBlockRGB[0] = RenderUtils.getIntFromRGBA(this.guiColours[0], this.guiColours[1], this.guiColours[2], this.guiColours[3]);
+		this.instance.CONFIG.showBlockRGB[1] = RenderUtils.getIntFromRGBA(this.guiColours[4], this.guiColours[5], this.guiColours[6], this.guiColours[7]);
+		this.instance.CONFIG.showBlockRGB[2] = RenderUtils.getIntFromRGBA(this.guiColours[8], this.guiColours[9], this.guiColours[10], this.guiColours[11]);
+	}
+	
+	/* Override methods. */
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
-		this.debug1 = new ModuleBlockRender(this.mc, instance);
-		Keyboard.enableRepeatEvents(true);
-		this.debug1.__updateBlockDebug();
 		super.initGui();
+		
+		Keyboard.enableRepeatEvents(true);
+		
+		this.d = new ModuleBlockRender(this.mc, instance);
+		this.d.__updateBlockDebug();
+		
 		this.controlList.add(new ButtonBase(501, this.width / 2 - 91, this.height / 4 + 8, 59, 20, "1st Colour", "First gradient colour of the BEVHUD."));
 		this.controlList.add(new ButtonBase(502, this.width / 2 - 30, this.height / 4 + 8,  59, 20, "2nd Colour", "First gradient colour of the BEVHUD."));
 		this.controlList.add(new ButtonBase(503, this.width / 2 + 31, this.height / 4 + 8,  59, 20, "Text", "Text colour of the BEVHUD."));
 		
-
 		this.controlList.add(new ButtonBase(504, this.width / 2 - 30, this.height / 4 + 8 - 22, 59, 20, "Save", "Save changes."));
 		this.controlList.add(new ButtonBase(505, this.width / 2 - 91, this.height / 4 + 8 - 22, 59, 20, "Revert", "Revert changes."));
 		this.controlList.add(new ButtonBase(506, this.width / 2 + 31, this.height / 4 + 8 - 22, 59, 20, "Reload", "Reload current."));
 		
-		for(int b = 0; b < 4; b++)
-		{
+		for(byte b = 0; b < 4; b++) {
 			textFields1[b] = new TextFieldNum(this, this.fontRenderer, this.width / 2 - 25, this.height / 4 + 32 + (b * 24), 50, 20, "");
 			textFields1[b].setMaxStringLength(3);
-		}
-		
-		for(int b = 0; b < 4; b++)
-		{
-			//510 511 512 513
-			this.controlList.add(buttonsMove[b] = new ButtonBase(510 + b, this.width / 2 + 27, this.height / 4 + 32 + (24 * b), 20, 20, "-"));
-			//514 515 516 517
-			this.controlList.add(buttonsMove[b + 4] = new ButtonBase(514 + b, this.width / 2 - 47, this.height / 4 + 32 + (24 * b), 20, 20, "+"));
+			/* 510 511 512 513 */ this.controlList.add(buttonsMove[b] = new ButtonBase(510 + b, this.width / 2 + 27, this.height / 4 + 32 + (24 * b), 20, 20, "-"));
+			/* 514 515 516 517 */ this.controlList.add(buttonsMove[b + 4] = new ButtonBase(514 + b, this.width / 2 - 47, this.height / 4 + 32 + (24 * b), 20, 20, "+"));
 		}
 		
 		for(GuiButton b : buttonsMove)
 			b.enabled2 = false;
 		
-		__checkEskerty();
+		__checkOptions();
 	}
 	
 	@Override
@@ -117,19 +133,11 @@ public class GuiColourConfig extends BaseGUIStyle {
         for(TextFieldNum a : textFields1)
         	a.mouseClicked(var1, var2, var3);
     }
-
 	
 	@Override
 	public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
     }
-	
-	private void __checkEskerty() {
-		eskerty = this.instance.CONFIG.transparency || this.instance.CONFIG.showBlockModernStyle;
-		if(eskerty) {
-			((GuiButton)this.controlList.get(1)).enabled = ((GuiButton)this.controlList.get(2)).enabled = false;
-		}
-	}
 
 	@Override
 	protected void actionPerformed(GuiButton var1) {
@@ -143,11 +151,10 @@ public class GuiColourConfig extends BaseGUIStyle {
 			this.mode = (byte) (var1.id - 501);
 			for(Object o : this.controlList)
 				((GuiButton)o).enabled = true;
-			__checkEskerty();
+			__checkOptions();
 			var1.enabled = false;
 			
-			if(this.mode > -1)
-			{
+			if(this.mode > -1) {
 				for(int i = 0; i < 4; i++) {
 					this.textFields1[i].setText(String.valueOf(this.guiColours[i + (4 * mode)]));
 				}
@@ -168,7 +175,7 @@ public class GuiColourConfig extends BaseGUIStyle {
 			this.instance.CONFIG.showBlockRGB[0] = this.backupA[0];
 			this.instance.CONFIG.showBlockRGB[1] = this.backupA[1];
 			this.instance.CONFIG.showBlockRGB[2] = this.backupA[2];
-			__updateVals1();
+			__updateValues();
 			for(int i = 0; i < 4; i++) {
 				this.textFields1[i].setText(String.valueOf(this.guiColours[i + (4 * mode)]));
 			}
@@ -176,7 +183,7 @@ public class GuiColourConfig extends BaseGUIStyle {
 		}
 		
 		case 506: {
-			__updateVals1();
+			__updateValues();
 			break;
 		}
 		
@@ -190,9 +197,9 @@ public class GuiColourConfig extends BaseGUIStyle {
 		case 517: {
 			int code = var1.id - 510;
 			if(code < 4)
-				this.textFields1[code].setText(__tF_Parse(this.textFields1[code].getText(), -1));
+				this.textFields1[code].setText(__parseNumString(this.textFields1[code].getText(), -1));
 			else
-				this.textFields1[code - 4].setText(__tF_Parse(this.textFields1[code - 4].getText(), 1));
+				this.textFields1[code - 4].setText(__parseNumString(this.textFields1[code - 4].getText(), 1));
 			updateColours();
 			break;
 		}
@@ -200,31 +207,6 @@ public class GuiColourConfig extends BaseGUIStyle {
 		
 		this.updateS = !(var1.id != 504);
 	}
-	
-	public void updateColours() {
-		for(int i = 0; i < 4; i++) {
-			if(this.textFields1[i].getText().length() < 1)
-				this.textFields1[i].setText("0");
-			this.guiColours[i + (4 * mode)] = Integer.parseInt(this.textFields1[i].getText());
-			//this.textFields1[i].setText(String.valueOf(this.guiColours[i + (4 * mode)]));
-		}
-		this.instance.CONFIG.showBlockRGB[0] = RenderUtils.getIntFromRGBA(this.guiColours[0], this.guiColours[1], this.guiColours[2], this.guiColours[3]);
-		this.instance.CONFIG.showBlockRGB[1] = RenderUtils.getIntFromRGBA(this.guiColours[4], this.guiColours[5], this.guiColours[6], this.guiColours[7]);
-		this.instance.CONFIG.showBlockRGB[2] = RenderUtils.getIntFromRGBA(this.guiColours[8], this.guiColours[9], this.guiColours[10], this.guiColours[11]);
-		
-	}
-	
-	String __tF_Parse(String d, int a) {
-		if(d.length() < 1)
-			d = "0";
-		int q = (Integer.parseInt(d) + a);
-		if(q > 255)
-			return "255";
-		if(q < 0)
-			return "0";
-		return String.valueOf(q);
-	}
-	
 
 	@Override
 	public void drawScreen(int a, int b, float f) {
@@ -236,16 +218,15 @@ public class GuiColourConfig extends BaseGUIStyle {
 		}
 		this.drawSuper(a, b, f);
 		this.drawCenteredString(this.mc.fontRenderer, "Colour Settings", this.width / 2, 40, 0xFFFFFF);
-		if(eskerty)
-		{
+		if(eskerty) {
 			this.drawCenteredString(this.mc.fontRenderer, "Please turn off Transparency or/and Modern Style", this.width / 2, 15, 0xFF0000);
-			this.drawCenteredString(this.mc.fontRenderer, "in order to manage last two options!", this.width / 2, 25, 0xFF0000);
+			this.drawCenteredString(this.mc.fontRenderer, "in order to manage background colour options!", this.width / 2, 25, 0xFF0000);
 		}
 		
 		if(updateS)
-			this.mc.fontRenderer.drawStringWithShadow("Сhanges have been saved!", 5, 5, 0xFFD800);
+			this.mc.fontRenderer.drawStringWithShadow("Changes have been saved!", 5, 5, 0xFFD800);
 		
-		debug1.doBlockRendering(this.width / 2, this.height * 6 / 8 + 20, 1);
+		d.doBlockRendering(this.width / 2, this.height * 6 / 8 + 20, 1);
 	}
 	
 	

@@ -34,6 +34,4 @@ public class ButtonTransparent extends ButtonBase {
 		}
 	}
 	
-	
-
 }

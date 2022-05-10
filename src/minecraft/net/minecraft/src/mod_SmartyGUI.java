@@ -22,22 +22,22 @@ import kz.chesschicken.smartygui.modloader.IModMenuDesc;
 import net.minecraft.client.Minecraft;
 
 public class mod_SmartyGUI extends BaseMod implements IModMenuDesc {
-    @Override
-    public String Version() {
-        return "ML-2.2";
-    }
 
     private static IDeFabricated<mod_SmartyGUI> modInstance;
 
+    /**
+     * A way to load a plugin into SmartyGUI
+     * @param plugin Plugin Instance.
+     */
+    public static void addPlugin(AbstractSmartyPlugin plugin) {
+    	((SmartyGUI)modInstance).PLUGINS.registerPlugin(plugin);
+    }
+    
     public mod_SmartyGUI() {
         modInstance = new SmartyGUI();
         modInstance.onInitializeClient(this);
         ModLoader.SetInGameHook(this, true, false);
         ModLoader.SetInGUIHook(this, true, false);
-    }
-    
-    public static void addPlugin(AbstractSmartyPlugin plugin) {
-    	((SmartyGUI)modInstance).PLUGINS.registerPlugin(plugin);
     }
 
     @Override
@@ -57,6 +57,18 @@ public class mod_SmartyGUI extends BaseMod implements IModMenuDesc {
     	modInstance.keyPressed(event);
     }
 
+	@Override
+	public void ModsLoaded() {
+		modInstance.onPostInitClient();
+	}
+	
+	/* Description methods. */
+	
+    @Override
+    public String Version() {
+        return "ML-2.2";
+    }
+    
 	@Override
 	public String Name() {
 		return "SmartyGUI";

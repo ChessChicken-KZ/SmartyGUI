@@ -146,9 +146,11 @@ public class ModuleBlockRender extends ModuleRender {
         	realXY = RenderUtils.gradientRenderByAnchor(x, y, Math.max(textRenderer.getStringWidth(stringBlockCoordinates), textRenderer.getStringWidth(stringBlockProperties + stringBlockHardness)) + 36, 26 + (f * 10), config.showBlockRGB[0], config.showBlockRGB[1], anchor, config.transparency);
 
         boolean e = false;
-        for(IOverrideBlockRender g : renderOverridePlugins) {
-        	boolean j = g.overrideHUDItemRenderer(currentBlockID, currentBlockMeta, minecraft.theWorld, itemRenderer, realXY[0] + 5, realXY[1] + 5, minecraft.objectMouseOver.blockX, minecraft.objectMouseOver.blockY, minecraft.objectMouseOver.blockZ);
-        	if(!e) e = j;
+        if(!_debug) {
+	        for(IOverrideBlockRender g : renderOverridePlugins) {
+	        	boolean j = g.overrideHUDItemRenderer(currentBlockID, currentBlockMeta, minecraft.theWorld, itemRenderer, realXY[0] + 5, realXY[1] + 5, minecraft.objectMouseOver.blockX, minecraft.objectMouseOver.blockY, minecraft.objectMouseOver.blockZ);
+	        	if(!e) e = j;
+	        }
         }
         
         if(!e)

@@ -38,6 +38,7 @@ public class GuiModules extends BaseGUIStyle {
 	@Override
 	public void initGui() {
 		super.initGui();
+		
 		this.controlList.add(new ButtonToggle(40, this.width / 2 - 91, this.height / 4 + 8, 182, 20, "Block/Entity Viewer HUD", "Enable BEVHUD."));
 		((ButtonToggle)this.controlList.get(1)).updateState(this.a_BEVHUD);
 		
@@ -49,8 +50,6 @@ public class GuiModules extends BaseGUIStyle {
 		
 		this.controlList.add(new ButtonBase(50, this.width / 2 - 91, this.height / 4 + 104, 182, 20, "Save and Close", "Save and go back."));
 	}
-
-
 
 	@Override
 	protected void actionPerformed(GuiButton var1) {
@@ -83,12 +82,10 @@ public class GuiModules extends BaseGUIStyle {
 			instance.CONFIG.enableInGameToolTip = this.a_IGTT;
 			
 			instance.CONFIG.forceSave();
-			instance.update___ArS();
+			instance.updateASHUD();
 			mc.displayGuiScreen(new GuiHome(instance));
 			break;
 		}
-		
-		
 		}
 	}
 	

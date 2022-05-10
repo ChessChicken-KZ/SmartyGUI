@@ -55,7 +55,7 @@ public class ModuleArmorRender extends ModuleRender {
         ScaledResolution sr = new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight);
         int scaledWidth = leftOrRight ? sr.getScaledWidth() - 17 : 1;
 
-        int q = 0;
+        byte q = 0;
         if(minecraft.thePlayer.inventory.getCurrentItem() != null) {
             String output = minecraft.thePlayer.inventory.getCurrentItem().getMaxDamage() != 0 ? minecraft.thePlayer.inventory.getCurrentItem().getMaxDamage() - minecraft.thePlayer.inventory.getCurrentItem().getItemDamage() + "" : "";
             RenderUtils.renderItem(itemRenderer, textRenderer, minecraft.renderEngine, minecraft.thePlayer.inventory.getCurrentItem(), scaledWidth,

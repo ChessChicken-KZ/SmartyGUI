@@ -25,6 +25,7 @@ public enum EnumOSList {
 	
 	public final String formattedName;
 	private final String[] uFList;
+	
 	EnumOSList(String a_f, String... f) {
 		this.formattedName = a_f;
 		this.uFList = f;

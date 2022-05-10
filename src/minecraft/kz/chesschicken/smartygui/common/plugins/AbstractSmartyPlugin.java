@@ -23,7 +23,9 @@ public abstract class AbstractSmartyPlugin implements Comparable<AbstractSmartyP
 	
 	public abstract String getPluginName();
 	
-	public String getPluginDescription() { return ""; }
+	public String getPluginDescription() {
+		return "";
+	}
 
 	@Override
 	public int compareTo(AbstractSmartyPlugin o) {
@@ -48,7 +50,5 @@ public abstract class AbstractSmartyPlugin implements Comparable<AbstractSmartyP
 		AbstractSmartyPlugin other = (AbstractSmartyPlugin) obj;
 		return other.getPluginName().equals(this.getPluginName());
 	}
-	
-	
 	
 }

@@ -11,6 +11,9 @@ runtime/
 src_utc/
 temp/
 
+# Intellij IDEA's project folder
+.idea/
+
 # .bat/sh files.
 cleanup.bat
 decompile.bat

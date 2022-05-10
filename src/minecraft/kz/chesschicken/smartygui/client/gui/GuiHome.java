@@ -21,7 +21,6 @@ import net.minecraft.src.GuiButton;
 
 public class GuiHome extends BaseGUIStyle {
 	
-
 	public GuiHome(SmartyGUI mod) {
 		super(mod);
 	}
@@ -30,8 +29,8 @@ public class GuiHome extends BaseGUIStyle {
 	@Override
 	public void initGui() {
 		super.initGui();
+		
 		this.controlList.add(new ButtonBase(20, this.width / 2 - 91, this.height / 4 + 32, 90, 20, "Modules", "Modules toggling menu."));
-
 		this.controlList.add(new ButtonBase(22, this.width / 2 - 91, this.height / 4 + 8, /* 90 */ 182, 20, "Location Settings", "BEVHUD location menu."));
 		this.controlList.add(new ButtonBase(23, this.width / 2 + 1, this.height / 4 + 32, 90, 20, "Appearance", "General appearance settings."));
 		this.controlList.add(new ButtonBase(24, this.width / 2 - 91, this.height / 4 + 56, /* 90 */ 182, 20, "Colour Settings", "BEVHUD colour settings."));
@@ -70,8 +69,6 @@ public class GuiHome extends BaseGUIStyle {
 			mc.displayGuiScreen(null);
 			break;
 		}
-		
-		
 		}
 	}
 	

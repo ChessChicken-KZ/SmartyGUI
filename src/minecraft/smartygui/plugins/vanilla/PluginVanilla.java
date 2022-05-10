@@ -43,7 +43,6 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 		System.out.println("Vanilla module initializaing... magic happening...");
 	}
 	
-
 	@Override
 	public String getPluginName() {
 		return "vanilla";
@@ -83,6 +82,5 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 		}
 		return false;
 	}
-
-
+	
 }

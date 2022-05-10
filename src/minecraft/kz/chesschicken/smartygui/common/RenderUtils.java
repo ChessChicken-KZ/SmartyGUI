@@ -66,6 +66,35 @@ public class RenderUtils {
     	
         return new int[] {x1, y1};
     }
+    
+    public static int[] gradientRenderRGB(int x1, int y1, int width, int height, int startColour) {
+    	
+        float vR = (float)(startColour >> 16 & 255) / 255.0F;
+        float vG = (float)(startColour >> 8 & 255) / 255.0F;
+        float vB = (float)(startColour & 255) / 255.0F;
+        
+        GL11.glDisable(3553);
+        GL11.glEnable(3042);
+        GL11.glDisable(3008);
+        GL11.glBlendFunc(770, 771);
+        GL11.glShadeModel(7425);
+       
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.setColorOpaque_F(vR, vG, vB);
+        tessellator.addVertex(width, y1, 0.0D);
+        tessellator.addVertex(x1, y1, 0.0D);
+        tessellator.addVertex(x1, height, 0.0D);
+        tessellator.addVertex(width, height, 0.0D);
+        tessellator.draw();
+        
+        GL11.glShadeModel(7424);
+        GL11.glDisable(3042);
+        GL11.glEnable(3008);
+        GL11.glEnable(3553);
+    	
+        return new int[] {x1, y1};
+    }
 
     public static void renderItem(RenderItem ir, FontRenderer fr, RenderEngine textureManager, ItemStack itemInstance, int x, int y) {
         GL11.glPushMatrix();
@@ -123,7 +152,7 @@ public class RenderUtils {
 
         return new int[] {x1, y1 - 2};
     }
-
+    
     public static int getIntFromRGB(int r, int g, int b) {
     	return ((r & 0x0FF) << 16) | ((g & 0x0FF) << 8) | (b & 0x0FF);
     }

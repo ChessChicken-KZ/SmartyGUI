@@ -35,7 +35,7 @@ public class ButtonImage extends ButtonBase {
         super(id, x, y, 20, 20, "");
         this.u = u;
         this.v = v;
-        this.stringA = f;
+        this.tooltipText = f;
     }
     
     @Override

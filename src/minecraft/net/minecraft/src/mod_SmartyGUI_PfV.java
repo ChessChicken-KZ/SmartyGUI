@@ -22,6 +22,7 @@ import smartygui.plugins.vanilla.PluginVanilla;
 public class mod_SmartyGUI_PfV extends BaseMod implements IModMenuDesc {
 
 	public mod_SmartyGUI_PfV() {
+		//For this moment, do nothing...
 	}
 	
 	@Override
@@ -29,6 +30,8 @@ public class mod_SmartyGUI_PfV extends BaseMod implements IModMenuDesc {
 		mod_SmartyGUI.addPlugin(new PluginShowBreaking());
 		mod_SmartyGUI.addPlugin(new PluginVanilla());
 	}
+	
+	/* Description methods. */
 	
 	@Override
 	public String Version() {

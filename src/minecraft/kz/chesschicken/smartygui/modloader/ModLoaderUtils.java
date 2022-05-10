@@ -18,15 +18,15 @@ package kz.chesschicken.smartygui.modloader;
 import net.minecraft.src.ModLoader;
 
 public class ModLoaderUtils {
-    private byte isDev;
+    private boolean isDev;
 
     public boolean isDeveloperInstance() {
-        return isDev == 1;
+        return isDev;
     }
 
     public Object getInstance(Class<?> c, Object i, String nameObf, String nameReal) {
         try {
-            return ModLoader.getPrivateValue(c, i, isDev == 1 ? nameReal : nameObf);
+            return ModLoader.getPrivateValue(c, i, isDev ? nameReal : nameObf);
         } catch (NoSuchFieldException e) {
             return null;
         }
@@ -40,9 +40,9 @@ public class ModLoaderUtils {
 
             try {
                 Class.forName("net.minecraft.src.ModLoader");
-                INSTANCE.isDev = 1;
+                INSTANCE.isDev = true;
             } catch (ClassNotFoundException e) {
-                INSTANCE.isDev = 0;
+                INSTANCE.isDev = false;
             }
 
         }

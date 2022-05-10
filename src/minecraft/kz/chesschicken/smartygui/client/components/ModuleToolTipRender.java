@@ -27,6 +27,7 @@ import kz.chesschicken.smartygui.common.SmartyGUI;
 
 public class ModuleToolTipRender extends ModuleRender {
     private short tickRender;
+    
     private int currentID;
     private int currentMeta;
     private String output;

@@ -29,27 +29,15 @@ import net.minecraft.src.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Basically a modification instance.
  */
 public class SmartyGUI implements IDeFabricated<mod_SmartyGUI> {
 	
 	protected final KeyBinding openConfigKeyBind = new KeyBinding("openConfigKeyBind", Keyboard.KEY_NUMPAD0);
+	
 	public SmartyGuiConfig CONFIG;
 	public SmartyGuiPlugins PLUGINS;
-
-	/**
-	 * Deprecated for ML versions.
-	 * @param sender Sender name.
-	 * @param string String to output.
-	 */
-	@Deprecated
-    public static void logMessageAs(String sender, String string) {
-        System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [" + sender + "] " + string);
-    }
 
     private ModuleBlockRender renderBlock;
     private ModuleEntityRenderer renderEntity;
@@ -111,8 +99,7 @@ public class SmartyGUI implements IDeFabricated<mod_SmartyGUI> {
     	return this.aV;
     }
     
-    
-    public void update___ArS() {
+    public void updateASHUD() {
     	this.renderStatus.update();
     }
 

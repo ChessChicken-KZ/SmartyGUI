@@ -35,8 +35,7 @@ public class TextFieldNum extends GuiTextField {
 	@Override
 	public void textboxKeyTyped(char var1, int var2) {
         if (this.isEnabled && this.isFocused) {
-            if(__isNum(var1))
-            {
+            if(__isNum(var1)) {
             	super.textboxKeyTyped(var1, var2);
             	if(this.getText().length() > 0)
                 	this.guiscreen.updateColours();

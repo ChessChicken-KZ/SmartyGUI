@@ -26,8 +26,8 @@ public class GuiPresets extends GuiScreen {
 	private final SmartyGUI instance;
 	private final GuiDragInterface homeScreen;
 	
+	private boolean shouldRevert = true;
 	private int[] axy = new int[3];
-
 	private ModuleBlockRender debug1;
 	
 	public GuiPresets(SmartyGUI smartygui, GuiDragInterface homeScreen) {
@@ -37,8 +37,6 @@ public class GuiPresets extends GuiScreen {
 		this.axy[1] = homeScreen.backupX;
 		this.axy[2] = homeScreen.backupY;
 	}
-
-	private boolean shouldRevert = true;
 	
 	@Override
 	public void onGuiClosed() {
@@ -47,16 +45,14 @@ public class GuiPresets extends GuiScreen {
 			this.instance.applyNewXY(this.axy[1], this.axy[2]);
 		}
 	}
-
-
-
+	
+	/* Presets mode. */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		this.debug1 = new ModuleBlockRender(this.mc, instance);
 		this.debug1.__updateBlockDebug();
 		
-		/* Presets mode*/
 		this.controlList.add(new ButtonBase(99, this.width / 2 - 10, this.height / 2 - 10, 20, 20, "X"));
 		
 		this.controlList.add(new ButtonBase(100, 10, 10, 80, 20, "LEFT UP"));
@@ -67,8 +63,6 @@ public class GuiPresets extends GuiScreen {
 		this.controlList.add(new ButtonBase(104, this.width / 2 - 40, this.height * 6 / 8, 80, 20, "UPPER INV"));
 		this.controlList.add(new ButtonBase(105, this.width - 90, this.height - 60, 80, 20, "RIGHT DOWN"));
 	}
-
-
 
 	@Override
 	protected void actionPerformed(GuiButton var1) {
@@ -102,8 +96,7 @@ public class GuiPresets extends GuiScreen {
 		}
 		}
 	}
-
-
+	
 	@Override
 	public void drawScreen(int a, int b, float f) {
 		super.drawScreen(a, b, f);

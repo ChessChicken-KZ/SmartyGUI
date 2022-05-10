@@ -47,7 +47,6 @@ public class GuiCredits extends GuiScreen {
 			Sys.openURL("https://twitter.com/ChessChicken_KZ");
 			break;
 		}
-		
 		}
 	}
 
@@ -59,7 +58,6 @@ public class GuiCredits extends GuiScreen {
 		this.controlList.add(new ButtonBase(902, this.width / 2 - 91, this.height / 4 + 126, 59, 20, "Github", "Repositories."));
 		this.controlList.add(new ButtonBase(903, this.width / 2 - 29, this.height / 4 + 126, 59, 20, "Twitter", "A... uhm.. social network?."));
 		this.controlList.add(new ButtonBase(904, this.width / 2 + 32, this.height / 4 + 126, 59, 20, "A Button :)", "Does nothing."));
-		//GITHUB, TWITTER, 
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class GuiCredits extends GuiScreen {
 		this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
 		super.drawScreen(var1, var2, var3);
 		this.drawCenteredString(this.mc.fontRenderer, "SmartyGUI Credits", this.width / 2, 40, 0xFFFFFF);
-
+		
 		for(int i = 0; i < authors.length; i++) {
 			this.drawCenteredString(this.mc.fontRenderer, authors[i], this.width / 2, 55 + (12 * i), 0xFFFF00);
 		}
