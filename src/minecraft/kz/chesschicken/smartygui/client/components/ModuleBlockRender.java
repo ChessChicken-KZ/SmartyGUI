@@ -73,29 +73,26 @@ public class ModuleBlockRender extends ModuleRender {
         this.currentBlockID = this.minecraft.theWorld.getBlockId(blockX, blockY, blockZ);
         this.currentBlockMeta = this.minecraft.theWorld.getBlockMetadata(blockX, blockY, blockZ);
 
-
         this.stringBlockCoordinates = "X: " + blockX + " Y: " + blockY + " Z: " + blockZ;
-
-        this.stringBlockProperties = StringTranslate.getInstance().translateNamedKey(
-                getSafeItemName(currentBlockID, currentBlockMeta)).trim() +
-                " " + currentBlockID + ":" + currentBlockMeta + " ";
+        this.stringBlockProperties = StringTranslate.getInstance().translateNamedKey(getSafeItemName(currentBlockID, currentBlockMeta)).trim() +  " " + currentBlockID + ":" + currentBlockMeta + " ";
         this.stringBlockHardness = "H: " + Block.blocksList[currentBlockID].getHardness();
+        
         this.colourType = getColorByHardness(Block.blocksList[currentBlockID].getHardness());
     }
     
     public void __updateBlockDebug() {
     	Random random = new Random();
+    	
     	this.currentBlockID = Block.cloth.blockID;
     	this.currentBlockMeta = random.nextInt(16);
     	
     	this.stringBlockCoordinates = "X: " + ((random.nextBoolean() ? -1 : 1) * random.nextInt(4096)) + " Y: " + random.nextInt(128) + " Z: " + ((random.nextBoolean() ? -1 : 1) * random.nextInt(4096));
-    	
-    	this.stringBlockProperties = StringTranslate.getInstance().translateNamedKey(
-                getSafeItemName(currentBlockID, currentBlockMeta)).trim() +
-                " " + currentBlockID + ":" + currentBlockMeta + " ";
+    	this.stringBlockProperties = StringTranslate.getInstance().translateNamedKey(getSafeItemName(currentBlockID, currentBlockMeta)).trim() + " " + currentBlockID + ":" + currentBlockMeta + " ";
     	this.stringBlockHardness = "H: " + Block.blocksList[currentBlockID].getHardness();
+    	
     	this.colourType = getColorByHardness(Block.blocksList[currentBlockID].getHardness());
-        this._debug = true;
+        
+    	this._debug = true;
     }
 
     @Override
@@ -130,6 +127,7 @@ public class ModuleBlockRender extends ModuleRender {
         
         String[][] vals = null;
         byte f = 0;
+        
         if(!_debug) {
 	        vals = new String[blockDescPlugins.length][];
 	        for(int q = 0; q < vals.length; q++)
@@ -168,6 +166,9 @@ public class ModuleBlockRender extends ModuleRender {
 	        	for(String h : vals[q]) {
 	                textRenderer.drawString(h, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
 	                f++;
+	                
+	                if(f > 254)
+	                	break;
 	        	}
 	        }
         }

@@ -173,6 +173,9 @@ public class ModuleEntityRenderer extends ModuleRender {
 	        	for(String he : vals[q]) {
 	                textRenderer.drawString(he, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
 	                f++;
+	                
+	                if(f > 254)
+	                	break;
 	        	}
 	        }
         }
