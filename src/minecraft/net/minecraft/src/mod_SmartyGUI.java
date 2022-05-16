@@ -30,6 +30,7 @@ public class mod_SmartyGUI extends BaseMod implements IModMenuDesc {
      * @param plugin Plugin Instance.
      */
     public static void addPlugin(AbstractSmartyPlugin plugin) {
+    	if(plugin == null) return;
     	((SmartyGUI)modInstance).PLUGINS.registerPlugin(plugin);
     }
     

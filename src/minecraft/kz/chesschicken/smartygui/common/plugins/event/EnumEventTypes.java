@@ -15,7 +15,7 @@
  */
 package kz.chesschicken.smartygui.common.plugins.event;
 
-/*
+/**
  * List of events, that can be used.
  * <br>
  * {@link EnumEventTypes#ADDITIONAL_BLOCK_DESCRIPTION} - see {@link IAdditionalBlockDescription}.
