@@ -31,9 +31,15 @@ Requires ModLoader, does not change any base classes. Put `SmartyGUI-ML-X.X.X.ja
 
 ## Build (Developers)
 
+### Fabric Version
+
 For setup/build instructions, please refer to [stationapi-example-mod page](https://github.com/calmilamsy/stationapi-example-mod).
 
 There is no Fabric-API for beta 1.7.3, so an addon of SmartyGUI (SmartyStation) uses [StationAPI](https://github.com/ModificationStation/StationAPI).
+
+### ModLoader Version
+
+Please refer to [ModLoader branch](https://github.com/ChessChicken-KZ/SmartyGUI/tree/modloader) for more information and code.
 
 ## License
 The project is under [MIT License](https://raw.githubusercontent.com/ChessChicken-KZ/SmartyGUI/local/LICENSE). Feel free to look at it.
