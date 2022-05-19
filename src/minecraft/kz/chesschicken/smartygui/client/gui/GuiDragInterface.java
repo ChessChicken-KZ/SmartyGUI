@@ -19,10 +19,8 @@ import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.client.gui.button.ButtonImage;
 import kz.chesschicken.smartygui.common.SmartyGUI;
-import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
-import net.minecraft.src.ModLoader;
 import net.minecraft.src.ScaledResolution;
 
 public class GuiDragInterface extends GuiScreen {
@@ -117,7 +115,6 @@ public class GuiDragInterface extends GuiScreen {
 		}
 		
 		case 0: {
-			Minecraft mc = ModLoader.getMinecraftInstance();
 			ScaledResolution scaled = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
 			instance.applyNewXY(scaled.getScaledWidth() / 2, scaled.getScaledHeight() / 2);
 			instance.CONFIG.saveConfig();

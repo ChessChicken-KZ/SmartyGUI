@@ -19,6 +19,7 @@ import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
 import kz.chesschicken.smartygui.modloader.IDeFabricated;
 import kz.chesschicken.smartygui.modloader.IModMenuDesc;
+import kz.chesschicken.smartygui.modloader.CodeUtils;
 import net.minecraft.client.Minecraft;
 
 public class mod_SmartyGUI extends BaseMod implements IModMenuDesc {

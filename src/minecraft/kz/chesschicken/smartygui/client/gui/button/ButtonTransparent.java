@@ -15,14 +15,14 @@
  */
 package kz.chesschicken.smartygui.client.gui.button;
 
+import kz.chesschicken.smartygui.modloader.CodeUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.ModLoader;
 
 public class ButtonTransparent extends ButtonBase {
 
 	public ButtonTransparent(int id, int x, int y, String t) {
 		super(id, x, y, t);
-		this.width = ModLoader.getMinecraftInstance().fontRenderer.getStringWidth(t);
+		this.width =  CodeUtils.getMC().fontRenderer.getStringWidth(t);
 		this.height = 8;
 	}
 

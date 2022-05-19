@@ -24,12 +24,12 @@ import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import kz.chesschicken.smartygui.common.plugins.event.IOverrideBlockRender;
+import kz.chesschicken.smartygui.modloader.CodeUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemRecord;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderItem;
 import net.minecraft.src.TileEntityRecordPlayer;
 import net.minecraft.src.TileEntitySign;
@@ -52,9 +52,7 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 	
 	@Override
 	public String[] getAdditionalBlockDescription(int id, int meta, World world, int x, int y, int z) {
-		if(Block.crops.blockID == id) {
-			return new String[] {"Age: " + (Math.round((meta * 100 / 7) * 100) / 100) + "%"};
-		}
+		if(Block.crops.blockID == id) { return new String[] {"Age: " + (Math.round((meta * 100 / 7) * 100) / 100) + "%"}; }
 
 		if((Block.signPost.blockID == id || Block.signWall.blockID == id) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			TileEntitySign sign = (TileEntitySign) world.getBlockTileEntity(x, y, z);
@@ -66,13 +64,11 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 		}
 		
 		if(Block.jukebox.blockID == id) {
-
             TileEntityRecordPlayer jukebox = (TileEntityRecordPlayer)world.getBlockTileEntity(x, y, z);
             String f = "Playing nothing.";
             
-            if(Item.itemsList[jukebox.record] instanceof ItemRecord) {
+            if(Item.itemsList[jukebox.record] instanceof ItemRecord)
             	f = "Playing - " + ((ItemRecord)Item.itemsList[jukebox.record]).recordName;
-            }
             
 			return new String[] { f };
 		}
@@ -83,7 +79,7 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 	@Override
 	public boolean overrideHUDItemRenderer(int id, int meta, World world, RenderItem render, int renderX, int renderY, int x, int y, int z) {
 		if(this.mc == null)
-			this.mc = ModLoader.getMinecraftInstance();
+			this.mc = CodeUtils.getMC();
 		
 		if(Block.signPost.blockID == id || Block.signWall.blockID == id) {
 			RenderUtils.renderItem(render, mc.fontRenderer, mc.renderEngine, new ItemStack(Item.sign), renderX, renderY);
