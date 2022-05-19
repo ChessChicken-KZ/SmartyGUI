@@ -47,7 +47,7 @@ public class CodeUtils {
     
     public static Minecraft getMC() {
     	if(MC_INSTANCE == null) 
-    		MC_INSTANCE = (Minecraft) getStaticObject(Minecraft.class, null, "theMinecraft");
+    		MC_INSTANCE = (Minecraft) getStaticObject(Minecraft.class, null, IS_SANDBOX_MODE ? "theMinecraft" : "a");
     	return MC_INSTANCE;
     }
 
