@@ -89,6 +89,17 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 			RenderUtils.renderItem(render, mc.fontRenderer, mc.renderEngine, new ItemStack(Item.sign), renderX, renderY);
 			return true;
 		}
+
+		if(Block.doorWood.blockID == id) {
+			RenderUtils.renderItem(render, mc.fontRenderer, mc.renderEngine, new ItemStack(Item.doorWood), renderX, renderY);
+			return true;
+		}
+		
+		if(Block.doorSteel.blockID == id) {
+			RenderUtils.renderItem(render, mc.fontRenderer, mc.renderEngine, new ItemStack(Item.doorSteel), renderX, renderY);
+			return true;
+		}
+		
 		return false;
 	}
 	
