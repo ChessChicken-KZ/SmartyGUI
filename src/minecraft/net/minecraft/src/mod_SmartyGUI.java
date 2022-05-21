@@ -19,9 +19,9 @@ import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
 import kz.chesschicken.smartygui.commonloader.modloader.BaseModExtended;
 
-public class mod_SmartyGUI extends BaseModExtended<mod_SmartyGUI> {
+public class mod_SmartyGUI extends BaseModExtended<SmartyGUI> {
 
-	private static mod_SmartyGUI INSTANCE_LAST;
+	private static mod_SmartyGUI ML_INSTANCE;
 	
     /**
      * A way to load a plugin into SmartyGUI
@@ -29,12 +29,13 @@ public class mod_SmartyGUI extends BaseModExtended<mod_SmartyGUI> {
      */
     public static void addPlugin(AbstractSmartyPlugin plugin) {
     	if(plugin == null) return;
-    	((SmartyGUI)INSTANCE_LAST.instance).PLUGINS.registerPlugin(plugin);
+    	ML_INSTANCE.instance.PLUGINS.registerPlugin(plugin);
     }
     
     public mod_SmartyGUI() {
     	super(new SmartyGUI());
-    	INSTANCE_LAST = this;
+    	ModLoader.RegisterKey(this, SmartyGUI.openConfigKeyBind, false);
+    	ML_INSTANCE = this;
     }
 
 }

@@ -7,14 +7,13 @@ import net.minecraft.src.GuiScreen;
 import net.minecraft.src.KeyBinding;
 import net.minecraft.src.ModLoader;
 
-public abstract class BaseModExtended<T> extends BaseMod {
+public abstract class BaseModExtended<T extends IMod<T>> extends BaseMod {
 
-	protected IMod<T> instance;
+	protected T instance;
 	
-	@SuppressWarnings("unchecked")
-	public BaseModExtended(IMod<T> t_holder) {
+	public BaseModExtended(T t_holder) {
 		this.instance = t_holder;
-		this.instance.onInitializeClient((T) this);
+		this.instance.onInitializeClient();
         ModLoader.SetInGameHook(this, true, false);
         ModLoader.SetInGUIHook(this, true, false);
 	}

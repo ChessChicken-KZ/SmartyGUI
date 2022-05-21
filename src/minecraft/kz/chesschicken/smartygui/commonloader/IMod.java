@@ -21,7 +21,7 @@ import net.minecraft.src.KeyBinding;
 
 public interface IMod<T> {
 
-    void onInitializeClient(T t);
+    void onInitializeClient();
     
     void onPostInitClient();
 

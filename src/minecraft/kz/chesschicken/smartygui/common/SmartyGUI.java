@@ -21,11 +21,16 @@ import kz.chesschicken.smartygui.client.components.ModuleEntityRenderer;
 import kz.chesschicken.smartygui.client.components.ModuleToolTipRender;
 import kz.chesschicken.smartygui.client.gui.GuiHome;
 import kz.chesschicken.smartygui.common.plugins.SmartyGuiPlugins;
+import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.IMod;
 import kz.chesschicken.smartygui.commonloader.ModDescription;
 import kz.chesschicken.smartygui.commonloader.SystemUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+import net.minecraft.src.EnumMovingObjectType;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.KeyBinding;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.ScaledResolution;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -39,9 +44,9 @@ import org.lwjgl.opengl.GL11;
 		description = "SmartyGUI - Block/Entity viewer, armor status and tooltip HUD.",
 		icon = "/smartygui/icon.png"
 		)
-public class SmartyGUI implements IMod<mod_SmartyGUI> {
+public class SmartyGUI implements IMod<SmartyGUI> {
 	
-	protected final KeyBinding openConfigKeyBind = new KeyBinding("openConfigKeyBind", Keyboard.KEY_NUMPAD0);
+	public static final KeyBinding openConfigKeyBind = new KeyBinding("openConfigKeyBind", Keyboard.KEY_NUMPAD0);
 	
 	public SmartyGuiConfig CONFIG;
 	public SmartyGuiPlugins PLUGINS;
@@ -54,14 +59,13 @@ public class SmartyGUI implements IMod<mod_SmartyGUI> {
     private int xV, yV, aV;
 
     @Override
-    public void onInitializeClient(mod_SmartyGUI mod) {
+    public void onInitializeClient() {
         CONFIG = new SmartyGuiConfig();
         CONFIG.start();
         PLUGINS = new SmartyGuiPlugins(this);
         xV = CONFIG.factorX;
         yV = CONFIG.factorY;
         aV = CONFIG.factorAnchor;
-        ModLoader.RegisterKey(mod, openConfigKeyBind, false);
     }
     
     /**
@@ -175,8 +179,8 @@ public class SmartyGUI implements IMod<mod_SmartyGUI> {
 
     @Override
     public void keyPressed(KeyBinding key) {
-    	if(key == this.openConfigKeyBind) {
-    		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiHome(this));
+    	if(key == SmartyGUI.openConfigKeyBind) {
+    		GameUtils.getMC().displayGuiScreen(new GuiHome(this));
     	}
     }
 

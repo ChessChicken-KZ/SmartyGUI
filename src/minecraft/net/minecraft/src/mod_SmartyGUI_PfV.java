@@ -18,7 +18,7 @@ package net.minecraft.src;
 import kz.chesschicken.smartygui.commonloader.modloader.BaseModExtended;
 import smartygui.plugins.vanilla.SmartyGUIVanilla;
 
-public class mod_SmartyGUI_PfV extends BaseModExtended<mod_SmartyGUI_PfV> {
+public class mod_SmartyGUI_PfV extends BaseModExtended<SmartyGUIVanilla> {
 
 	public mod_SmartyGUI_PfV() {
 		super(new SmartyGUIVanilla());
