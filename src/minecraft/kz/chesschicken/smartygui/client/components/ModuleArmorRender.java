@@ -44,9 +44,7 @@ public class ModuleArmorRender extends ModuleRender {
     }
 
     @Override
-    public void clean() {
-        //nothing really
-    }
+    public void clean() { }
 
     /**
      * Render code for armor status HUD.

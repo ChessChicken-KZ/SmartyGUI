@@ -37,9 +37,7 @@ public class ModuleToolTipRender extends ModuleRender {
     }
 
     @Override
-    public void clean() {
-    	//not really
-    }
+    public void clean() { }
 
     /**
      * Render code for Tool-tip HUD.

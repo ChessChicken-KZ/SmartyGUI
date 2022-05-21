@@ -712,3 +712,4 @@ src/minecraft/net/minecraft/src/WorldProviderHell.java
 src/minecraft/net/minecraft/src/WorldProviderSky.java
 src/minecraft/net/minecraft/src/WorldProviderSurface.java
 src/minecraft/net/minecraft/src/WorldRenderer.java
+src/minecraft/net/minecraft/src/mod_ExtendedGuiSign.java

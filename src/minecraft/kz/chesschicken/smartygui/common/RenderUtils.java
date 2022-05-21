@@ -15,10 +15,17 @@
  */
 package kz.chesschicken.smartygui.common;
 
-import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.RenderEngine;
+import net.minecraft.src.RenderHelper;
+import net.minecraft.src.RenderItem;
+import net.minecraft.src.Tessellator;
+
 public class RenderUtils {
+	
 	public static int[] gradientRenderByAnchor(int x1, int y1, int width, int height, int startColour, int endColour, int anchor, boolean transparency) {
 		if(transparency)
 			return anchor == 0 ? new int [] { x1, y1 } : (anchor == 1 ? new int[] { x1 - (width / 2), y1 - (height / 2) } : (anchor == 2 ? new int[] { x1 - width, y1 } : new int[0]));
@@ -129,7 +136,6 @@ public class RenderUtils {
 		return modernRender(x1, y1, length, var4);
     }
 
-    
     public static int[] modernRenderCentered(int x1, int y1, int w, int h) {
     	x1 = x1 - (w / 2);
 		y1 = y1 - (h / 2);
@@ -188,5 +194,10 @@ public class RenderUtils {
     	         (float)(a & 255) / 255.0F
     	};
     }
-
+    
+    public static byte[] getRGBColour_byTime() {
+        int rgb = java.awt.Color.HSBtoRGB((float) (System.currentTimeMillis() % 11520L) / 11520.0F, 1.0F, 1.0F);
+        return new byte[] { (byte) (rgb >> 16 & 0xFF), (byte) (rgb >> 8 & 0xFF), (byte) (rgb & 0xFF) };
+    }
+    
 }

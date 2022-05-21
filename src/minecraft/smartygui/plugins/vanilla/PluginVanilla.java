@@ -24,7 +24,7 @@ import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import kz.chesschicken.smartygui.common.plugins.event.IOverrideBlockRender;
-import kz.chesschicken.smartygui.modloader.CodeUtils;
+import kz.chesschicken.smartygui.commonloader.GameUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
@@ -79,7 +79,7 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 	@Override
 	public boolean overrideHUDItemRenderer(int id, int meta, World world, RenderItem render, int renderX, int renderY, int x, int y, int z) {
 		if(this.mc == null)
-			this.mc = CodeUtils.getMC();
+			this.mc = GameUtils.getMC();
 		
 		if(Block.signPost.blockID == id || Block.signWall.blockID == id) {
 			RenderUtils.renderItem(render, mc.fontRenderer, mc.renderEngine, new ItemStack(Item.sign), renderX, renderY);

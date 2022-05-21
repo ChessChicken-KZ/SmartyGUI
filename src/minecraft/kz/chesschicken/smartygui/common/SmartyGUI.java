@@ -21,8 +21,9 @@ import kz.chesschicken.smartygui.client.components.ModuleEntityRenderer;
 import kz.chesschicken.smartygui.client.components.ModuleToolTipRender;
 import kz.chesschicken.smartygui.client.gui.GuiHome;
 import kz.chesschicken.smartygui.common.plugins.SmartyGuiPlugins;
-import kz.chesschicken.smartygui.modloader.IDeFabricated;
-import kz.chesschicken.smartygui.modloader.SystemUtils;
+import kz.chesschicken.smartygui.commonloader.IMod;
+import kz.chesschicken.smartygui.commonloader.ModDescription;
+import kz.chesschicken.smartygui.commonloader.SystemUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 
@@ -32,7 +33,13 @@ import org.lwjgl.opengl.GL11;
 /**
  * Basically a modification instance.
  */
-public class SmartyGUI implements IDeFabricated<mod_SmartyGUI> {
+@ModDescription(
+		name = "SmartyGUI",
+		version = "ML-2.2",
+		description = "SmartyGUI - Block/Entity viewer, armor status and tooltip HUD.",
+		icon = "/smartygui/icon.png"
+		)
+public class SmartyGUI implements IMod<mod_SmartyGUI> {
 	
 	protected final KeyBinding openConfigKeyBind = new KeyBinding("openConfigKeyBind", Keyboard.KEY_NUMPAD0);
 	

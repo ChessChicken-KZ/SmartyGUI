@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.modloader;
+package kz.chesschicken.smartygui.commonloader;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
@@ -21,7 +21,7 @@ import java.lang.reflect.Field;
 import net.minecraft.client.Minecraft;
 import sun.misc.Unsafe;
 
-public class CodeUtils {
+public class GameUtils {
 
     public static boolean isDeveloperInstance() {
         return IS_SANDBOX_MODE;

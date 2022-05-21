@@ -17,73 +17,24 @@ package net.minecraft.src;
 
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
-import kz.chesschicken.smartygui.modloader.IDeFabricated;
-import kz.chesschicken.smartygui.modloader.IModMenuDesc;
-import kz.chesschicken.smartygui.modloader.CodeUtils;
-import net.minecraft.client.Minecraft;
+import kz.chesschicken.smartygui.commonloader.modloader.BaseModExtended;
 
-public class mod_SmartyGUI extends BaseMod implements IModMenuDesc {
+public class mod_SmartyGUI extends BaseModExtended<mod_SmartyGUI> {
 
-    private static IDeFabricated<mod_SmartyGUI> modInstance;
-
+	private static mod_SmartyGUI INSTANCE_LAST;
+	
     /**
      * A way to load a plugin into SmartyGUI
      * @param plugin Plugin Instance.
      */
     public static void addPlugin(AbstractSmartyPlugin plugin) {
     	if(plugin == null) return;
-    	((SmartyGUI)modInstance).PLUGINS.registerPlugin(plugin);
+    	((SmartyGUI)INSTANCE_LAST.instance).PLUGINS.registerPlugin(plugin);
     }
     
     public mod_SmartyGUI() {
-        modInstance = new SmartyGUI();
-        modInstance.onInitializeClient(this);
-        ModLoader.SetInGameHook(this, true, false);
-        ModLoader.SetInGUIHook(this, true, false);
+    	super(new SmartyGUI());
+    	INSTANCE_LAST = this;
     }
-
-    @Override
-    public boolean OnTickInGame(Minecraft game) {
-        modInstance.onTickGame(game);
-        return true;
-    }
-
-    @Override
-    public boolean OnTickInGUI(Minecraft game, GuiScreen gui) {
-        modInstance.onTickInGUI(game, gui);
-        return true;
-    }
-    
-    @Override
-    public void KeyboardEvent(KeyBinding event) {
-    	modInstance.keyPressed(event);
-    }
-
-	@Override
-	public void ModsLoaded() {
-		modInstance.onPostInitClient();
-	}
-	
-	/* Description methods. */
-	
-    @Override
-    public String Version() {
-        return "ML-2.2";
-    }
-    
-	@Override
-	public String Name() {
-		return "SmartyGUI";
-	}
-
-	@Override
-	public String Description() {
-		return "SmartyGUI - Block/Entity viewer, armor status and tooltip HUD.";
-	}
-
-	@Override
-	public String Icon() {
-		return "/smartygui/icon.png";
-	}
 
 }
