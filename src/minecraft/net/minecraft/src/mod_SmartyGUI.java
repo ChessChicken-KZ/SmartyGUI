@@ -38,4 +38,23 @@ public class mod_SmartyGUI extends BaseModExtended<SmartyGUI> {
     	ML_INSTANCE = this;
     }
 
+	@Override
+	public String Version() {
+		return super.Version();
+	}
+
+	@Override
+	public String Name() {
+		return super.Name();
+	}
+	
+	@Override
+	public String Description() {
+		return super.Description();
+	}
+
+	@Override
+	public String Icon() {
+		return super.Icon();
+	}
 }

@@ -24,4 +24,23 @@ public class mod_SmartyGUI_PfV extends BaseModExtended<SmartyGUIVanilla> {
 		super(new SmartyGUIVanilla());
 	}
 
+	@Override
+	public String Version() {
+		return super.Version();
+	}
+
+	@Override
+	public String Name() {
+		return super.Name();
+	}
+
+	@Override
+	public String Description() {
+		return super.Description();
+	}
+	
+	@Override
+	public String Icon() {
+		return super.Icon();
+	}
 }
