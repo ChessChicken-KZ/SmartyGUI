@@ -25,6 +25,23 @@ The ML version of the project is under [Apache License 2.0](https://raw.githubus
 
 ## Changelog
 ```
+ML-2.2:
+    Bug fixes/General:
+    	— Shortened time for ButtonBase hints.
+    	— Debug mode for BEVHUD while changing its' parameters.
+       	— Generally micro optimizations and code cleanup.
+    	— Some bytes became booleans, some ints became bytes.
+    	— Some grammatical mistakes fix.
+
+    Additions:
+    	— Implementation of plugin system for the modification.
+    	— A new plugin that shows block breaking percentage.
+    	— A new plugin that enhances the modification usage.
+	    	— Replaced broken block textures with their items in Block Viewer HUD.
+	    	— Jukebox's music information.
+	    	— Plant's grow stage information.
+	    — Extension of "common" loader (making the modification less dependant on ModLoader).
+
 ML-2.1:
     Bug fixes:
     — Fixed a crash whereas the mod was trying to get null properties and eventually was throwing NullPointerException (names and icons).
