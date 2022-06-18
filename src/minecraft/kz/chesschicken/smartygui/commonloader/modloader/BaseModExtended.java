@@ -47,7 +47,7 @@ public abstract class BaseModExtended<T extends IMod<T>> extends BaseMod {
     
     @Override
     public void KeyboardEvent(KeyBinding event) {
-    	instance.keyPressed(event);
+    	instance.keyPressed(event.keyCode);
     }
 
 	@Override

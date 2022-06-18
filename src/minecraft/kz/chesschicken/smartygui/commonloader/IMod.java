@@ -29,7 +29,7 @@ public interface IMod<T> {
 
     default void onTickInGUI(Minecraft minecraft, GuiScreen current) { }
 
-    default void keyPressed(KeyBinding key) { }
+    default void keyPressed(int key) { }
 
     default String getVersion(Class<?> instance) {
     	if(instance.isAnnotationPresent(ModDescription.class)) {

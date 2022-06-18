@@ -47,6 +47,7 @@ import org.lwjgl.opengl.GL11;
 public class SmartyGUI implements IMod<SmartyGUI> {
 	
 	public static final KeyBinding openConfigKeyBind = new KeyBinding("openConfigKeyBind", Keyboard.KEY_NUMPAD0);
+	public static final KeyBinding toggleGUI = new KeyBinding("toggleGUI", Keyboard.KEY_NUMPAD1);
 	
 	public SmartyGuiConfig CONFIG;
 	public SmartyGuiPlugins PLUGINS;
@@ -57,6 +58,7 @@ public class SmartyGUI implements IMod<SmartyGUI> {
     private ModuleToolTipRender renderToolTip;
 
     private int xV, yV, aV;
+    private boolean keytoggle;
 
     @Override
     public void onInitializeClient() {
@@ -116,6 +118,8 @@ public class SmartyGUI implements IMod<SmartyGUI> {
 
     @Override
     public void onTickGame(Minecraft minecraft) {
+    	if(keytoggle)
+    		return;
         if(renderBlock == null) renderBlock = new ModuleBlockRender(minecraft, this);
         if(renderEntity == null) renderEntity = new ModuleEntityRenderer(minecraft, this);
         if(renderStatus == null) renderStatus = new ModuleArmorRender(minecraft, this);
@@ -178,10 +182,11 @@ public class SmartyGUI implements IMod<SmartyGUI> {
     }
 
     @Override
-    public void keyPressed(KeyBinding key) {
-    	if(key == SmartyGUI.openConfigKeyBind) {
+    public void keyPressed(int key) {
+    	if(key == SmartyGUI.openConfigKeyBind.keyCode)
     		GameUtils.getMC().displayGuiScreen(new GuiHome(this));
-    	}
+    	if(key == SmartyGUI.toggleGUI.keyCode)
+    		keytoggle = !keytoggle;
     }
 
 	@Override

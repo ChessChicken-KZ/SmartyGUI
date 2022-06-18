@@ -35,6 +35,7 @@ public class mod_SmartyGUI extends BaseModExtended<SmartyGUI> {
     public mod_SmartyGUI() {
     	super(new SmartyGUI());
     	ModLoader.RegisterKey(this, SmartyGUI.openConfigKeyBind, false);
+    	ModLoader.RegisterKey(this, SmartyGUI.toggleGUI, false);
     	ML_INSTANCE = this;
     }
 
