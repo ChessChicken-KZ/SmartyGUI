@@ -25,6 +25,15 @@ The ML version of the project is under [Apache License 2.0](https://raw.githubus
 
 ## Changelog
 ```
+ML-2.3:
+    Bug fixes/General:
+    	— Fixed ModMenu not detecting the mod's description.
+    	— Internal KeyBinding method change for better compatibility (in future).
+
+    New features:
+    	— A toggle keybind for turning on/off the mod's GUI part.
+    	— Small localization for keybindings' names inside "Options" settings.
+
 ML-2.2:
     Bug fixes/General:
     	— Shortened time for ButtonBase hints.
