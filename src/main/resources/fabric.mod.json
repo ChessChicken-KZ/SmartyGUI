@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "SmartyGUI",
-  "description": "SmartyGUI - Block/Entity viewer, armor status and tooltip HUD.",
+  "description": "SmartyGUI - Block/Entity Viewer HUD, Armor status HUD and In-Game ToolTip.",
   "authors": [
     "ChessChicken-KZ"
   ],

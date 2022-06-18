@@ -1,12 +1,14 @@
 # SmartyGUI
 
-SmartyGUI — a modification for ModLoader/CursedFabric that adds a bunch of useful things to the game!
+SmartyGUI — a Minecraft b1.7.3 modification for ModLoader/Fabric that adds a bunch of useful client-side things to the game!
 
 Currently, it adds:
-
-    Block/Entity Viewer HUD.
-    Extended F3.
-    In-Game Tooltip.
+```
+    - Block/Entity Viewer HUD.
+    - Extended F3.
+    - Armor Status HUD.
+    - In-Game Tooltip.
+```
 
 ## Setup (Players/Users)
 
@@ -23,11 +25,12 @@ Requires ModLoader, does not change any base classes. Put `SmartyGUI-ML-X.X.X.ja
 
 ### Fabric Version
 
-For setup/build instructions, please refer to [stationapi-example-mod page](https://github.com/calmilamsy/stationapi-example-mod).
+For setup/build instructions, please refer to [stationapi-example-mod (dev/12) page](https://github.com/calmilamsy/stationapi-example-mod/tree/dev/12).
 
 ### ModLoader Version
 
 Please refer to [ModLoader branch](https://github.com/ChessChicken-KZ/SmartyGUI/tree/modloader) for more information and code.
 
 ## License
+
 The project is under [Apache License 2.0](https://raw.githubusercontent.com/ChessChicken-KZ/SmartyGUI/master/LICENSE). Feel free to look at it.
