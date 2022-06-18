@@ -15,16 +15,6 @@
  */
 package smartygui.plugins.vanilla;
 
-import net.minecraft.block.BlockBase;
-import net.minecraft.client.render.entity.ItemRenderer;
-import net.minecraft.item.ItemBase;
-import net.minecraft.item.ItemInstance;
-import net.minecraft.item.Record;
-import net.minecraft.level.Level;
-import net.minecraft.tileentity.TileEntityJukebox;
-import net.minecraft.tileentity.TileEntitySign;
-import org.lwjgl.input.Keyboard;
-
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
@@ -33,7 +23,16 @@ import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import kz.chesschicken.smartygui.common.plugins.event.IOverrideBlockRender;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
+import net.minecraft.block.BlockBase;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.entity.ItemRenderer;
+import net.minecraft.item.ItemBase;
+import net.minecraft.item.ItemInstance;
+import net.minecraft.item.Record;
+import net.minecraft.level.Level;
+import net.minecraft.tileentity.TileEntityJukebox;
+import net.minecraft.tileentity.TileEntitySign;
+import org.lwjgl.input.Keyboard;
 
 @GetClassifiedEvents({EnumEventTypes.ADDITIONAL_BLOCK_DESCRIPTION, EnumEventTypes.OVERRIDE_BLOCK_RENDER})
 public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBlockDescription, IOverrideBlockRender {

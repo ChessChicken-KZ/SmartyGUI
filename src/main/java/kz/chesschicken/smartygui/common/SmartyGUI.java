@@ -28,7 +28,6 @@ import kz.chesschicken.smartygui.commonloader.SystemUtils;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.options.KeyBinding;
-
 import net.minecraft.client.render.TextRenderer;
 import net.minecraft.client.util.ScreenScaler;
 import net.minecraft.util.hit.HitType;

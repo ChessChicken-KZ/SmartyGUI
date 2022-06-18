@@ -15,6 +15,12 @@
  */
 package kz.chesschicken.smartygui.client.components;
 
+import kz.chesschicken.smartygui.common.ModuleRender;
+import kz.chesschicken.smartygui.common.RenderUtils;
+import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
+import kz.chesschicken.smartygui.common.plugins.event.IAdditionalEntityDescription;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderHelper;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.entity.EntityBase;
@@ -22,13 +28,6 @@ import net.minecraft.entity.EntityRegistry;
 import net.minecraft.entity.Living;
 import net.minecraft.entity.player.PlayerBase;
 import org.lwjgl.opengl.GL11;
-
-import kz.chesschicken.smartygui.common.ModuleRender;
-import kz.chesschicken.smartygui.common.RenderUtils;
-import kz.chesschicken.smartygui.common.SmartyGUI;
-import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
-import kz.chesschicken.smartygui.common.plugins.event.IAdditionalEntityDescription;
-import net.minecraft.client.Minecraft;
 
 public class ModuleEntityRenderer extends ModuleRender {
     private String stringEntityCoordinates;

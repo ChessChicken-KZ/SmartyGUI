@@ -15,14 +15,13 @@
  */
 package kz.chesschicken.smartygui.client.gui;
 
-import net.minecraft.client.gui.widgets.Button;
-import org.lwjgl.input.Keyboard;
-
 import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.client.gui.button.TextFieldNum;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import net.minecraft.client.gui.widgets.Button;
+import org.lwjgl.input.Keyboard;
 
 public class GuiColourConfig extends BaseGUIStyle {
 	

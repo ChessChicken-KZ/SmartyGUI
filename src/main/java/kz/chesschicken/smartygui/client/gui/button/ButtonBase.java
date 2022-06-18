@@ -15,12 +15,11 @@
  */
 package kz.chesschicken.smartygui.client.gui.button;
 
+import kz.chesschicken.smartygui.common.SmartyGUIConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widgets.Button;
 import net.minecraft.client.render.TextRenderer;
 import org.lwjgl.opengl.GL11;
-
-import kz.chesschicken.smartygui.common.SmartyGUIConfig;
-import net.minecraft.client.Minecraft;
 
 public class ButtonBase extends Button {
 	

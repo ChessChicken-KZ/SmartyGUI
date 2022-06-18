@@ -15,12 +15,12 @@
  */
 package kz.chesschicken.smartygui.commonloader;
 
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Field;
-
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import sun.misc.Unsafe;
+
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Field;
 
 public class GameUtils {
 

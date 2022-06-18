@@ -15,11 +15,10 @@
  */
 package kz.chesschicken.smartygui.client.gui;
 
+import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import net.minecraft.client.gui.screen.ScreenBase;
 import net.minecraft.client.gui.widgets.Button;
 import org.lwjgl.Sys;
-
-import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 
 public class GuiCredits extends ScreenBase {
 	
