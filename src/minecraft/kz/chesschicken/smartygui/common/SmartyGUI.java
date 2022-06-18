@@ -46,8 +46,8 @@ import org.lwjgl.opengl.GL11;
 		)
 public class SmartyGUI implements IMod<SmartyGUI> {
 	
-	public static final KeyBinding openConfigKeyBind = new KeyBinding("openConfigKeyBind", Keyboard.KEY_NUMPAD0);
-	public static final KeyBinding toggleGUI = new KeyBinding("toggleGUI", Keyboard.KEY_NUMPAD1);
+	public static final KeyBinding openConfigKeyBind = new KeyBinding("key.openconfigkeybind", Keyboard.KEY_NUMPAD0);
+	public static final KeyBinding toggleGUI = new KeyBinding("key.togglegui", Keyboard.KEY_NUMPAD1);
 	
 	public SmartyGuiConfig CONFIG;
 	public SmartyGuiPlugins PLUGINS;
