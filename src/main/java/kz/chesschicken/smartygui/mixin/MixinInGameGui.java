@@ -49,7 +49,7 @@ public class MixinInGameGui {
 
         /* ShowBlock Part */
         if (SmartyGUIConfig.INSTANCE.enableShowBlock && minecraft.hitResult != null && !minecraft.paused && minecraft.currentScreen == null && !Minecraft.isDebugHudEnabled() && !minecraft.options.hideHud) {
-            if (minecraft.hitResult.type == HitType.TILE) {
+            if (minecraft.hitResult.type == HitType.field_789) {
                 renderBlock.updateBlock(minecraft.hitResult.x, minecraft.hitResult.y, minecraft.hitResult.z);
                 renderBlock.doBlockRendering(5, 13, SmartyGUIConfig.INSTANCE.showBlockModernStyle);
                 renderBlock.clean();

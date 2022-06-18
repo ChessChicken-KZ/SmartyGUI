@@ -68,7 +68,7 @@ public class ModuleEntityRenderer extends ModuleRender
             if(APIDetector.INSTANCE.moduleStAPI)
                 return "Health: " + (entityBase.getDataTracker().getInt(30));
 
-            if(!minecraft.level.isClient)
+            if(!minecraft.level.isServerSide)
                 return "Health: " + ((Living)entityBase).health;
         }
 
