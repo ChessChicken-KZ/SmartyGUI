@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "SmartyGUI",
-  "description": "ShowBlock (a.k.a. Waila), ArmorStatusHUD, ToolTip and some additional info in F3.",
+  "description": "SmartyGUI - Block/Entity viewer, armor status and tooltip HUD.",
   "authors": [
     "ChessChicken-KZ"
   ],
@@ -14,12 +14,12 @@
     "sources": "https://github.com/ChessChicken-KZ/SmartyGUI"
   },
 
-  "license": "MIT",
+  "license": "Apache License 2.0",
   "icon": "assets/smartygui/icon.png",
 
   "entrypoints": {
     "client": [
-      "kz.chesschicken.smartygui.SmartyGUI"
+      "smartygui.SmartyGUIFabric"
     ]
   },
   "mixins": [

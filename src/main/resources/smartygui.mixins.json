@@ -1,18 +1,17 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "kz.chesschicken.smartygui.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "package": "kz.chesschicken.smartygui.commonloader.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
   "client": [
-    "MixinBlockRenderer",
-    "MixinGuiFurnace",
-    "MixinInGameGui",
-    "MixinMainMenu"
+    "MixinMinecraft",
+    "MixinOverlay",
+    "MixinStoneSlab",
+    "MixinScreenBase"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
-    "patch.MixinStoneSlab"
   ]
 }

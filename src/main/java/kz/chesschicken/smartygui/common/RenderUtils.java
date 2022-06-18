@@ -1,6 +1,20 @@
+/**
+ * Copyright 2022 ChessChicken-KZ
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package kz.chesschicken.smartygui.common;
 
-import kz.chesschicken.smartygui.client.showblock.ModuleBlockRender;
 import net.minecraft.client.render.RenderHelper;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.TextRenderer;
@@ -9,31 +23,87 @@ import net.minecraft.client.texture.TextureManager;
 import net.minecraft.item.ItemInstance;
 import org.lwjgl.opengl.GL11;
 
-public class RenderUtils {
 
-    public static void gradientRender(int x1, int y1, int x2, int y2, int startColour, int endColour) {
+public class RenderUtils {
+	
+	public static int[] gradientRenderByAnchor(int x1, int y1, int width, int height, int startColour, int endColour, int anchor, boolean transparency) {
+		if(transparency)
+			return anchor == 0 ? new int [] { x1, y1 } : (anchor == 1 ? new int[] { x1 - (width / 2), y1 - (height / 2) } : (anchor == 2 ? new int[] { x1 - width, y1 } : new int[0]));
+		if(anchor == 0)
+			return gradientRender(x1, y1, x1 + width, y1 + height, startColour, endColour);
+		if(anchor == 1)
+			return gradientRender(x1 - (width / 2), y1 - (height / 2), x1 + width / 2, y1 + height / 2, startColour, endColour);
+		if(anchor == 2)
+			return gradientRender(x1 - width, y1, x1, y1 + height, startColour, endColour);
+		return new int[0];
+	}
+	
+    public static int[] gradientRender(int x1, int y1, int width, int height, int startColour, int endColour) {
+    	
+    	float vA = (float)(startColour >> 24 & 255) / 255.0F;
+        float vR = (float)(startColour >> 16 & 255) / 255.0F;
+        float vG = (float)(startColour >> 8 & 255) / 255.0F;
+        float vB = (float)(startColour & 255) / 255.0F;
+        
+        float vA2 = (float)(endColour >> 24 & 255) / 255.0F;
+        float vR2 = (float)(endColour >> 16 & 255) / 255.0F;
+        float vG2 = (float)(endColour >> 8 & 255) / 255.0F;
+        float vB2 = (float)(endColour & 255) / 255.0F;
+        
         GL11.glDisable(3553);
         GL11.glEnable(3042);
         GL11.glDisable(3008);
         GL11.glBlendFunc(770, 771);
         GL11.glShadeModel(7425);
-        Tessellator var15 = Tessellator.INSTANCE;
-        var15.start();
-        var15.colour((float)(startColour >> 16 & 255) / 255.0F, (float)(startColour >> 8 & 255) / 255.0F, (float)(startColour & 255) / 255.0F, (float)(startColour >> 24 & 255) / 255.0F);
-        var15.addVertex(x2, y1, 0.0D);
-        var15.addVertex(x1, y1, 0.0D);
-        var15.colour((float)(endColour >> 16 & 255) / 255.0F, (float)(endColour >> 8 & 255) / 255.0F, (float)(endColour & 255) / 255.0F, (float)(endColour >> 24 & 255) / 255.0F);
-        var15.addVertex(x1, y2, 0.0D);
-        var15.addVertex(x2, y2, 0.0D);
-        var15.draw();
+       
+        Tessellator tessellator = Tessellator.INSTANCE;
+        tessellator.start();
+        tessellator.colour(vR, vG, vB, vA);
+        tessellator.addVertex(width, y1, 0.0D);
+        tessellator.addVertex(x1, y1, 0.0D);
+        tessellator.colour(vR2, vG2, vB2, vA2);
+        tessellator.addVertex(x1, height, 0.0D);
+        tessellator.addVertex(width, height, 0.0D);
+        tessellator.draw();
+        
         GL11.glShadeModel(7424);
         GL11.glDisable(3042);
         GL11.glEnable(3008);
         GL11.glEnable(3553);
+    	
+        return new int[] {x1, y1};
+    }
+    
+    public static int[] gradientRenderRGB(int x1, int y1, int width, int height, int startColour) {
+    	
+        float vR = (float)(startColour >> 16 & 255) / 255.0F;
+        float vG = (float)(startColour >> 8 & 255) / 255.0F;
+        float vB = (float)(startColour & 255) / 255.0F;
+        
+        GL11.glDisable(3553);
+        GL11.glEnable(3042);
+        GL11.glDisable(3008);
+        GL11.glBlendFunc(770, 771);
+        GL11.glShadeModel(7425);
+       
+        Tessellator tessellator = Tessellator.INSTANCE;
+        tessellator.start();
+        tessellator.colour(vR, vG, vB);
+        tessellator.addVertex(width, y1, 0.0D);
+        tessellator.addVertex(x1, y1, 0.0D);
+        tessellator.addVertex(x1, height, 0.0D);
+        tessellator.addVertex(width, height, 0.0D);
+        tessellator.draw();
+        
+        GL11.glShadeModel(7424);
+        GL11.glDisable(3042);
+        GL11.glEnable(3008);
+        GL11.glEnable(3553);
+    	
+        return new int[] {x1, y1};
     }
 
     public static void renderItem(ItemRenderer ir, TextRenderer fr, TextureManager textureManager, ItemInstance itemInstance, int x, int y) {
-        ModuleBlockRender.amIBeingCaused = 1;
         GL11.glPushMatrix();
         GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
         RenderHelper.enableLighting();
@@ -41,55 +111,93 @@ public class RenderUtils {
         GL11.glPushMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(32826);
-        ir.method_1487(fr, textureManager, itemInstance, x, y);
-        ir.method_1488(fr, textureManager, itemInstance, x, y);
+        try {
+    	   ir.method_1487(fr, textureManager, itemInstance, x, y);
+           ir.method_1488(fr, textureManager, itemInstance, x, y);
+        }catch(NullPointerException ignored) {
+        }
         GL11.glDisable(32826);
         RenderHelper.disableLighting();
         GL11.glPopMatrix();
-        ModuleBlockRender.amIBeingCaused = 0;
+    }
+    
+    public static int[] modernRenderByAnchor(int x1, int y1, int w, int h, int anchor) {
+    	if(anchor == 0)
+    		return modernRender(x1, y1, w, h);
+    	if(anchor == 1)
+    		return modernRenderCentered(x1, y1, w, h);
+    	if(anchor == 2)
+    		return modernRenderRight(x1, y1, w, h);
+    	return new int[0];
+    }
+    
+    public static int[] modernRenderRight(int x1, int y1, int length, int var4) {
+    	x1 = x1 - length;
+		return modernRender(x1, y1, length, var4);
     }
 
-    public static void gradientModern(int var1, int var2, int length, int var4, int var5, int multiplier, int widthSize) {
-        int var9 = var1 - var4 + 12;
-        int var10 = var2 - var5 - 12;
-        int l1 = Math.max(length, widthSize);
-        int j3 = 8 * multiplier;
-        int k3 = -267386864;
-        gradientRender(var9 - 3, var10 - 4, var9 + l1 + 3, ( var10 - 3), k3, k3);
-        gradientRender(var9 - 3, var10 + j3 + 3, var9 + l1 + 3, ( var10 + j3 + 4), k3, k3);
-        gradientRender(var9 - 3, var10 - 3, var9 + l1 + 3, ( var10 + j3 + 3), k3, k3);
-        gradientRender(var9 - 4, var10 - 3, var9 - 3, ( var10 + j3 + 3), k3, k3);
-        gradientRender(var9 + l1 + 3, var10 - 3, var9 + l1 + 4, ( var10 + j3 + 3), k3, k3);
-        int l3 = 1347420415;
-        int i4 = (l3 & 16711422) >> 1 | l3 & -16777216;
-        gradientRender(var9 - 3, var10 - 3 + 1, var9 - 3 + 1, ( var10 + j3 + 3 - 1), l3, i4);
-        gradientRender(var9 + l1 + 2, var10 - 3 + 1, var9 + l1 + 3, ( var10 + j3 + 3 - 1), l3, i4);
-        gradientRender(var9 - 3, var10 - 3, var9 + l1 + 3,( var10 - 3 + 1), l3, l3);
-        gradientRender(var9 - 3, var10 + j3 + 2, var9 + l1 + 3, (var10 + j3 + 3), i4, i4);
-
+    public static int[] modernRenderCentered(int x1, int y1, int w, int h) {
+    	x1 = x1 - (w / 2);
+		y1 = y1 - (h / 2);
+		return modernRender(x1, y1, w, h);
     }
 
-    public static int convertRGBToInt(int r, int g, int b) {
-        return 0xFF000000 | ((r << 16) & 0x00FF0000) | ((g << 8) & 0x0000FF00) | (b & 0x000000FF);
+    public static int[] modernRender(int x1, int y1, int w, int h) {
+        y1 = y1 + 2;
+        
+        gradientRender(x1 - 3, y1 - 4, x1 + w + 3, (y1 - 3), -267386864, -267386864);
+        gradientRender(x1 - 3, y1 + h + 3, x1 + w + 3, (y1 + h + 4), -267386864, -267386864);
+        gradientRender(x1 - 3, y1 - 3, x1 + w + 3, (y1 + h + 3), -267386864, -267386864);
+        gradientRender(x1 - 4, y1 - 3, x1 - 3, (y1 + h + 3), -267386864, -267386864);
+        gradientRender(x1 + w + 3, y1 - 3, x1 + w + 4, (y1 + h + 3), -267386864, -267386864);
+        
+        gradientRender(x1 - 3, y1 - 3 + 1, x1 - 3 + 1, (y1 + h + 3 - 1), 1347420415, 1344798847);
+        gradientRender(x1 + w + 2, y1 - 3 + 1, x1 + w + 3, (y1 + h + 3 - 1), 1347420415, 1344798847);
+        gradientRender(x1 - 3, y1 - 3, x1 + w + 3,(y1 - 3 + 1), 1347420415, 1347420415);
+        gradientRender(x1 - 3, y1 + h + 2, x1 + w + 3, (y1 + h + 3), 1344798847, 1344798847);
+
+        return new int[] {x1, y1 - 2};
     }
-
-    public static int[] convertIntToRGB(int i) {
-        return new int[] {i >> 16, i >> 8 & 255, i & 255};
+    
+    public static int getIntFromRGB(int r, int g, int b) {
+    	return ((r & 0x0FF) << 16) | ((g & 0x0FF) << 8) | (b & 0x0FF);
     }
-
-    public static float[] convertIntToFloatRGB(int i) {
-        return new float[] {((i >> 16 & 255) / 255.0F), ((i >> 8 & 255) / 255.0F), ((i & 255) / 255.0F)};
+    
+    public static int getIntFromRGBA(int r, int g, int b, int a) {
+    	return (a << 24) | ((r & 0x0FF) << 16) | ((g & 0x0FF) << 8) | (b & 0x0FF);
     }
-
-    public static char getColorByHardness(float f) {
-        if(f < 0f)
-            return 'b';
-        else if(f <= 1f)
-            return 'a';
-        else if(f > 1F && f <= 3f)
-            return 'e';
-
-        return 'c';
+    
+    public static int[] getRGBAFromInt(int i) {
+    	return new int[] {
+    			(i & 0xff0000) >> 16,
+    			(i & 0xff00) >> 8,
+    			i & 0xff,
+    			(i & 0xff000000) >>> 24,
+    	};
     }
-
+    
+    public static float[] getRGBAFromIntF(int i) {
+    	return new float[] {
+    			1.0F * ((i & 0xff0000) >> 16) / 255,
+    			1.0F * ((i & 0xff00) >> 8) / 255,
+    			1.0F * (i & 0xff) / 255,
+    			1.0F * ((i & 0xff000000) >>> 24) / 255,
+    	};
+    }
+    
+    
+    public static float[] getARGBColour(int a) {
+    	return new float[] {
+    	    	 (float)(a >> 24 & 255) / 255.0F,
+    	         (float)(a >> 16 & 255) / 255.0F,
+    	         (float)(a >> 8 & 255) / 255.0F,
+    	         (float)(a & 255) / 255.0F
+    	};
+    }
+    
+    public static byte[] getRGBColour_byTime() {
+        int rgb = java.awt.Color.HSBtoRGB((float) (System.currentTimeMillis() % 11520L) / 11520.0F, 1.0F, 1.0F);
+        return new byte[] { (byte) (rgb >> 16 & 0xFF), (byte) (rgb >> 8 & 0xFF), (byte) (rgb & 0xFF) };
+    }
+    
 }
