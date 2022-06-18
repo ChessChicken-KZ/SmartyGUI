@@ -178,7 +178,7 @@ public class GuiDragInterface extends ScreenBase {
 		}
 
 		if(saveState)
-			minecraft.textRenderer.drawTextWithShadow("Сhanges have been saved!", 5 + minecraft.textRenderer.getTextWidth("Move, Drag & Setup"), 2, 0xFFD800);
+			minecraft.textRenderer.drawTextWithShadow("Changes have been saved!", 5 + minecraft.textRenderer.getTextWidth("Move, Drag & Setup"), 2, 0xFFD800);
 		
 		for(Object f : this.buttons)
 			((ButtonBase) f).drawTooltip(this.minecraft, var1, var2);
