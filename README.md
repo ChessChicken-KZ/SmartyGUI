@@ -10,6 +10,12 @@ Currently, it adds:
     - In-Game Tooltip.
 ```
 
+
+HUD Example Showcase             |  Colour Settings
+:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/53552480/169657637-1581ef23-7c8b-4ed3-8c18-8b7101c8ea95.gif)  |  ![](https://user-images.githubusercontent.com/53552480/174448683-0dbdbe8e-b9e4-43ea-a5b3-4d1bdbbd6e06.gif)
+
+
 ## Setup (Players/Users)
 
 ### Fabric Version (CF-X.X.X)
