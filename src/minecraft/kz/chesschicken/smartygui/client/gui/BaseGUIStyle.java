@@ -16,8 +16,11 @@
 package kz.chesschicken.smartygui.client.gui;
 
 import kz.chesschicken.smartygui.client.gui.button.ButtonTransparent;
+import kz.chesschicken.smartygui.client.gui.button.IUpdateOnResize;
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
+import net.minecraft.src.GuiParticle;
 import net.minecraft.src.GuiScreen;
 
 public class BaseGUIStyle extends GuiScreen {
@@ -50,6 +53,21 @@ public class BaseGUIStyle extends GuiScreen {
 	public void drawScreen(int a, int b, float f) {
 		this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
 		super.drawScreen(a, b, f);
+	}
+	
+	@Override
+	public void setWorldAndResolution(Minecraft g, int w, int h) {
+		this.guiParticles = new GuiParticle(g);
+        this.mc = g;
+        this.fontRenderer = g.fontRenderer;
+        this.width = w;
+        this.height = h;
+        //Resize function.
+        for(Object a : this.controlList) {
+        	if(a instanceof IUpdateOnResize) {
+        		((IUpdateOnResize)a).updateOnResize(this.width, this.height);
+        	}
+        }
 	}
 
 	public void drawSuper(int a, int b, float f) {

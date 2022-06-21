@@ -15,6 +15,8 @@
  */
 package kz.chesschicken.smartygui.client.gui.button;
 
+import java.util.function.BiConsumer;
+
 import org.lwjgl.opengl.GL11;
 
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
@@ -22,32 +24,42 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiButton;
 
-public class ButtonBase extends GuiButton {
+public class ButtonBase extends GuiButton implements IUpdateOnResize {
 	
-	public final int STACK_X, STACK_Y;
 	public boolean FF_1 = false;
 	
 	private byte tickA = 0;
 	public String tooltipText = null;
+	public BiConsumer<Integer, Integer> resizeFunc;
 	
 	public ButtonBase(int id, int x, int y, int w, int h, String t) {
 		super(id, x, y, w, h, t);
-		this.STACK_X = x;
-		this.STACK_Y = y;
 	}
 	
 	public ButtonBase(int id, int x, int y, int w, int h, String t, String f) {
 		super(id, x, y, w, h, t);
-		this.STACK_X = x;
-		this.STACK_Y = y;
 		this.tooltipText = f;
 	}
 	
 	public ButtonBase(int id, int x, int y, String t) {
         super(id, x, y, t);
-		this.STACK_X = x;
-		this.STACK_Y = y;
     }
+	
+	public ButtonBase(int id, int w, int h, BiConsumer<Integer, Integer> r, String t) {
+		super(id, 0, 0, w, h, t);
+		this.resizeFunc = r;
+	}
+	
+	public ButtonBase(int id, int w, int h, BiConsumer<Integer, Integer> r, String t, String f) {
+		super(id, 0, 0, w, h, t);
+		this.resizeFunc = r;
+		this.tooltipText = f;
+	}
+	
+	public ButtonBase(int id, BiConsumer<Integer, Integer> r, String t) {
+		super(id, 0, 0, t);
+		this.resizeFunc = r;
+	}
 	
 	public void drawModern(Minecraft mc, int a, int b) {
         if (this.enabled2) {
@@ -88,8 +100,10 @@ public class ButtonBase extends GuiButton {
 			}else if(tickA != 60) tickA = 60;
 		}
 	}
-	
-	
-	
 
+	@Override
+	public void updateOnResize(int newWidth, int newHeight) {
+		if(this.resizeFunc != null)
+			this.resizeFunc.accept(newWidth, newHeight);
+	}
 }
