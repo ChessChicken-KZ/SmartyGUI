@@ -15,67 +15,31 @@
  */
 package kz.chesschicken.smartygui.client.gui;
 
-import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
-import kz.chesschicken.smartygui.common.SmartyGUI;
-import net.minecraft.src.GuiButton;
 
-public class GuiHome extends BaseGUIStyle {
+import java.util.function.Function;
+
+import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.common.guiframework.BasePanel;
+import kz.chesschicken.smartygui.common.guiframework.ValueXY;
+import kz.chesschicken.smartygui.common.guiframework.widgets.WidgetButtonA;
+import kz.chesschicken.smartygui.commonloader.GameUtils;
+import kz.chesschicken.smartygui.common.RenderUtils;
+
+public class GuiHome {
 	
-	public GuiHome(SmartyGUI mod) {
-		super(mod);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public void initGui() {
-		super.initGui();
-		
-		this.controlList.add(new ButtonBase(20, this.width / 2 - 91, this.height / 4 + 32, 90, 20, "Modules", "Modules toggling menu."));
-		this.controlList.add(new ButtonBase(22, this.width / 2 - 91, this.height / 4 + 8, /* 90 */ 182, 20, "Location Settings", "BEVHUD location menu."));
-		this.controlList.add(new ButtonBase(23, this.width / 2 + 1, this.height / 4 + 32, 90, 20, "Appearance", "General appearance settings."));
-		this.controlList.add(new ButtonBase(24, this.width / 2 - 91, this.height / 4 + 56, /* 90 */ 182, 20, "Colour Settings", "BEVHUD colour settings."));
-		
-		this.controlList.add(new ButtonBase(70, this.width / 2 - 91, this.height / 4 + 104, 182, 20, "Save and Close", "Save settings and exit to game."));
-	}
-	
-	@Override
-	protected void actionPerformed(GuiButton var1) {
-		super.actionPerformed(var1);
-		if(!var1.enabled || !var1.enabled2)
-			return;
-		switch(var1.id) {
-		
-		case 20: {
-			mc.displayGuiScreen(new GuiModules(instance));
-			break;
+	public static Function<SmartyGUI, BasePanel> HOME_GUI = (instance) -> new BasePanel(gui -> {
+		gui.add(new WidgetButtonA("Modules", 90, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 32), () -> GameUtils.open(new GuiModules(instance))));
+		gui.add(new WidgetButtonA("Location Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8), () -> GameUtils.open(new GuiDragInterface(instance))));
+		gui.add(new WidgetButtonA("Appearance", 90, 20, (w, h) -> new ValueXY(w / 2 + 1, h / 4 + 32), () -> GameUtils.open(new GuiAppearanceConfig(instance))));
+		gui.add(new WidgetButtonA("Colour Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 56), () -> GameUtils.open(new GuiColourConfig(instance))));
+		gui.add(new WidgetButtonA("Save and Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), () -> GameUtils.open(null)));
+	}) {
+		@Override
+		public void render(int q, int w, float e) {
+            RenderUtils.gradientRender(0, 0, this.width, this.height, -1072689136, -804253680);
+			super.render(q, w, e);
+			RenderUtils.renderShadowCenteredString(this.width / 2, 40, 0xFFFFFF, "SmartyGUI Options");
 		}
-		
-		case 22: {
-			mc.displayGuiScreen(new GuiDragInterface(instance));
-			break;
-		}
-		
-		case 23: {
-			mc.displayGuiScreen(new GuiAppearanceConfig(instance));
-			break;
-		}
-		
-		case 24: {
-			mc.displayGuiScreen(new GuiColourConfig(instance));
-			break;
-		}
-		
-		case 70: {
-			mc.displayGuiScreen(null);
-			break;
-		}
-		}
-	}
-	
-	@Override
-	public void drawScreen(int a, int b, float f) {
-		super.drawScreen(a, b, f);
-		this.drawCenteredString(this.mc.fontRenderer, "SmartyGUI Options", this.width / 2, 40, 0xFFFFFF);
-	}
+	};
 
 }

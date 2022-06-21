@@ -18,6 +18,7 @@ package kz.chesschicken.smartygui.client.gui;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.client.gui.button.ButtonToggle;
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.common.guiframework.GuiScreenExtended;
 import net.minecraft.src.GuiButton;
 
 public class GuiModules extends BaseGUIStyle {
@@ -83,7 +84,7 @@ public class GuiModules extends BaseGUIStyle {
 			
 			instance.CONFIG.forceSave();
 			instance.updateASHUD();
-			mc.displayGuiScreen(new GuiHome(instance));
+			mc.displayGuiScreen(new GuiScreenExtended(GuiHome.HOME_GUI.apply(instance)));
 			break;
 		}
 		}

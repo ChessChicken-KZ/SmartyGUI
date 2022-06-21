@@ -21,6 +21,7 @@ import kz.chesschicken.smartygui.client.gui.button.ButtonToggle;
 import kz.chesschicken.smartygui.common.EnumTheme;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.guiframework.GuiScreenExtended;
 import net.minecraft.src.GuiButton;
 
 public class GuiAppearanceConfig extends BaseGUIStyle {
@@ -128,7 +129,7 @@ public class GuiAppearanceConfig extends BaseGUIStyle {
 			instance.CONFIG.armorStatusHUDmode = a_ashmode;
 			instance.CONFIG.forceSave();
 			instance.updateASHUD();
-			mc.displayGuiScreen(new GuiHome(instance));
+			mc.displayGuiScreen(new GuiScreenExtended(GuiHome.HOME_GUI.apply(instance)));
 			break;
 		}
 		}
