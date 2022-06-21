@@ -45,7 +45,7 @@ public abstract class WidgetButton extends AbstractComponent implements IUpdateO
 	public void render(int var2, int var3, float d) {
         RenderUtils.bindTexture("/gui/gui.png");
         boolean isHovered = this.isHovered(var2, var3);
-        byte renderState = (byte) (!this.active ? 0 : (isHovered ? 2 : 0));
+        byte renderState = (byte) (!this.active ? 0 : (isHovered ? 2 : 1));
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         RenderUtils.renderTexture(this.x, this.y, 0, 46 + renderState * 20, this.width / 2, this.height);
         RenderUtils.renderTexture(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + renderState * 20, this.width / 2, this.height);
