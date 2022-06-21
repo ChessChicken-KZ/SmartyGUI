@@ -20,11 +20,11 @@ import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiParticle;
 import net.minecraft.src.GuiScreen;
 
-public class GuiScreenExtended<T extends BasePanel> extends GuiScreen {
+public class GuiScreenExtended extends GuiScreen {
 	
-	public final T mainPanel;
+	public final BasePanel mainPanel;
 	
-	public GuiScreenExtended(T panel) {
+	public GuiScreenExtended(BasePanel panel) {
 		this.mainPanel = panel;
 	}
 	
