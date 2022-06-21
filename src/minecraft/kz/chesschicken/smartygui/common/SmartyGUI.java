@@ -165,8 +165,7 @@ public class SmartyGUI implements IMod<SmartyGUI> {
 
             stringToSent = "OS: " + SystemUtils.getFullOperatingSystemName();
             fr.drawStringWithShadow(stringToSent, scaledWidth - fr.getStringWidth(stringToSent) - 2, 26, 14737632);
-            if(SystemUtils.getProcessorInfo() != null)
-            {
+            if(SystemUtils.getProcessorInfo() != null) {
                 stringToSent = "CPU: " + SystemUtils.getProcessorInfo();
                 fr.drawStringWithShadow(stringToSent, scaledWidth - fr.getStringWidth(stringToSent) - 2, 36, 14737632);
             }
@@ -185,7 +184,7 @@ public class SmartyGUI implements IMod<SmartyGUI> {
     @Override
     public void keyPressed(int key) {
     	if(key == SmartyGUI.openConfigKeyBind.keyCode)
-    		GameUtils.getMC().displayGuiScreen(new GuiScreenExtended(GuiHome.HOME_GUI.apply(this)));
+    		GameUtils.open(new GuiScreenExtended<>(GuiHome.HOME_GUI.apply(this)));
     	if(key == SmartyGUI.toggleGUI.keyCode)
     		keytoggle = !keytoggle;
     }

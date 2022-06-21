@@ -62,7 +62,7 @@ public abstract class BasePanel extends AbstractComponent implements IContainer,
 
 	@Override
 	public void onInteractWithComponents(int mX, int mY, int mEvent) {
-		if(mEvent != 0) //If not left click - cancel.
+		if(mEvent != 0) //If not left-click - cancel.
 			return;
 		for(AbstractComponent i : components) {
 			if(!(i instanceof IInteractive) || !i.isVisible())

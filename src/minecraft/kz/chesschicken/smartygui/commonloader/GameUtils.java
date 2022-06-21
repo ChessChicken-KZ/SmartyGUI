@@ -18,6 +18,8 @@ package kz.chesschicken.smartygui.commonloader;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
 
+import kz.chesschicken.smartygui.commonloader.guiframework.BasePanel;
+import kz.chesschicken.smartygui.commonloader.guiframework.GuiScreenExtended;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.ModLoader;
 import sun.misc.Unsafe;
@@ -48,6 +50,10 @@ public class GameUtils {
     
     public static <T extends net.minecraft.src.GuiScreen> void open(T a) {
     	getMC().displayGuiScreen(a);
+    }
+    
+    public static <T extends BasePanel> void openPanel(T t) {
+    	getMC().displayGuiScreen(new GuiScreenExtended<T>(t));
     }
     
     public static Minecraft getMC() {
