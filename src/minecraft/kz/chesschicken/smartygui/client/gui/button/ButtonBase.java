@@ -20,12 +20,11 @@ import java.util.function.BiConsumer;
 import org.lwjgl.opengl.GL11;
 
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
-import kz.chesschicken.smartygui.commonloader.guiframework.IUpdateOnResize;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiButton;
 
-public class ButtonBase extends GuiButton implements IUpdateOnResize {
+public class ButtonBase extends GuiButton {
 	
 	public boolean FF_1 = false;
 	
@@ -100,11 +99,5 @@ public class ButtonBase extends GuiButton implements IUpdateOnResize {
 				} else tickA--;
 			}else if(tickA != 60) tickA = 60;
 		}
-	}
-
-	@Override
-	public void updateOnResize(int newWidth, int newHeight) {
-		if(this.resizeFunc != null)
-			this.resizeFunc.accept(newWidth, newHeight);
 	}
 }
