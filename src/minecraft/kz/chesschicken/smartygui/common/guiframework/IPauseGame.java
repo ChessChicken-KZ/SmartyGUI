@@ -13,28 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.common.guiframework.widgets;
+package kz.chesschicken.smartygui.common.guiframework;
 
-import kz.chesschicken.smartygui.common.BinaryIntConsumer;
-
-public class WidgetButtonA extends WidgetButton {
-	
-	@FunctionalInterface
-	public static interface Action1 {
-		void onActivate();
-	}
-	
-	protected final Action1 action;
-	
-	public WidgetButtonA(String text, BinaryIntConsumer f, Action1 a) {
-		super(text, f);
-		this.action = a;
-	}
-
-	@Override
-	public void onActivate() {
-		if(this.action != null)
-			this.action.onActivate();
-	}
-
+public interface IPauseGame {
+	boolean shouldPauseGame();
 }

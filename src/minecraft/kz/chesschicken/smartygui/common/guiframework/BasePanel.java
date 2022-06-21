@@ -1,17 +1,32 @@
 package kz.chesschicken.smartygui.common.guiframework;
 
+/**
+ * Copyright 2022 ChessChicken-KZ
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasePanel extends IComponent implements IContainer, IUpdateOnResize {
+public class BasePanel extends AbstractComponent implements IContainer, IUpdateOnResize {
 
-	public final List<IComponent> components = new ArrayList<>();
+	public final List<AbstractComponent> components = new ArrayList<>();
 	
 	@Override
 	public void updateOnResize(int newWidth, int newHeight) {
 		this.width = newWidth;
 		this.height = newHeight;
-		for(IComponent i : this.components) {
+		for(AbstractComponent i : this.components) {
         	if(i instanceof IUpdateOnResize) {
         		((IUpdateOnResize)i).updateOnResize(newWidth, newHeight);
         	}
@@ -20,7 +35,7 @@ public class BasePanel extends IComponent implements IContainer, IUpdateOnResize
 
 	@Override
 	public void render(int q, int w, float e) {
-		for(IComponent i : components) {
+		for(AbstractComponent i : components) {
 			if(i.shouldDraw()) {
 				i.render(q, w, e);
 			}
@@ -28,13 +43,26 @@ public class BasePanel extends IComponent implements IContainer, IUpdateOnResize
 	}
 
 	@Override
-	public void add(IComponent i) {
+	public void add(AbstractComponent i) {
 		this.components.add(i);
 	}
 
 	@Override
-	public List<IComponent> getComponents() {
+	public List<AbstractComponent> getComponents() {
 		return this.components;
+	}
+
+	@Override
+	public void onInteractWithComponents(int mX, int mY, int mEvent) {
+		if(mEvent != 0) //If not left click - cancel.
+			return;
+		for(AbstractComponent i : components) {
+			if(!(i instanceof IInteractive))
+				continue;
+			if(((IInteractive)i).isHovered(mX, mY)) {
+				((IInteractive)i).onActivate();
+			}
+		}
 	}
 	
 }
