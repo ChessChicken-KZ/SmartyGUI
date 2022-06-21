@@ -41,12 +41,6 @@ public class BaseGUIStyle extends GuiScreen {
 	protected void actionPerformed(GuiButton var1) {
 		if(!var1.enabled || !var1.enabled2)
 			return;
-		switch(var1.id) {
-		case 900: {
-			mc.displayGuiScreen(new GuiCredits());
-			break;
-		}
-		}
 	}
 
 	@Override

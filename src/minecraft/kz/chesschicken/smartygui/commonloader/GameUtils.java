@@ -51,6 +51,10 @@ public class GameUtils {
     public static <T extends net.minecraft.src.GuiScreen> void open(T a) {
     	getMC().displayGuiScreen(a);
     }
+
+    public static void closeGUI() {
+        open(null);
+    }
     
     public static <T extends BasePanel> void openPanel(T t) {
     	getMC().displayGuiScreen(new GuiScreenExtended<T>(t));

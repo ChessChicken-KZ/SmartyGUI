@@ -44,6 +44,10 @@ public class RenderUtils {
 	public static void renderShadowCenteredString(int x1, int y1, int color, String text) {
 		gameInstance.get().fontRenderer.drawStringWithShadow(text, x1 - gameInstance.get().fontRenderer.getStringWidth(text) / 2, y1, color);
 	}
+
+    public static int getStringSize(String s) {
+        return gameInstance.get().fontRenderer.getStringWidth(s);
+    }
 	
 	@Deprecated
 	@SuppressWarnings("unchecked")
