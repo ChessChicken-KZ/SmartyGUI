@@ -9,8 +9,8 @@ public class WidgetButtonA extends WidgetButton {
 	
 	protected final Action1 action;
 	
-	public WidgetButtonA(int id, String text, BiConsumer<Integer, Integer> f, Action1 a) {
-		super(id, text, f);
+	public WidgetButtonA(String text, BiConsumer<Integer, Integer> f, Action1 a) {
+		super(text, f);
 		this.action = a;
 	}
 

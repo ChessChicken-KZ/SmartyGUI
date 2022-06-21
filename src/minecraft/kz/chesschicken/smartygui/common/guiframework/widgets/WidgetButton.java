@@ -11,13 +11,11 @@ import kz.chesschicken.smartygui.common.guiframework.IUpdateOnResize;
 
 public abstract class WidgetButton extends IComponent implements IUpdateOnResize, IInteractive {
 	
-	protected final int id;
 	protected String text;
 	protected boolean active;
 	protected final BiConsumer<Integer, Integer> resizeFunc;
 	
-	public WidgetButton(int id, String text, BiConsumer<Integer, Integer> f) {
-		this.id = id;
+	public WidgetButton(String text, BiConsumer<Integer, Integer> f) {
 		this.text = text;
 		this.resizeFunc = f;
 	}
