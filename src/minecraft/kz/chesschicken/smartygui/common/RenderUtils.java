@@ -27,10 +27,32 @@ import net.minecraft.src.RenderItem;
 import net.minecraft.src.Tessellator;
 
 public class RenderUtils {
+	
+	/**
+	  * Should be a lazy init to avoid null static instance.
+	  */
 	public static LateGetter<Minecraft> gameInstance = new LateGetter<>(() -> ModLoader.getMinecraftInstance());
 	
 	public static int texture(String s) {
-		return ModLoader.getMinecraftInstance().renderEngine.getTexture(s);
+		return gameInstance.get().renderEngine.getTexture(s);
+	}
+	
+	public static void renderString(int x1, int y1, int color, String text) {
+		gameInstance.get().fontRenderer.drawString(text, x1, y1, color);
+	}
+	
+	public static void renderShadowString(int x1, int y1, int color, String text) {
+		gameInstance.get().fontRenderer.drawStringWithShadow(text, x1, y1, color);
+	}
+	
+	public static void renderShadowCenteredString(int x1, int y1, int color, String text) {
+		gameInstance.get().fontRenderer.drawStringWithShadow(text, x1 - gameInstance.get().fontRenderer.getStringWidth(text) / 2, y1, color);
+	}
+	
+	@Deprecated
+	@SuppressWarnings("unchecked")
+	public static <T> T getRawFontRenderer() {
+		return (T) gameInstance.get().fontRenderer;
 	}
 	
 	public static int[] renderTexture(int x1, int y1, int u, int v, int sizeX, int sizeY) {
@@ -136,8 +158,7 @@ public class RenderUtils {
         try {
     	   ir.renderItemIntoGUI(fr, textureManager, itemInstance, x, y);
            ir.renderItemOverlayIntoGUI(fr, textureManager, itemInstance, x, y);
-        }catch(NullPointerException ignored) {
-        }
+        } catch(NullPointerException ignored) {}
         GL11.glDisable(32826);
         RenderHelper.disableStandardItemLighting();
         GL11.glPopMatrix();
