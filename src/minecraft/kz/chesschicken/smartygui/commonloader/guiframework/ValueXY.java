@@ -1,4 +1,4 @@
-package kz.chesschicken.smartygui.common.guiframework;
+package kz.chesschicken.smartygui.commonloader.guiframework;
 
 public class ValueXY {
 	public final int a;

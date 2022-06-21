@@ -17,7 +17,6 @@ package kz.chesschicken.smartygui.commonloader;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiScreen;
-import net.minecraft.src.KeyBinding;
 
 public interface IMod<T> {
 

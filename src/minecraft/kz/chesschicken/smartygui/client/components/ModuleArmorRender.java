@@ -16,8 +16,8 @@
 package kz.chesschicken.smartygui.client.components;
 
 import kz.chesschicken.smartygui.common.ModuleRender;
-import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.RenderItem;
 import net.minecraft.src.ScaledResolution;

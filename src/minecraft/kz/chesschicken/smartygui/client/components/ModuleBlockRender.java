@@ -18,11 +18,11 @@ package kz.chesschicken.smartygui.client.components;
 import java.util.Random;
 
 import kz.chesschicken.smartygui.common.ModuleRender;
-import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import kz.chesschicken.smartygui.common.plugins.event.IOverrideBlockRender;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;

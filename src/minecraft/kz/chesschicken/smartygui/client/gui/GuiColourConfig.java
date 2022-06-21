@@ -20,8 +20,8 @@ import org.lwjgl.input.Keyboard;
 import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.client.gui.button.TextFieldNum;
-import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import net.minecraft.src.GuiButton;
 
 public class GuiColourConfig extends BaseGUIStyle {

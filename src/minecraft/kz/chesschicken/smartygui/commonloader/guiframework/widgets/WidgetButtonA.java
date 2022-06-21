@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.common.guiframework.widgets;
+package kz.chesschicken.smartygui.commonloader.guiframework.widgets;
 
-import kz.chesschicken.smartygui.common.BinaryIntFunction;
-import kz.chesschicken.smartygui.common.guiframework.ValueXY;
+import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
+import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public class WidgetButtonA extends WidgetButton {
 	

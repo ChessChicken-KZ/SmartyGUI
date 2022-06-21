@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.common.guiframework;
+package kz.chesschicken.smartygui.commonloader.guiframework;
 
-public interface IInteractive {
-	void onActivate();
-	
-	boolean isHovered(int i, int i1);
+public interface IPauseGame {
+	boolean shouldPauseGame();
 }

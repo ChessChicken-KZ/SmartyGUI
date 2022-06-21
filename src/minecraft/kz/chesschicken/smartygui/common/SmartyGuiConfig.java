@@ -18,6 +18,7 @@ package kz.chesschicken.smartygui.common;
 import kz.chesschicken.smartygui.common.configapi.ConfigInstance;
 import kz.chesschicken.smartygui.common.configapi.instance.Group;
 import kz.chesschicken.smartygui.common.configapi.instance.Property;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
 
 /**
  * A config instance implementation for the SmartyGUI modification.

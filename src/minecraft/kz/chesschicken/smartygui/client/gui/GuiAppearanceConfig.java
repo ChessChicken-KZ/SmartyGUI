@@ -21,7 +21,7 @@ import kz.chesschicken.smartygui.client.gui.button.ButtonToggle;
 import kz.chesschicken.smartygui.common.EnumTheme;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
-import kz.chesschicken.smartygui.common.guiframework.GuiScreenExtended;
+import kz.chesschicken.smartygui.commonloader.guiframework.GuiScreenExtended;
 import net.minecraft.src.GuiButton;
 
 public class GuiAppearanceConfig extends BaseGUIStyle {

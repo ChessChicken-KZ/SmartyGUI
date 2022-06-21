@@ -17,7 +17,6 @@ package smartygui.plugins.vanilla;
 
 import org.lwjgl.input.Keyboard;
 
-import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.AbstractSmartyPlugin;
 import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
@@ -25,6 +24,7 @@ import kz.chesschicken.smartygui.common.plugins.event.GetClassifiedEvents;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalBlockDescription;
 import kz.chesschicken.smartygui.common.plugins.event.IOverrideBlockRender;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;

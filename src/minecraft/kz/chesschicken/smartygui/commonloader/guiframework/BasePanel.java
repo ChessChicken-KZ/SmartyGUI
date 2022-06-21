@@ -1,4 +1,4 @@
-package kz.chesschicken.smartygui.common.guiframework;
+package kz.chesschicken.smartygui.commonloader.guiframework;
 
 /**
  * Copyright 2022 ChessChicken-KZ

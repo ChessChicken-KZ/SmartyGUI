@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.common.guiframework.widgets;
+package kz.chesschicken.smartygui.commonloader.guiframework.widgets;
 
 import org.lwjgl.opengl.GL11;
 
-import kz.chesschicken.smartygui.common.BinaryIntFunction;
-import kz.chesschicken.smartygui.common.RenderUtils;
-import kz.chesschicken.smartygui.common.guiframework.AbstractComponent;
-import kz.chesschicken.smartygui.common.guiframework.IInteractive;
-import kz.chesschicken.smartygui.common.guiframework.IUpdateOnResize;
-import kz.chesschicken.smartygui.common.guiframework.ValueXY;
+import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
+import kz.chesschicken.smartygui.commonloader.guiframework.AbstractComponent;
+import kz.chesschicken.smartygui.commonloader.guiframework.IInteractive;
+import kz.chesschicken.smartygui.commonloader.guiframework.IUpdateOnResize;
+import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public abstract class WidgetButton extends AbstractComponent implements IUpdateOnResize, IInteractive {
 	

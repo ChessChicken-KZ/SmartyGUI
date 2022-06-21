@@ -19,11 +19,11 @@ package kz.chesschicken.smartygui.client.gui;
 import java.util.function.Function;
 
 import kz.chesschicken.smartygui.common.SmartyGUI;
-import kz.chesschicken.smartygui.common.guiframework.BasePanel;
-import kz.chesschicken.smartygui.common.guiframework.ValueXY;
-import kz.chesschicken.smartygui.common.guiframework.widgets.WidgetButtonA;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
-import kz.chesschicken.smartygui.common.RenderUtils;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
+import kz.chesschicken.smartygui.commonloader.guiframework.BasePanel;
+import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
+import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
 
 public class GuiHome {
 	

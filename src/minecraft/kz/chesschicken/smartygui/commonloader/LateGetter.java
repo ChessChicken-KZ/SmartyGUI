@@ -1,4 +1,4 @@
-package kz.chesschicken.smartygui.common;
+package kz.chesschicken.smartygui.commonloader;
 
 import java.util.function.Supplier;
 

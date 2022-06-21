@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.common.guiframework;
+package kz.chesschicken.smartygui.commonloader.guiframework;
 
-import java.util.List;
-
-public interface IContainer {
-	void add(AbstractComponent i);
-	
-	List<AbstractComponent> getComponents();
-	
-	void onInteractWithComponents(int mX, int mY, int mEvent);
+public interface IKeyTyped {
+	void onKeyTyped(char c, int i);
 }

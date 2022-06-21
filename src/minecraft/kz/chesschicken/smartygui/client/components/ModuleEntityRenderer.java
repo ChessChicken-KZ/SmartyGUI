@@ -18,10 +18,10 @@ package kz.chesschicken.smartygui.client.components;
 import org.lwjgl.opengl.GL11;
 
 import kz.chesschicken.smartygui.common.ModuleRender;
-import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
 import kz.chesschicken.smartygui.common.plugins.event.IAdditionalEntityDescription;
+import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityList;

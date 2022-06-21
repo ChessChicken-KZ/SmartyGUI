@@ -18,7 +18,7 @@ package kz.chesschicken.smartygui.client.gui;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.client.gui.button.ButtonToggle;
 import kz.chesschicken.smartygui.common.SmartyGUI;
-import kz.chesschicken.smartygui.common.guiframework.GuiScreenExtended;
+import kz.chesschicken.smartygui.commonloader.guiframework.GuiScreenExtended;
 import net.minecraft.src.GuiButton;
 
 public class GuiModules extends BaseGUIStyle {
