@@ -129,7 +129,7 @@ public class GuiAppearanceConfig extends BaseGUIStyle {
 			instance.CONFIG.armorStatusHUDmode = a_ashmode;
 			instance.CONFIG.forceSave();
 			instance.updateASHUD();
-			mc.displayGuiScreen(new GuiScreenExtended(GuiHome.HOME_GUI.apply(instance)));
+			mc.displayGuiScreen(new GuiScreenExtended(LambdaPanels.HOME_GUI.apply(instance)));
 			break;
 		}
 		}

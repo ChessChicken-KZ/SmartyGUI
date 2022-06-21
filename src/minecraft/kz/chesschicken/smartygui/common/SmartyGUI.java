@@ -19,7 +19,7 @@ import kz.chesschicken.smartygui.client.components.ModuleArmorRender;
 import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.components.ModuleEntityRenderer;
 import kz.chesschicken.smartygui.client.components.ModuleToolTipRender;
-import kz.chesschicken.smartygui.client.gui.GuiHome;
+import kz.chesschicken.smartygui.client.gui.LambdaPanels;
 import kz.chesschicken.smartygui.common.plugins.SmartyGuiPlugins;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.IMod;
@@ -184,7 +184,7 @@ public class SmartyGUI implements IMod<SmartyGUI> {
     @Override
     public void keyPressed(int key) {
     	if(key == SmartyGUI.openConfigKeyBind.keyCode)
-    		GameUtils.open(new GuiScreenExtended<>(GuiHome.HOME_GUI.apply(this)));
+    		GameUtils.open(new GuiScreenExtended<>(LambdaPanels.HOME_GUI.apply(this)));
     	if(key == SmartyGUI.toggleGUI.keyCode)
     		keytoggle = !keytoggle;
     }

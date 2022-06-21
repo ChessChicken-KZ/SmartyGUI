@@ -15,7 +15,6 @@
  */
 package kz.chesschicken.smartygui.client.gui;
 
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 import kz.chesschicken.smartygui.common.SmartyGUI;
@@ -25,7 +24,7 @@ import kz.chesschicken.smartygui.commonloader.guiframework.*;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonBoolean;
 
-public class GuiHome {
+public class LambdaPanels {
 	
 	public static Function<SmartyGUI, BasePanel> MODULES_GUI = (instance) -> new BasePanel(gui -> {
 		gui.add(new WidgetButtonBoolean("Block/Entity Viewer HUD", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8),
@@ -41,7 +40,7 @@ public class GuiHome {
 			}
 			instance.CONFIG.forceSave();
 			instance.updateASHUD();
-			GameUtils.openPanel(GuiHome.HOME_GUI.apply(instance));
+			GameUtils.openPanel(LambdaPanels.HOME_GUI.apply(instance));
 		}));
 	}) {
 		@Override
