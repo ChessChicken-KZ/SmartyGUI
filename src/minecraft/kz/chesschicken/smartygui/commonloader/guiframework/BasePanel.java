@@ -19,12 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class BasePanel extends AbstractComponent implements IContainer, IUpdateOnResize {
+public abstract class BasePanel extends AbstractComponent implements IContainer, IUpdateOnResize {
 
 	public final List<AbstractComponent> components = new ArrayList<>();
 	
-	public BasePanel(Consumer<BasePanel> init) {
+	public BasePanel(Consumer<? super BasePanel> init) {
 		init.accept(this);
+	}
+	
+	public BasePanel() {
 	}
 	
 	@Override
@@ -62,7 +65,7 @@ public class BasePanel extends AbstractComponent implements IContainer, IUpdateO
 		if(mEvent != 0) //If not left click - cancel.
 			return;
 		for(AbstractComponent i : components) {
-			if(!(i instanceof IInteractive))
+			if(!(i instanceof IInteractive) || !i.isVisible())
 				continue;
 			if(((IInteractive)i).isHovered(mX, mY)) {
 				((IInteractive)i).onActivate();
