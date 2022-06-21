@@ -205,7 +205,7 @@ public class GuiColourConfig extends BaseGUIStyle {
 		}
 		}
 		
-		this.updateS = !(var1.id != 504);
+		this.updateS = var1.id == 504;
 	}
 
 	@Override

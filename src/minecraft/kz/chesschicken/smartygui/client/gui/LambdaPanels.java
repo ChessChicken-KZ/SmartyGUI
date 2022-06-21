@@ -16,7 +16,6 @@
 package kz.chesschicken.smartygui.client.gui;
 
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import kz.chesschicken.smartygui.common.SmartyGUI;
@@ -54,6 +53,7 @@ public class LambdaPanels {
 	};
 	
 	public static Function<SmartyGUI, BasePanel> MODULES_GUI = (instance) -> new BasePanel(gui -> {
+		gui.add(new WidgetButtonTransparent("Credits...", (w, h) -> new ValueXY(2, h - 10), () -> GameUtils.openPanel(CREDITS_GUI)));
 
 		gui.add(new WidgetButtonBoolean("Block/Entity Viewer HUD", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8),
 				instance.CONFIG.enableShowBlock, aBoolean -> instance.CONFIG.enableShowBlock = aBoolean));
@@ -77,7 +77,7 @@ public class LambdaPanels {
 	};
 
 	public static Function<SmartyGUI, BasePanel> HOME_GUI = (instance) -> new BasePanel(gui -> {
-		gui.add(new WidgetButtonTransparent("Credits...", (w, h) -> new ValueXY(2, h - 10), () -> GameUtils.openPanel(CREDITS_GUI.get())));
+		gui.add(new WidgetButtonTransparent("Credits...", (w, h) -> new ValueXY(2, h - 10), () -> GameUtils.openPanel(CREDITS_GUI)));
 
 		gui.add(new WidgetButtonA("Modules", 90, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 32), () -> GameUtils.openPanel(MODULES_GUI.apply(instance))));
 		gui.add(new WidgetButtonA("Location Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8), () -> GameUtils.open(new GuiDragInterface(instance))));
