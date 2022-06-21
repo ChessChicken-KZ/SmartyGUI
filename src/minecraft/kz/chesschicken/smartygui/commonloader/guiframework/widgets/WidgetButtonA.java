@@ -21,7 +21,7 @@ import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 public class WidgetButtonA extends WidgetButton {
 	
 	@FunctionalInterface
-	public static interface Action1 {
+	public interface Action1 {
 		void onActivate();
 	}
 	

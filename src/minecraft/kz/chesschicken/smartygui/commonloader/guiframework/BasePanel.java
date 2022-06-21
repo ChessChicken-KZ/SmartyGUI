@@ -1,5 +1,3 @@
-package kz.chesschicken.smartygui.commonloader.guiframework;
-
 /**
  * Copyright 2022 ChessChicken-KZ
  *
@@ -15,6 +13,8 @@ package kz.chesschicken.smartygui.commonloader.guiframework;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package kz.chesschicken.smartygui.commonloader.guiframework;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
