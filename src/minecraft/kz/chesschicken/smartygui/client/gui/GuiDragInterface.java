@@ -178,7 +178,7 @@ public class GuiDragInterface extends GuiScreen {
 		}
 
 		if(saveState)
-			this.mc.fontRenderer.drawStringWithShadow("Сhanges have been saved!", 5 + this.mc.fontRenderer.getStringWidth("Move, Drag & Setup"), 2, 0xFFD800);
+			this.mc.fontRenderer.drawStringWithShadow("Changes have been saved!", 5 + this.mc.fontRenderer.getStringWidth("Move, Drag & Setup"), 2, 0xFFD800);
 		
 		for(Object f : this.controlList)
 			((ButtonBase) f).drawTooltip(this.mc, var1, var2);
