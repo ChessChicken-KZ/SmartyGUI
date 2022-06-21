@@ -19,6 +19,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.src.ModLoader;
 import sun.misc.Unsafe;
 
 public class GameUtils {
@@ -51,7 +52,7 @@ public class GameUtils {
     
     public static Minecraft getMC() {
     	if(MC_INSTANCE == null) 
-    		MC_INSTANCE = (Minecraft) getStaticObject(Minecraft.class, null, IS_SANDBOX_MODE ? "theMinecraft" : "a");
+    		MC_INSTANCE = ModLoader.getMinecraftInstance();
     	return MC_INSTANCE;
     }
 
