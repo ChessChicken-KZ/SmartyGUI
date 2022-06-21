@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.commonloader.guiframework;
+package kz.chesschicken.smartygui.commonloader.guiframework.api;
 
 public interface IInteractive {
 	void onActivate();

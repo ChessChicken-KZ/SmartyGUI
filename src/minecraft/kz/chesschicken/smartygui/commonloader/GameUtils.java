@@ -19,7 +19,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
 import java.util.function.Supplier;
 
-import kz.chesschicken.smartygui.commonloader.guiframework.BasePanel;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
 import kz.chesschicken.smartygui.commonloader.guiframework.GuiScreenExtended;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.ModLoader;

@@ -19,9 +19,9 @@ import org.lwjgl.opengl.GL11;
 
 import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
 import kz.chesschicken.smartygui.commonloader.RenderUtils;
-import kz.chesschicken.smartygui.commonloader.guiframework.AbstractComponent;
-import kz.chesschicken.smartygui.commonloader.guiframework.IInteractive;
-import kz.chesschicken.smartygui.commonloader.guiframework.IUpdateOnResize;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.AbstractComponent;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IInteractive;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IUpdateOnResize;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public abstract class WidgetButton extends AbstractComponent implements IUpdateOnResize, IInteractive {

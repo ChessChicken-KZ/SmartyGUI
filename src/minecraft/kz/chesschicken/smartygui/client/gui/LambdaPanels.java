@@ -22,6 +22,8 @@ import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.*;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IRunQ1W9M;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonBoolean;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonTransparent;

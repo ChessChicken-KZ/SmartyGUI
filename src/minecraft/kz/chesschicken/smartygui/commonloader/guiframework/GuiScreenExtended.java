@@ -15,6 +15,9 @@
  */
 package kz.chesschicken.smartygui.commonloader.guiframework;
 
+import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IKeyTyped;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IPauseGame;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiParticle;

@@ -16,7 +16,7 @@
 package kz.chesschicken.smartygui.commonloader.guiframework.widgets;
 
 import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
-import kz.chesschicken.smartygui.commonloader.guiframework.IRunQ1W9M;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IRunQ1W9M;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 import java.util.function.Consumer;

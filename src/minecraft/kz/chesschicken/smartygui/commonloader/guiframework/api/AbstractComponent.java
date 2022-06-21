@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.commonloader.guiframework;
+package kz.chesschicken.smartygui.commonloader.guiframework.api;
+
+import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public abstract class AbstractComponent {
 	

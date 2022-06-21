@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kz.chesschicken.smartygui.commonloader.guiframework;
+package kz.chesschicken.smartygui.commonloader.guiframework.api;
 
-import java.util.List;
-
-public interface IContainer {
-	void add(AbstractComponent i);
-	
-	List<AbstractComponent> getComponents();
-	
-	void onInteractWithComponents(int mX, int mY, int mEvent);
+/**
+ * A special interface class to run specific code after specific call execution.
+ * <br>
+ * Should be used as a kind of small bridge and nothing else.
+ */
+public interface IRunQ1W9M {
+    void runQ1W9M();
 }
