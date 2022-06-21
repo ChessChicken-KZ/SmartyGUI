@@ -33,10 +33,6 @@ public class RenderUtils {
 	  */
 	public static LateGetter<Minecraft> gameInstance = new LateGetter<>(() -> ModLoader.getMinecraftInstance());
 	
-	public static int texture(String s) {
-		return gameInstance.get().renderEngine.getTexture(s);
-	}
-	
 	public static void renderString(int x1, int y1, int color, String text) {
 		gameInstance.get().fontRenderer.drawString(text, x1, y1, color);
 	}
@@ -53,6 +49,14 @@ public class RenderUtils {
 	@SuppressWarnings("unchecked")
 	public static <T> T getRawFontRenderer() {
 		return (T) gameInstance.get().fontRenderer;
+	}
+	
+	public static int getTexture(String s) {
+		return gameInstance.get().renderEngine.getTexture(s);
+	}
+	
+	public static void bindTexture(String s) {
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, getTexture(s));
 	}
 	
 	public static int[] renderTexture(int x1, int y1, int u, int v, int sizeX, int sizeY) {
