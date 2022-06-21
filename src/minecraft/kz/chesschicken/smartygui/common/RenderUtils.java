@@ -17,14 +17,36 @@ package kz.chesschicken.smartygui.common;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderEngine;
 import net.minecraft.src.RenderHelper;
 import net.minecraft.src.RenderItem;
 import net.minecraft.src.Tessellator;
 
 public class RenderUtils {
+	public static LateGetter<Minecraft> gameInstance = new LateGetter<>(() -> ModLoader.getMinecraftInstance());
+	
+	public static int texture(String s) {
+		return ModLoader.getMinecraftInstance().renderEngine.getTexture(s);
+	}
+	
+	public static int[] renderTexture(int x1, int y1, int u, int v, int sizeX, int sizeY) {
+		return renderTexture(x1, y1, u, v, sizeX, sizeY, 0.0F);
+	}
+	
+	public static int[] renderTexture(int x1, int y1, int u, int v, int sizeX, int sizeY, float zLevel) {
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV((double)(x1 + 0), (double)(y1 + sizeY), (double)zLevel, (double)((float)(u + 0) * 0.00390625F), (double)((float)(v + sizeY) * 0.00390625F));
+        tessellator.addVertexWithUV((double)(x1 + sizeX), (double)(y1 + sizeY), (double)zLevel, (double)((float)(u + sizeX) * 0.00390625F), (double)((float)(v + sizeY) * 0.00390625F));
+        tessellator.addVertexWithUV((double)(x1 + sizeX), (double)(y1 + 0), (double)zLevel, (double)((float)(u + sizeX) * 0.00390625F), (double)((float)(v + 0) * 0.00390625F));
+        tessellator.addVertexWithUV((double)(x1 + 0), (double)(y1 + 0), (double)zLevel, (double)((float)(u + 0) * 0.00390625F), (double)((float)(v + 0) * 0.00390625F));
+        tessellator.draw();
+        return new int[] {x1, y1};
+	}
 	
 	public static int[] gradientRenderByAnchor(int x1, int y1, int width, int height, int startColour, int endColour, int anchor, boolean transparency) {
 		if(transparency)
