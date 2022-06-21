@@ -1,9 +1,8 @@
 package kz.chesschicken.smartygui.common.guiframework.widgets;
 
-import java.util.function.BiConsumer;
-
 import org.lwjgl.opengl.GL11;
 
+import kz.chesschicken.smartygui.common.BinaryIntConsumer;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.guiframework.IComponent;
 import kz.chesschicken.smartygui.common.guiframework.IInteractive;
@@ -13,9 +12,9 @@ public abstract class WidgetButton extends IComponent implements IUpdateOnResize
 	
 	protected String text;
 	protected boolean active;
-	protected final BiConsumer<Integer, Integer> resizeFunc;
+	protected final BinaryIntConsumer resizeFunc;
 	
-	public WidgetButton(String text, BiConsumer<Integer, Integer> f) {
+	public WidgetButton(String text, BinaryIntConsumer f) {
 		this.text = text;
 		this.resizeFunc = f;
 	}

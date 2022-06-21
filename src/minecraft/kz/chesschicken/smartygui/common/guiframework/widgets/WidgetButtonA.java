@@ -1,6 +1,6 @@
 package kz.chesschicken.smartygui.common.guiframework.widgets;
 
-import java.util.function.BiConsumer;
+import kz.chesschicken.smartygui.common.BinaryIntConsumer;
 
 public class WidgetButtonA extends WidgetButton {
 	public static interface Action1 {
@@ -9,7 +9,7 @@ public class WidgetButtonA extends WidgetButton {
 	
 	protected final Action1 action;
 	
-	public WidgetButtonA(String text, BiConsumer<Integer, Integer> f, Action1 a) {
+	public WidgetButtonA(String text, BinaryIntConsumer f, Action1 a) {
 		super(text, f);
 		this.action = a;
 	}
