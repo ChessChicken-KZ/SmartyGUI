@@ -20,11 +20,11 @@ import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiParticle;
 import net.minecraft.src.GuiScreen;
 
-public class GuiScreenExtended extends GuiScreen {
+public class GuiScreenExtended<T extends BasePanel> extends GuiScreen {
 	
-	public final BasePanel mainPanel;
+	public final T mainPanel;
 	
-	public GuiScreenExtended(BasePanel panel) {
+	public GuiScreenExtended(T panel) {
 		this.mainPanel = panel;
 	}
 	
@@ -70,23 +70,19 @@ public class GuiScreenExtended extends GuiScreen {
         this.height = h;
         //Resize function.
         mainPanel.updateOnResize(this.width, this.height);
+        this.controlList.clear();
+        this.initGui();
 	}
 
 	@Override
 	public void initGui() {
-		// TODO Auto-generated method stub
-		super.initGui();
 	}
 
 	@Override
 	public void updateScreen() {
-		// TODO Auto-generated method stub
-		super.updateScreen();
 	}
 
 	@Override
 	public void onGuiClosed() {
-		// TODO Auto-generated method stub
-		super.onGuiClosed();
 	}
 }
