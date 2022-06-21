@@ -20,6 +20,7 @@ import java.util.function.BiConsumer;
 import org.lwjgl.opengl.GL11;
 
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
+import kz.chesschicken.smartygui.common.guiframework.IUpdateOnResize;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiButton;

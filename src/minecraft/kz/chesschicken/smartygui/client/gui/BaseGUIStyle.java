@@ -16,8 +16,8 @@
 package kz.chesschicken.smartygui.client.gui;
 
 import kz.chesschicken.smartygui.client.gui.button.ButtonTransparent;
-import kz.chesschicken.smartygui.client.gui.button.IUpdateOnResize;
 import kz.chesschicken.smartygui.common.SmartyGUI;
+import kz.chesschicken.smartygui.common.guiframework.IUpdateOnResize;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiParticle;
