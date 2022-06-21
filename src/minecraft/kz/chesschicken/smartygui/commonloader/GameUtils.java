@@ -45,6 +45,10 @@ public class GameUtils {
         }
     }
     
+    public static <T extends net.minecraft.src.GuiScreen> void open(T a) {
+    	getMC().displayGuiScreen(a);
+    }
+    
     public static Minecraft getMC() {
     	if(MC_INSTANCE == null) 
     		MC_INSTANCE = (Minecraft) getStaticObject(Minecraft.class, null, IS_SANDBOX_MODE ? "theMinecraft" : "a");
