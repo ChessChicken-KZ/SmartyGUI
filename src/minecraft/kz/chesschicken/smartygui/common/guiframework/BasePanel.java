@@ -17,10 +17,15 @@ package kz.chesschicken.smartygui.common.guiframework;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class BasePanel extends AbstractComponent implements IContainer, IUpdateOnResize {
 
 	public final List<AbstractComponent> components = new ArrayList<>();
+	
+	public BasePanel(Consumer<BasePanel> init) {
+		init.accept(this);
+	}
 	
 	@Override
 	public void updateOnResize(int newWidth, int newHeight) {

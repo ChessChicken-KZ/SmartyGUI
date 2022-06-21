@@ -30,16 +30,13 @@ public abstract class AbstractComponent {
 		return this.x;
 	}
 	
-	public void setX(int i) {
-		this.x = i;
-	}
-	
 	public int getY() {
 		return this.x;
 	}
-	
-	public void setY(int i) {
-		this.y = i;
+
+	public void setXY(ValueXY n) {
+		this.x = n.a;
+		this.y = n.b;
 	}
 	
 	public int getWidth() {

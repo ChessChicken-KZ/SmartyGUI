@@ -15,7 +15,8 @@
  */
 package kz.chesschicken.smartygui.common.guiframework.widgets;
 
-import kz.chesschicken.smartygui.common.BinaryIntConsumer;
+import kz.chesschicken.smartygui.common.BinaryIntFunction;
+import kz.chesschicken.smartygui.common.guiframework.ValueXY;
 
 public class WidgetButtonA extends WidgetButton {
 	
@@ -26,7 +27,17 @@ public class WidgetButtonA extends WidgetButton {
 	
 	protected final Action1 action;
 	
-	public WidgetButtonA(String text, BinaryIntConsumer f, Action1 a) {
+	public WidgetButtonA(String text, BinaryIntFunction<ValueXY> f, Action1 a) {
+		super(text, f);
+		this.action = a;
+	}
+	
+	public WidgetButtonA(String text, int w, int h, BinaryIntFunction<ValueXY> f, Action1 a) {
+		super(text, w, h, f);
+		this.action = a;
+	}
+	
+	public WidgetButtonA(int w, int h, String text, BinaryIntFunction<ValueXY> f, Action1 a) {
 		super(text, f);
 		this.action = a;
 	}

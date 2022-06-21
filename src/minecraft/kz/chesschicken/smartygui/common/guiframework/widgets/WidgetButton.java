@@ -17,21 +17,28 @@ package kz.chesschicken.smartygui.common.guiframework.widgets;
 
 import org.lwjgl.opengl.GL11;
 
-import kz.chesschicken.smartygui.common.BinaryIntConsumer;
+import kz.chesschicken.smartygui.common.BinaryIntFunction;
 import kz.chesschicken.smartygui.common.RenderUtils;
 import kz.chesschicken.smartygui.common.guiframework.AbstractComponent;
 import kz.chesschicken.smartygui.common.guiframework.IInteractive;
 import kz.chesschicken.smartygui.common.guiframework.IUpdateOnResize;
+import kz.chesschicken.smartygui.common.guiframework.ValueXY;
 
 public abstract class WidgetButton extends AbstractComponent implements IUpdateOnResize, IInteractive {
 	
 	protected String text;
-	protected boolean active;
-	protected final BinaryIntConsumer resizeFunc;
+	protected boolean active = true;
+	protected final BinaryIntFunction<ValueXY> resizeFunc;
 	
-	public WidgetButton(String text, BinaryIntConsumer f) {
+	public WidgetButton(String text, BinaryIntFunction<ValueXY> f) {
+		this(text, 200, 20, f);
+	}
+	
+	public WidgetButton(String text, int w, int h, BinaryIntFunction<ValueXY> f) {
 		this.text = text;
 		this.resizeFunc = f;
+		this.width = w;
+		this.height = h;
 	}
 
 	@Override
@@ -47,7 +54,7 @@ public abstract class WidgetButton extends AbstractComponent implements IUpdateO
 
 	@Override
 	public void updateOnResize(int newWidth, int newHeight) {
-		this.resizeFunc.accept(newWidth, newHeight);
+		this.setXY(this.resizeFunc.apply(newWidth, newHeight));
 	}
 
 	@Override
