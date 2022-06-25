@@ -58,7 +58,7 @@ public class GameUtils {
     }
     
     public static <T extends BasePanel> void openPanel(T t) {
-    	getMC().displayGuiScreen(new GuiScreenExtended<T>(t));
+    	getMC().displayGuiScreen(new GuiScreenExtended<>(t));
     }
 
     public static <T extends BasePanel> void openPanel(Supplier<T> t) {

@@ -19,13 +19,12 @@ import kz.chesschicken.smartygui.client.components.ModuleArmorRender;
 import kz.chesschicken.smartygui.client.components.ModuleBlockRender;
 import kz.chesschicken.smartygui.client.components.ModuleEntityRenderer;
 import kz.chesschicken.smartygui.client.components.ModuleToolTipRender;
-import kz.chesschicken.smartygui.client.gui.LambdaPanels;
+import kz.chesschicken.smartygui.client.gui.panel.PanelHome;
 import kz.chesschicken.smartygui.common.plugins.SmartyGuiPlugins;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.IMod;
 import kz.chesschicken.smartygui.commonloader.ModDescription;
 import kz.chesschicken.smartygui.commonloader.SystemUtils;
-import kz.chesschicken.smartygui.commonloader.guiframework.GuiScreenExtended;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EnumMovingObjectType;
 import net.minecraft.src.FontRenderer;
@@ -184,7 +183,7 @@ public class SmartyGUI implements IMod<SmartyGUI> {
     @Override
     public void keyPressed(int key) {
     	if(key == SmartyGUI.openConfigKeyBind.keyCode)
-    		GameUtils.open(new GuiScreenExtended<>(LambdaPanels.HOME_GUI.apply(this)));
+    		GameUtils.openPanel(new PanelHome(this));
     	if(key == SmartyGUI.toggleGUI.keyCode)
     		keytoggle = !keytoggle;
     }

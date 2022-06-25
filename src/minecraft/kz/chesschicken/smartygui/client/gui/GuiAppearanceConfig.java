@@ -18,11 +18,11 @@ package kz.chesschicken.smartygui.client.gui;
 import kz.chesschicken.smartygui.client.gui.button.ButtonBase;
 import kz.chesschicken.smartygui.client.gui.button.ButtonEnum;
 import kz.chesschicken.smartygui.client.gui.button.ButtonToggle;
+import kz.chesschicken.smartygui.client.gui.panel.PanelHome;
 import kz.chesschicken.smartygui.common.EnumTheme;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
-import kz.chesschicken.smartygui.commonloader.guiframework.GuiScreenExtended;
 import net.minecraft.src.GuiButton;
 
 public class GuiAppearanceConfig extends BaseGUIStyle {
@@ -130,7 +130,7 @@ public class GuiAppearanceConfig extends BaseGUIStyle {
 			instance.CONFIG.armorStatusHUDmode = a_ashmode;
 			instance.CONFIG.forceSave();
 			instance.updateASHUD();
-			GameUtils.openPanel(LambdaPanels.HOME_GUI.apply(instance));
+			GameUtils.openPanel(new PanelHome(instance));
 			break;
 		}
 		}
