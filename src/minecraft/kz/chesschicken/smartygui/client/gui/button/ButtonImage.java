@@ -15,11 +15,10 @@
  */
 package kz.chesschicken.smartygui.client.gui.button;
 
-import org.lwjgl.opengl.GL11;
-
 import kz.chesschicken.smartygui.common.EnumTheme;
 import kz.chesschicken.smartygui.common.SmartyGuiConfig;
 import net.minecraft.client.Minecraft;
+import org.lwjgl.opengl.GL11;
 
 public class ButtonImage extends ButtonBase {
 	
