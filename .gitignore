@@ -1,4 +1,18 @@
-# MCP's not to be published folders.
+# Intellij IDEA's standard project folder
+
+smartygui_modloader/.idea/
+smartygui_fabric/.idea/
+
+# Fabric-loom
+
+smartygui_fabric/.gradle/
+smartygui_fabric/build/
+smartygui_fabric/run/
+
+# MCP
+
+smartygui_modloader/out/
+
 smartygui_modloader/bin/
 smartygui_modloader/eclipse/
 smartygui_modloader/conf/
@@ -11,11 +25,6 @@ smartygui_modloader/runtime/
 smartygui_modloader/src_utc/
 smartygui_modloader/temp/
 
-# Intellij IDEA's project folder
-.idea/
-out/
-
-# .bat/sh files.
 smartygui_modloader/cleanup.bat
 smartygui_modloader/decompile.bat
 smartygui_modloader/recompile.bat
@@ -26,8 +35,6 @@ smartygui_modloader/startclient.bat
 smartygui_modloader/startserver.bat
 smartygui_modloader/updatemcp.bat
 smartygui_modloader/updatemd5.bat
-
-# Minecraft unnecessary src folders.
 
 smartygui_modloader/src/*
 !smartygui_modloader/src/minecraft/
