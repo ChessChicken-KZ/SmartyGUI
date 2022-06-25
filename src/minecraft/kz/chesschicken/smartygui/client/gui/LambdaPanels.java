@@ -56,7 +56,9 @@ public class LambdaPanels {
 	};
 
 	public static Function<SmartyGUI, BasePanel> COLOR_CONFIG_GUI = (instance) -> new BasePanel(gui -> {
-		gui.add(new BaseWindow(100, 50, 10, 10));
+		gui.add(new BaseWindow(100, 50, 10, 10, window -> {
+			window.add(new WidgetButtonA("Shu ulatoe", 40, 20, (w, h) -> new ValueXY(5 , 5), () -> System.out.println("Daa....")));
+		}));
 	}) {
 		@Override
 		public void render(int q, int w, float e) {

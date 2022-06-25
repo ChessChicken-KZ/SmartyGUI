@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class BaseWindow extends AbstractComponent implements IContainer, IUpdateOnResize, ITickUpdate, IFocus, IControllerInput {
 
@@ -45,6 +46,11 @@ public class BaseWindow extends AbstractComponent implements IContainer, IUpdate
         this.render = WindowTheme.getWindowsProps(getContX(), getContY(), width, height, isFocused);
     }
 
+    public BaseWindow(int w, int h, int x, int y, Consumer<? super BaseWindow> a) {
+        this(w, h, x, y);
+        a.accept(this);
+    }
+
     @Override
     public void render(int a, int b, float d) {
         if(isDragging()) {
@@ -76,6 +82,7 @@ public class BaseWindow extends AbstractComponent implements IContainer, IUpdate
 
     @Override
     public void add(AbstractComponent i) {
+        i.updateContXY(x, y);
         this.components.add(i);
     }
 
