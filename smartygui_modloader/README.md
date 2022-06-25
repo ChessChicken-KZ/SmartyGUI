@@ -7,12 +7,6 @@ Currently adds:
 - Armor Status HUD.
 - Tooltip.
 
-## Installation (Players/Users)
-
-Requires ModLoader, does not change any base classes. Put `SmartyGUI-ML-X.X.X.jar` inside `mods` folder.
-
-Built packages can be accessed here, **be sure to choose ML-X.X version**: [Release tags list](https://github.com/ChessChicken-KZ/SmartyGUI/tags).
-
 ## Build (Developers/Code explorers)
 
 1. Install MCP v4.3 ([1.7.3-LTS](https://github.com/ModificationStation/1.7.3-LTS) or [RetroMCP](https://github.com/MCPHackers/RetroMCP-Java) is recommended).
