@@ -24,7 +24,7 @@ import kz.chesschicken.smartygui.commonloader.guiframework.api.AbstractComponent
 import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
 import kz.chesschicken.smartygui.commonloader.guiframework.api.IRunQ1W9M;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButton;
-import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
+import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonAction;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetTextFieldNum;
 import org.lwjgl.input.Keyboard;
 
@@ -114,16 +114,16 @@ public class PanelColorConfig extends BasePanel implements IRunQ1W9M {
 
         setGuiColours();
 
-        add(new WidgetButtonA("1st Colour", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8), () -> buttonChooseType((byte) 0)));
-        add(new WidgetButtonA("2nd Colour", 59, 20, (w, h) -> new ValueXY(w / 2 - 30, h / 4 + 8), () -> buttonChooseType((byte) 1)));
-        add(new WidgetButtonA("Text", 59, 20, (w, h) -> new ValueXY(w / 2 + 31, h / 4 + 8), () -> buttonChooseType((byte) 2)));
+        add(new WidgetButtonAction("1st Colour", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8), () -> buttonChooseType((byte) 0)));
+        add(new WidgetButtonAction("2nd Colour", 59, 20, (w, h) -> new ValueXY(w / 2 - 30, h / 4 + 8), () -> buttonChooseType((byte) 1)));
+        add(new WidgetButtonAction("Text", 59, 20, (w, h) -> new ValueXY(w / 2 + 31, h / 4 + 8), () -> buttonChooseType((byte) 2)));
 
-        add(new WidgetButtonA("Save", 59, 20, (w, h) -> new ValueXY(w / 2 - 30, h / 4 + 8 - 22), () -> {
+        add(new WidgetButtonAction("Save", 59, 20, (w, h) -> new ValueXY(w / 2 - 30, h / 4 + 8 - 22), () -> {
             this.instance.CONFIG.forceSave();
             updateS = true;
         }));
-        add(new WidgetButtonA("Revert", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8 - 22), this::buttonRevert));
-        add(new WidgetButtonA("Reload", 59, 20, (w, h) -> new ValueXY(w / 2 + 31, h / 4 + 8 - 22), this::setGuiColours));
+        add(new WidgetButtonAction("Revert", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8 - 22), this::buttonRevert));
+        add(new WidgetButtonAction("Reload", 59, 20, (w, h) -> new ValueXY(w / 2 + 31, h / 4 + 8 - 22), this::setGuiColours));
 
         for (byte b = 0; b < 4; b++) {
             final byte finalB = b;
@@ -131,9 +131,9 @@ public class PanelColorConfig extends BasePanel implements IRunQ1W9M {
             textFields1[b].setMaxLength(3);
             textFields1[b].isEnabled = false;
             /* 510 511 512 513 */
-            add(buttonsMove[b] = new WidgetButtonA("-", 20, 20, (w, h) -> new ValueXY(w / 2 + 27, h / 4 + 32 + (24 * finalB)), () -> buttonPlusMinus(finalB)));
+            add(buttonsMove[b] = new WidgetButtonAction("-", 20, 20, (w, h) -> new ValueXY(w / 2 + 27, h / 4 + 32 + (24 * finalB)), () -> buttonPlusMinus(finalB)));
             /* 514 515 516 517 */
-            add(buttonsMove[b + 4] = new WidgetButtonA("+", 20, 20, (w, h) -> new ValueXY(this.width / 2 - 47, this.height / 4 + 32 + (24 * finalB)), () -> buttonPlusMinus(finalB + 4)));
+            add(buttonsMove[b + 4] = new WidgetButtonAction("+", 20, 20, (w, h) -> new ValueXY(this.width / 2 - 47, this.height / 4 + 32 + (24 * finalB)), () -> buttonPlusMinus(finalB + 4)));
         }
 
         for (WidgetButton b : buttonsMove)

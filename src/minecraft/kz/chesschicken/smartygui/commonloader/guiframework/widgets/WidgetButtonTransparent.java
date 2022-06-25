@@ -19,9 +19,9 @@ import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
 import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
-public class WidgetButtonTransparent extends WidgetButtonA {
+public class WidgetButtonTransparent extends WidgetButtonAction {
 
-    public WidgetButtonTransparent(String text, BinaryIntFunction<ValueXY> f, Action1 a) {
+    public WidgetButtonTransparent(String text, BinaryIntFunction<ValueXY> f, IAction a) {
         super(text, RenderUtils.getStringSize(text), 8, f, a);
     }
 

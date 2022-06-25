@@ -21,7 +21,7 @@ import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
 import kz.chesschicken.smartygui.commonloader.guiframework.api.IRunQ1W9M;
-import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
+import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonAction;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonBoolean;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonTransparent;
 
@@ -38,7 +38,7 @@ public class PanelModules extends BasePanel {
                 instance.CONFIG.enableArmorStatusHUD, aBoolean -> instance.CONFIG.enableArmorStatusHUD = aBoolean));
         add(new WidgetButtonBoolean("In-Game ToolTip", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 56),
                 instance.CONFIG.enableInGameToolTip, aBoolean -> instance.CONFIG.enableInGameToolTip = aBoolean));
-        add(new WidgetButtonA("Save and Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), () -> {
+        add(new WidgetButtonAction("Save and Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), () -> {
             getComponents().stream().filter(c -> c instanceof IRunQ1W9M).forEach(a -> ((IRunQ1W9M) a).runQ1W9M());
             instance.CONFIG.forceSave();
             instance.updateASHUD();

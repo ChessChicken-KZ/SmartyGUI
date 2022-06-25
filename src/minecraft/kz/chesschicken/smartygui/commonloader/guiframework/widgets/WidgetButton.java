@@ -40,6 +40,10 @@ public abstract class WidgetButton extends AbstractComponent implements IUpdateO
 		this.height = h;
 	}
 
+	public void setText(String s) {
+		this.text = s;
+	}
+
 	@Override
 	public void render(int var2, int var3, float d) {
         RenderUtils.bindTexture("/gui/gui.png");

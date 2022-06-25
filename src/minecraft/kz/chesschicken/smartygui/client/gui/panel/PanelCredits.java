@@ -19,7 +19,7 @@ import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
-import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
+import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonAction;
 import org.lwjgl.Sys;
 
 public class PanelCredits extends BasePanel {
@@ -30,10 +30,10 @@ public class PanelCredits extends BasePanel {
 
     public PanelCredits() {
         super();
-        add(new WidgetButtonA("Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), GameUtils::closeGUI));
-        add(new WidgetButtonA("GitHub", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 126), () -> Sys.openURL("https://github.com/ChessChicken-KZ/SmartyGUI")));
-        add(new WidgetButtonA("Twitter", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 126), () -> Sys.openURL("https://twitter.com/ChessChicken_KZ")));
-        add(new WidgetButtonA("A Button :)", 59, 20, (w, h) -> new ValueXY(w / 2 + 32, h / 4 + 126), () -> { /* TODO: Add something here... */ }));
+        add(new WidgetButtonAction("Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), GameUtils::closeGUI));
+        add(new WidgetButtonAction("GitHub", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 126), () -> Sys.openURL("https://github.com/ChessChicken-KZ/SmartyGUI")));
+        add(new WidgetButtonAction("Twitter", 59, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 126), () -> Sys.openURL("https://twitter.com/ChessChicken_KZ")));
+        add(new WidgetButtonAction("A Button :)", 59, 20, (w, h) -> new ValueXY(w / 2 + 32, h / 4 + 126), () -> { /* TODO: Add something here... */ }));
     }
 
     @Override

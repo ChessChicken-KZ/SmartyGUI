@@ -19,26 +19,26 @@ import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
-public class WidgetButtonA extends WidgetButton {
+public class WidgetButtonAction extends WidgetButton {
 
 	@FunctionalInterface
-	public interface Action1 {
+	public interface IAction {
 		void onActivate();
 	}
 	
-	protected final Action1 action;
+	protected final IAction action;
 	
-	public WidgetButtonA(String text, BinaryIntFunction<ValueXY> f, Action1 a) {
+	public WidgetButtonAction(String text, BinaryIntFunction<ValueXY> f, IAction a) {
 		super(text, f);
 		this.action = a;
 	}
 	
-	public WidgetButtonA(String text, int w, int h, BinaryIntFunction<ValueXY> f, Action1 a) {
+	public WidgetButtonAction(String text, int w, int h, BinaryIntFunction<ValueXY> f, IAction a) {
 		super(text, w, h, f);
 		this.action = a;
 	}
 	
-	public WidgetButtonA(int w, int h, String text, BinaryIntFunction<ValueXY> f, Action1 a) {
+	public WidgetButtonAction(int w, int h, String text, BinaryIntFunction<ValueXY> f, IAction a) {
 		super(text, f);
 		this.action = a;
 	}
@@ -50,7 +50,7 @@ public class WidgetButtonA extends WidgetButton {
 
 	@Override
 	public void clickMouse(int mX, int mY, int mEvent) {
-		if(isHovered(mX, mY) && mEvent == 0 && this.action != null) {
+		if(isHovered(mX, mY) && mEvent == 0 && this.action != null && this.active) {
 			GameUtils.playSoundFX("random.click", 1.0F, 1.0F);
 			this.action.onActivate();
 		}

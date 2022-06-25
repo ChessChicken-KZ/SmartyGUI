@@ -15,14 +15,13 @@
  */
 package kz.chesschicken.smartygui.client.gui.panel;
 
-import kz.chesschicken.smartygui.client.gui.GuiAppearanceConfig;
 import kz.chesschicken.smartygui.client.gui.GuiDragInterface;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
-import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
+import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonAction;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonTransparent;
 
 public class PanelHome extends BasePanel {
@@ -31,11 +30,11 @@ public class PanelHome extends BasePanel {
     public PanelHome(SmartyGUI smartyGUI) {
         this.instance = smartyGUI;
         add(new WidgetButtonTransparent("Credits...", (w, h) -> new ValueXY(2, h - 10), () -> GameUtils.openPanel(new PanelCredits())));
-        add(new WidgetButtonA("Modules", 90, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 32), () -> GameUtils.openPanel(new PanelModules(instance))));
-        add(new WidgetButtonA("Location Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8), () -> GameUtils.open(new GuiDragInterface(instance))));
-        add(new WidgetButtonA("Appearance", 90, 20, (w, h) -> new ValueXY(w / 2 + 1, h / 4 + 32), () -> GameUtils.open(new GuiAppearanceConfig(instance))));
-        add(new WidgetButtonA("Colour Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 56), () -> GameUtils.openPanel(new PanelColorConfig(instance))));
-        add(new WidgetButtonA("Save and Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), GameUtils::closeGUI));
+        add(new WidgetButtonAction("Modules", 90, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 32), () -> GameUtils.openPanel(new PanelModules(instance))));
+        add(new WidgetButtonAction("Location Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8), () -> GameUtils.open(new GuiDragInterface(instance))));
+        add(new WidgetButtonAction("Appearance", 90, 20, (w, h) -> new ValueXY(w / 2 + 1, h / 4 + 32), () -> GameUtils.openPanel(new PanelAppearance(instance))));
+        add(new WidgetButtonAction("Colour Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 56), () -> GameUtils.openPanel(new PanelColorConfig(instance))));
+        add(new WidgetButtonAction("Save and Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), GameUtils::closeGUI));
     }
 
     @Override
