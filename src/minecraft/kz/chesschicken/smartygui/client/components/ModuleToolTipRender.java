@@ -15,15 +15,14 @@
  */
 package kz.chesschicken.smartygui.client.components;
 
+import kz.chesschicken.smartygui.common.ModuleRender;
+import kz.chesschicken.smartygui.common.SmartyGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.StringTranslate;
 import org.lwjgl.opengl.GL11;
-
-import kz.chesschicken.smartygui.common.ModuleRender;
-import kz.chesschicken.smartygui.common.SmartyGUI;
 
 public class ModuleToolTipRender extends ModuleRender {
     private short tickRender;

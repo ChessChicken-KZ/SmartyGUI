@@ -15,8 +15,6 @@
  */
 package kz.chesschicken.smartygui.client.components;
 
-import java.util.Random;
-
 import kz.chesschicken.smartygui.common.ModuleRender;
 import kz.chesschicken.smartygui.common.SmartyGUI;
 import kz.chesschicken.smartygui.common.plugins.event.EnumEventTypes;
@@ -28,6 +26,8 @@ import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.RenderItem;
 import net.minecraft.src.StringTranslate;
+
+import java.util.Random;
 
 public class ModuleBlockRender extends ModuleRender {
 	

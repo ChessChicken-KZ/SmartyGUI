@@ -26,12 +26,7 @@ import kz.chesschicken.smartygui.commonloader.IMod;
 import kz.chesschicken.smartygui.commonloader.ModDescription;
 import kz.chesschicken.smartygui.commonloader.SystemUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.EnumMovingObjectType;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.KeyBinding;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.ScaledResolution;
-
+import net.minecraft.src.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 

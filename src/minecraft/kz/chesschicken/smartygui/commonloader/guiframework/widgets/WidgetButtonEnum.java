@@ -5,7 +5,6 @@ import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class WidgetButtonEnum<T extends Enum<T>> extends WidgetButton {
 

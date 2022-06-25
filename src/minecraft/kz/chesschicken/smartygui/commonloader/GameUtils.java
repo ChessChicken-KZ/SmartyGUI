@@ -15,15 +15,15 @@
  */
 package kz.chesschicken.smartygui.commonloader;
 
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Field;
-import java.util.function.Supplier;
-
-import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
 import kz.chesschicken.smartygui.commonloader.guiframework.GuiScreenExtended;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.ModLoader;
 import sun.misc.Unsafe;
+
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Field;
+import java.util.function.Supplier;
 
 public class GameUtils {
 
