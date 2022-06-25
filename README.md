@@ -26,16 +26,13 @@ If you are unsure with choosing jar file, it is highly recommended downloading `
 
 Requires ModLoader, does not change any base classes. Put `SmartyGUI-ML-X.X.X.jar` inside `mods` folder.
 
+Built packages can be accessed here, **be sure to choose ML-X.X version**: [Release tags list](https://github.com/ChessChicken-KZ/SmartyGUI/tags).
 
 ## Build (Developers)
 
-### Fabric Version
+### [Fabric Version](https://github.com/ChessChicken-KZ/SmartyGUI/blob/master/smartygui_fabric/README.md)
 
-For setup/build instructions, please refer to [stationapi-example-mod (dev/12) page](https://github.com/calmilamsy/stationapi-example-mod/tree/dev/12).
-
-### ModLoader Version
-
-Please refer to [ModLoader branch](https://github.com/ChessChicken-KZ/SmartyGUI/tree/modloader) for more information and code.
+### [ModLoader Version](https://github.com/ChessChicken-KZ/SmartyGUI/blob/master/smartygui_modloader/README.md)
 
 ## License
 
