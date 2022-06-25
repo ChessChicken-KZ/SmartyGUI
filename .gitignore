@@ -4,4 +4,7 @@
 
 .idea
 
-run/
+smartygui_fabric/run/
+smartygui_fabric/build/
+smartygui_fabric/.idea/
+smartygui_fabric/.gradle/
