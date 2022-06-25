@@ -16,7 +16,6 @@
 package kz.chesschicken.smartygui.commonloader.guiframework.widgets;
 
 import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
-import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.RenderUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 import kz.chesschicken.smartygui.commonloader.guiframework.api.AbstractComponent;
@@ -27,7 +26,7 @@ import net.minecraft.src.ChatAllowedCharacters;
 import net.minecraft.src.GuiScreen;
 
 public class WidgetTextField extends AbstractComponent implements ITickUpdate, IControllerInput, IUpdateOnResize {
-    protected boolean isEnabled = true;
+    public boolean isEnabled = true;
     protected boolean isFocused = false;
     protected int maxLength;
 
@@ -51,6 +50,10 @@ public class WidgetTextField extends AbstractComponent implements ITickUpdate, I
         RenderUtils.gradientRenderRGB(getContX() - 1, getContY() - 1, getContX() + this.width + 1, getContY() + this.height + 1, -6250336);
         RenderUtils.gradientRenderRGB(getContX(), getContY(), getContX() + this.width, getContY() + this.height, -16777216);
         RenderUtils.renderString(getContX() + 4, getContY() + (this.height - 8) / 2, this.isEnabled ? 14737632 : 7368816, this.isEnabled ? (this.text + (this.isFocused && this.tick1 / 6 % 2 == 0 ? "_" : "")) : (this.text));
+    }
+
+    @Override
+    public void onClose() {
     }
 
     @Override
@@ -89,5 +92,17 @@ public class WidgetTextField extends AbstractComponent implements ITickUpdate, I
     @Override
     public void updateOnResize(int newWidth, int newHeight) {
         this.setXY(this.resizeFunc.apply(newWidth, newHeight));
+    }
+
+    public void setMaxLength(int q) {
+        this.maxLength = q;
+    }
+
+    public String getText() {
+        return this.text;
+    }
+
+    public void setText(String s) {
+        this.text = s;
     }
 }

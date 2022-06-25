@@ -100,4 +100,8 @@ public class GameUtils {
         }
     	IS_SANDBOX_MODE = a;
     }
+
+    public static void playSoundFX(String s, float v, float v1) {
+        getMC().sndManager.playSoundFX(s, v, v1);
+    }
 }

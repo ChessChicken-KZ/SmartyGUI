@@ -86,5 +86,6 @@ public class GuiScreenExtended<T extends BasePanel> extends GuiScreen {
 
 	@Override
 	public void onGuiClosed() {
+		mainPanel.onClose();
 	}
 }

@@ -21,9 +21,11 @@ public abstract class AbstractComponent {
 
 	protected int contX = 0, contY = 0;
 	protected int x, y, width, height;
-	protected boolean visible = true;
+	public boolean visible = true;
 	
 	public abstract void render(int a, int b, float d);
+
+	public abstract void onClose();
 	
 	public boolean shouldDraw() {
 		return this.visible;

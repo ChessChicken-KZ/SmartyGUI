@@ -16,6 +16,7 @@
 package kz.chesschicken.smartygui.commonloader.guiframework.widgets;
 
 import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
+import kz.chesschicken.smartygui.commonloader.GameUtils;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public class WidgetButtonA extends WidgetButton {
@@ -49,8 +50,10 @@ public class WidgetButtonA extends WidgetButton {
 
 	@Override
 	public void clickMouse(int mX, int mY, int mEvent) {
-		if(isHovered(mX, mY) && mEvent == 0 && this.action != null)
+		if(isHovered(mX, mY) && mEvent == 0 && this.action != null) {
+			GameUtils.playSoundFX("random.click", 1.0F, 1.0F);
 			this.action.onActivate();
+		}
 	}
 
 }

@@ -15,19 +15,18 @@
  */
 package kz.chesschicken.smartygui.commonloader.guiframework.widgets;
 
-import kz.chesschicken.smartygui.commonloader.guiframework.api.IControllerInput;
-import org.lwjgl.opengl.GL11;
-
 import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
 import kz.chesschicken.smartygui.commonloader.RenderUtils;
-import kz.chesschicken.smartygui.commonloader.guiframework.api.AbstractComponent;
-import kz.chesschicken.smartygui.commonloader.guiframework.api.IUpdateOnResize;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.AbstractComponent;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IControllerInput;
+import kz.chesschicken.smartygui.commonloader.guiframework.api.IUpdateOnResize;
+import org.lwjgl.opengl.GL11;
 
 public abstract class WidgetButton extends AbstractComponent implements IUpdateOnResize, IControllerInput {
 	
 	protected String text;
-	protected boolean active = true;
+	public boolean active = true;
 	protected final BinaryIntFunction<ValueXY> resizeFunc;
 	
 	public WidgetButton(String text, BinaryIntFunction<ValueXY> f) {
@@ -57,4 +56,8 @@ public abstract class WidgetButton extends AbstractComponent implements IUpdateO
 		this.setXY(this.resizeFunc.apply(newWidth, newHeight));
 	}
 
+	@Override
+	public void onClose() {
+
+	}
 }

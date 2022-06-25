@@ -85,4 +85,10 @@ public abstract class BasePanel extends AbstractComponent implements IContainer,
 				((ITickUpdate)c).update();
 		}
 	}
+
+	@Override
+	public void onClose() {
+		for(AbstractComponent c : components)
+			c.onClose();
+	}
 }
