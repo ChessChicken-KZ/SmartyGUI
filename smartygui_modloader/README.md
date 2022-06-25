@@ -1,11 +1,14 @@
 # SmartyGUI - ModLoader version!
 
-SmartyGUI — a modification that adds a bunch of useful things to the game!
+SmartyGUI — a Minecraft b1.7.3 modification for ModLoader/Fabric that adds a bunch of useful client-side things to the game!
 
-Currently adds:
-- Block/Entity Viewer HUD.
-- Armor Status HUD.
-- Tooltip.
+Currently, it adds:
+```
+    - Block/Entity Viewer HUD.
+    - Extended F3.
+    - Armor Status HUD.
+    - In-Game Tooltip.
+```
 
 ## Build (Developers/Code explorers)
 
