@@ -16,7 +16,6 @@
 package kz.chesschicken.smartygui.commonloader.guiframework;
 
 import kz.chesschicken.smartygui.commonloader.guiframework.api.BasePanel;
-import kz.chesschicken.smartygui.commonloader.guiframework.api.IKeyTyped;
 import kz.chesschicken.smartygui.commonloader.guiframework.api.IPauseGame;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
@@ -38,30 +37,28 @@ public class GuiScreenExtended<T extends BasePanel> extends GuiScreen {
 	
 	@Override
 	protected void mouseClicked(int var1, int var2, int var3) {
-		mainPanel.onInteractWithComponents(var1, var2, var3);
+		mainPanel.clickMouse(var1, var2, var3);
 	}
 
 	@Override
 	protected void keyTyped(char var1, int var2) {
 		super.keyTyped(var1, var2);
-		if(mainPanel instanceof IKeyTyped) {
-			((IKeyTyped)mainPanel).onKeyTyped(var1, var2);
-		}
+		mainPanel.typeKey(var1, var2);
 	}
 
 	@Override
 	protected void mouseMovedOrUp(int var1, int var2, int var3) {
-		return; //FIXME: I think use it?
+		//FIXME: I think use it?
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton var1) {
-		return; //Hardcoded to not accept it in any way.
+		//Hardcoded to not accept it in any way.
 	}
 	
 	@Override
 	public boolean doesGuiPauseGame() {
-		return (mainPanel instanceof IPauseGame) ? ((IPauseGame)mainPanel).shouldPauseGame() : true;
+		return !(mainPanel instanceof IPauseGame) || ((IPauseGame) mainPanel).shouldPauseGame();
 	}
 
 	@Override
@@ -77,12 +74,13 @@ public class GuiScreenExtended<T extends BasePanel> extends GuiScreen {
         this.initGui();
 	}
 
+
 	@Override
-	public void initGui() {
-	}
+	public void initGui() {}
 
 	@Override
 	public void updateScreen() {
+		mainPanel.update();
 	}
 
 	@Override

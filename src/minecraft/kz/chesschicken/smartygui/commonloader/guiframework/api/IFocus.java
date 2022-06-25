@@ -15,10 +15,8 @@
  */
 package kz.chesschicken.smartygui.commonloader.guiframework.api;
 
-import java.util.List;
+public interface IFocus {
+    boolean isFocused();
 
-public interface IContainer {
-	void add(AbstractComponent i);
-	
-	List<AbstractComponent> getComponents();
+    void setFocused(boolean a);
 }

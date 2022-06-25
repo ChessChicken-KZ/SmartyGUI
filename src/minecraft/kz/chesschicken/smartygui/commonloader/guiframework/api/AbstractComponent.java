@@ -40,7 +40,11 @@ public abstract class AbstractComponent {
 		this.x = n.a;
 		this.y = n.b;
 	}
-	
+
+	public boolean isHovered(int a, int b) {
+		return a >= this.x && b >= this.y && a < this.x + this.width && b < this.y + this.height;
+	}
+
 	public int getWidth() {
 		return this.width;
 	}

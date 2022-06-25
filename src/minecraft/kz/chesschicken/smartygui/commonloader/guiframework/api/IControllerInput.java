@@ -15,8 +15,8 @@
  */
 package kz.chesschicken.smartygui.commonloader.guiframework.api;
 
-public interface IInteractive {
-	void onActivate();
-	
-	boolean isHovered(int i, int i1);
+public interface IControllerInput {
+	void typeKey(char c, int i);
+
+	void clickMouse(int mX, int mY, int mEvent);
 }

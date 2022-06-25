@@ -19,9 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public abstract class BasePanel extends AbstractComponent implements IContainer, IUpdateOnResize {
+public abstract class BasePanel extends AbstractComponent implements IContainer, IUpdateOnResize, ITickUpdate, IControllerInput {
 
 	public final List<AbstractComponent> components = new ArrayList<>();
+	protected AbstractComponent focused;
 	
 	public BasePanel(Consumer<? super BasePanel> init) {
 		init.accept(this);
@@ -61,16 +62,25 @@ public abstract class BasePanel extends AbstractComponent implements IContainer,
 	}
 
 	@Override
-	public void onInteractWithComponents(int mX, int mY, int mEvent) {
-		if(mEvent != 0) //If not left-click - cancel.
-			return;
+	public void typeKey(char c, int i) {
+
+	}
+
+	@Override
+	public void clickMouse(int mX, int mY, int mEvent) {
 		for(AbstractComponent i : components) {
-			if(!(i instanceof IInteractive) || !i.isVisible())
-				continue;
-			if(((IInteractive)i).isHovered(mX, mY)) {
-				((IInteractive)i).onActivate();
-			}
+			if(mEvent != 0 && i.isHovered(mX, mY))
+				focused = i;
+			if(i instanceof IControllerInput)
+				((IControllerInput)i).clickMouse(mX, mY, mEvent);
 		}
 	}
-	
+
+	@Override
+	public void update() {
+		for(AbstractComponent c : components) {
+			if(c instanceof ITickUpdate)
+				((ITickUpdate)c).update();
+		}
+	}
 }

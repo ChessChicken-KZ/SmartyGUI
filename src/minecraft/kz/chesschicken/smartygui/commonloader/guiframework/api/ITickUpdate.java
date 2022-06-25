@@ -15,6 +15,6 @@
  */
 package kz.chesschicken.smartygui.commonloader.guiframework.api;
 
-public interface IKeyTyped {
-	void onKeyTyped(char c, int i);
+public interface ITickUpdate {
+    void update();
 }

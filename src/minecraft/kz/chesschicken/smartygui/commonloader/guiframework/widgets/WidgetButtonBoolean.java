@@ -42,12 +42,6 @@ public class WidgetButtonBoolean extends WidgetButton implements IRunQ1W9M {
 		this.config = q;
 		this.text = formatName();
 	}
-
-	@Override
-	public void onActivate() {
-		this.value = !this.value;
-		this.text = formatName();
-	}
 	
 	public String formatName() {
 		return this.newText + ": " + (value ? "ON" : "OFF");
@@ -56,5 +50,18 @@ public class WidgetButtonBoolean extends WidgetButton implements IRunQ1W9M {
 	@Override
 	public void runQ1W9M() {
 		this.config.accept(this.value);
+	}
+
+	@Override
+	public void typeKey(char c, int i) {
+
+	}
+
+	@Override
+	public void clickMouse(int mX, int mY, int mEvent) {
+		if(isHovered(mX, mY) && mEvent == 0){
+			this.value = !this.value;
+			this.text = formatName();
+		}
 	}
 }

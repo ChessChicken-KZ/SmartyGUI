@@ -19,7 +19,18 @@ import kz.chesschicken.smartygui.commonloader.BinaryIntFunction;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public class WidgetButtonA extends WidgetButton {
-	
+
+	@Override
+	public void typeKey(char c, int i) {
+
+	}
+
+	@Override
+	public void clickMouse(int mX, int mY, int mEvent) {
+		if(isHovered(mX, mY) && mEvent == 0 && this.action != null)
+			this.action.onActivate();
+	}
+
 	@FunctionalInterface
 	public interface Action1 {
 		void onActivate();
@@ -42,10 +53,6 @@ public class WidgetButtonA extends WidgetButton {
 		this.action = a;
 	}
 
-	@Override
-	public void onActivate() {
-		if(this.action != null)
-			this.action.onActivate();
-	}
+
 
 }

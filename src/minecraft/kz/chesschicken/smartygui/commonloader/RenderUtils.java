@@ -70,10 +70,10 @@ public class RenderUtils {
 	public static int[] renderTexture(int x1, int y1, int u, int v, int sizeX, int sizeY, float zLevel) {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(x1 + 0), (double)(y1 + sizeY), (double)zLevel, (double)((float)(u + 0) * 0.00390625F), (double)((float)(v + sizeY) * 0.00390625F));
-        tessellator.addVertexWithUV((double)(x1 + sizeX), (double)(y1 + sizeY), (double)zLevel, (double)((float)(u + sizeX) * 0.00390625F), (double)((float)(v + sizeY) * 0.00390625F));
-        tessellator.addVertexWithUV((double)(x1 + sizeX), (double)(y1 + 0), (double)zLevel, (double)((float)(u + sizeX) * 0.00390625F), (double)((float)(v + 0) * 0.00390625F));
-        tessellator.addVertexWithUV((double)(x1 + 0), (double)(y1 + 0), (double)zLevel, (double)((float)(u + 0) * 0.00390625F), (double)((float)(v + 0) * 0.00390625F));
+        tessellator.addVertexWithUV(x1 + 0, y1 + sizeY, zLevel, (float)(u + 0) * 0.00390625F, (float)(v + sizeY) * 0.00390625F);
+        tessellator.addVertexWithUV(x1 + sizeX, y1 + sizeY, zLevel, (float)(u + sizeX) * 0.00390625F, (float)(v + sizeY) * 0.00390625F);
+        tessellator.addVertexWithUV(x1 + sizeX, y1 + 0, zLevel, (float)(u + sizeX) * 0.00390625F, (float)(v + 0) * 0.00390625F);
+        tessellator.addVertexWithUV(x1 + 0, y1 + 0, zLevel, (float)(u + 0) * 0.00390625F, (float)(v + 0) * 0.00390625F);
         tessellator.draw();
         return new int[] {x1, y1};
 	}

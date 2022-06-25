@@ -53,6 +53,15 @@ public class LambdaPanels {
 			}
 		}
 	};
+
+	public static Function<SmartyGUI, BasePanel> COLOR_CONFIG_GUI = (instance) -> new BasePanel(gui -> {
+
+	}) {
+		@Override
+		public void render(int q, int w, float e) {
+			super.render(q, w, e);
+		}
+	};
 	
 	public static Function<SmartyGUI, BasePanel> MODULES_GUI = (instance) -> new BasePanel(gui -> {
 		gui.add(new WidgetButtonTransparent("Credits...", (w, h) -> new ValueXY(2, h - 10), () -> GameUtils.openPanel(CREDITS_GUI)));
