@@ -18,22 +18,28 @@ package kz.chesschicken.smartygui.commonloader.guiframework.api;
 import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public abstract class AbstractComponent {
-	
+
+	protected int contX, contY;
 	protected int x, y, width, height;
 	protected boolean visible = true;
 	
-	public abstract void render(int i, int i1, float d);
+	public abstract void render(int a, int b, float d);
 	
 	public boolean shouldDraw() {
 		return this.visible;
 	}
 
-	public int getX() {
-		return this.x;
+	public void updateContXY(int a, int b) {
+		this.contX = a;
+		this.contY = b;
 	}
-	
-	public int getY() {
-		return this.x;
+
+	public int getContX() {
+		return this.x + this.contX;
+	}
+
+	public int getContY() {
+		return this.y + this.contY;
 	}
 
 	public void setXY(ValueXY n) {
@@ -42,30 +48,7 @@ public abstract class AbstractComponent {
 	}
 
 	public boolean isHovered(int a, int b) {
-		return a >= this.x && b >= this.y && a < this.x + this.width && b < this.y + this.height;
+		return a >= getContX() && b >= getContY() && a < getContX() + this.width && b < getContY() + this.height;
 	}
 
-	public int getWidth() {
-		return this.width;
-	}
-	
-	public void setWidth(int i) {
-		this.width = i;
-	}
-	
-	public int getHeight() {
-		return this.height;
-	}
-	
-	public void setHeight(int i) {
-		this.height = i;
-	}
-	
-	public boolean isVisible() {
-		return this.visible;
-	}
-	
-	public void setVisible(boolean a) {
-		this.visible = a;
-	}
 }

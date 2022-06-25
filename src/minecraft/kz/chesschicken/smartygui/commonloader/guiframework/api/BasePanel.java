@@ -22,7 +22,6 @@ import java.util.function.Consumer;
 public abstract class BasePanel extends AbstractComponent implements IContainer, IUpdateOnResize, ITickUpdate, IControllerInput {
 
 	public final List<AbstractComponent> components = new ArrayList<>();
-	protected AbstractComponent focused;
 	
 	public BasePanel(Consumer<? super BasePanel> init) {
 		init.accept(this);
@@ -63,14 +62,17 @@ public abstract class BasePanel extends AbstractComponent implements IContainer,
 
 	@Override
 	public void typeKey(char c, int i) {
-
+		for(AbstractComponent f : components) {
+			if(f instanceof IControllerInput)
+				((IControllerInput)f).typeKey(c, i);
+		}
 	}
 
 	@Override
 	public void clickMouse(int mX, int mY, int mEvent) {
 		for(AbstractComponent i : components) {
-			if(mEvent != 0 && i.isHovered(mX, mY))
-				focused = i;
+			if(mEvent != 0 && i instanceof IFocus)
+				((IFocus)i).setFocused(i.isHovered(mX, mY));
 			if(i instanceof IControllerInput)
 				((IControllerInput)i).clickMouse(mX, mY, mEvent);
 		}

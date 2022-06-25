@@ -27,6 +27,6 @@ public class WidgetButtonTransparent extends WidgetButtonA {
 
     @Override
     public void render(int a, int b, float d) {
-        RenderUtils.renderShadowCenteredString(this.x + this.width / 2, this.y + (this.height - 8) / 2, (!this.active) ? -6250336 : (isHovered(a, b) ? 16777120 : 14737632), this.text);
+        RenderUtils.renderShadowCenteredString(getContX() + this.width / 2, getContY() + (this.height - 8) / 2, (!this.active) ? -6250336 : (isHovered(a, b) ? 16777120 : 14737632), this.text);
     }
 }

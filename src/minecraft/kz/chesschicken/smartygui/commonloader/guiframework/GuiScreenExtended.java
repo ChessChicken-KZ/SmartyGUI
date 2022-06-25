@@ -74,9 +74,10 @@ public class GuiScreenExtended<T extends BasePanel> extends GuiScreen {
         this.initGui();
 	}
 
-
 	@Override
-	public void initGui() {}
+	public void initGui() {
+		//Does it even execute?
+	}
 
 	@Override
 	public void updateScreen() {

@@ -48,9 +48,9 @@ public class WidgetTextField extends AbstractComponent implements ITickUpdate, I
 
     @Override
     public void render(int i, int i1, float d) {
-        RenderUtils.gradientRenderRGB(this.x - 1, this.y - 1, this.x + this.width + 1, this.y + this.height + 1, -6250336);
-        RenderUtils.gradientRenderRGB(this.x, this.y, this.x + this.width, this.y + this.height, -16777216);
-        RenderUtils.renderString(this.x + 4, this.y + (this.height - 8) / 2, this.isEnabled ? 14737632 : 7368816, this.isEnabled ? (this.text + (this.isFocused && this.tick1 / 6 % 2 == 0 ? "_" : "")) : (this.text));
+        RenderUtils.gradientRenderRGB(getContX() - 1, getContY() - 1, getContX() + this.width + 1, getContY() + this.height + 1, -6250336);
+        RenderUtils.gradientRenderRGB(getContX(), getContY(), getContX() + this.width, getContY() + this.height, -16777216);
+        RenderUtils.renderString(getContX() + 4, getContY() + (this.height - 8) / 2, this.isEnabled ? 14737632 : 7368816, this.isEnabled ? (this.text + (this.isFocused && this.tick1 / 6 % 2 == 0 ? "_" : "")) : (this.text));
     }
 
     @Override
