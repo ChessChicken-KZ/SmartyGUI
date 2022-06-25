@@ -15,16 +15,9 @@
  */
 package kz.chesschicken.smartygui.commonloader;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.RenderEngine;
-import net.minecraft.src.RenderHelper;
-import net.minecraft.src.RenderItem;
-import net.minecraft.src.Tessellator;
+import net.minecraft.src.*;
+import org.lwjgl.opengl.GL11;
 
 public class RenderUtils {
 	
