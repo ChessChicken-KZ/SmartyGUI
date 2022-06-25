@@ -19,7 +19,7 @@ import kz.chesschicken.smartygui.commonloader.guiframework.ValueXY;
 
 public abstract class AbstractComponent {
 
-	protected int contX, contY;
+	protected int contX = 0, contY = 0;
 	protected int x, y, width, height;
 	protected boolean visible = true;
 	
@@ -50,5 +50,4 @@ public abstract class AbstractComponent {
 	public boolean isHovered(int a, int b) {
 		return a >= getContX() && b >= getContY() && a < getContX() + this.width && b < getContY() + this.height;
 	}
-
 }

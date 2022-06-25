@@ -71,7 +71,7 @@ public abstract class BasePanel extends AbstractComponent implements IContainer,
 	@Override
 	public void clickMouse(int mX, int mY, int mEvent) {
 		for(AbstractComponent i : components) {
-			if(mEvent != 0 && i instanceof IFocus)
+			if(mEvent == 0 && i instanceof IFocus)
 				((IFocus)i).setFocused(i.isHovered(mX, mY));
 			if(i instanceof IControllerInput)
 				((IControllerInput)i).clickMouse(mX, mY, mEvent);

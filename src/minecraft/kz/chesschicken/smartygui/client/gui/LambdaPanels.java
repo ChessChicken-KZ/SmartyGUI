@@ -27,6 +27,7 @@ import kz.chesschicken.smartygui.commonloader.guiframework.api.IRunQ1W9M;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonA;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonBoolean;
 import kz.chesschicken.smartygui.commonloader.guiframework.widgets.WidgetButtonTransparent;
+import kz.chesschicken.smartygui.commonloader.guiframework.window.BaseWindow;
 import org.lwjgl.Sys;
 
 public class LambdaPanels {
@@ -55,7 +56,7 @@ public class LambdaPanels {
 	};
 
 	public static Function<SmartyGUI, BasePanel> COLOR_CONFIG_GUI = (instance) -> new BasePanel(gui -> {
-
+		gui.add(new BaseWindow(100, 50, 10, 10));
 	}) {
 		@Override
 		public void render(int q, int w, float e) {
@@ -93,7 +94,7 @@ public class LambdaPanels {
 		gui.add(new WidgetButtonA("Modules", 90, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 32), () -> GameUtils.openPanel(MODULES_GUI.apply(instance))));
 		gui.add(new WidgetButtonA("Location Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 8), () -> GameUtils.open(new GuiDragInterface(instance))));
 		gui.add(new WidgetButtonA("Appearance", 90, 20, (w, h) -> new ValueXY(w / 2 + 1, h / 4 + 32), () -> GameUtils.open(new GuiAppearanceConfig(instance))));
-		gui.add(new WidgetButtonA("Colour Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 56), () -> GameUtils.open(new GuiColourConfig(instance))));
+		gui.add(new WidgetButtonA("Colour Settings", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 56), () -> GameUtils.openPanel(COLOR_CONFIG_GUI.apply(instance))));
 		gui.add(new WidgetButtonA("Save and Close", 182, 20, (w, h) -> new ValueXY(w / 2 - 91, h / 4 + 104), GameUtils::closeGUI));
 	}) {
 		@Override
