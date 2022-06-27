@@ -1,5 +1,7 @@
 # SmartyGUI
 
+[![modrinth-badge](https://img.shields.io/modrinth/dt/smartygui?label=SmartyGUI&logo=Modrinth&style=flat-square)](https://modrinth.com/mod/smartygui/versions)
+
 SmartyGUI — a Minecraft b1.7.3 modification for ModLoader/Fabric that adds a bunch of useful client-side things to the game!
 
 Currently, it adds:
