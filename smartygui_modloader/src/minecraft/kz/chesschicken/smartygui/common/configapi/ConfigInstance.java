@@ -16,20 +16,18 @@
 package kz.chesschicken.smartygui.common.configapi;
 
 public abstract class ConfigInstance {
-    protected Configuration instance;
 
-    public ConfigInstance(String name)
-    {
+    protected final Configuration instance;
+
+    public ConfigInstance(String name) {
         instance = new Configuration(name);
     }
 
-    public void start()
-    {
+    public void start() {
         if(!instance.exists()) {
             saveConfig();
             instance.save();
-        }
-        else {
+        } else {
             instance.load();
             applyConfig();
         }
@@ -42,9 +40,18 @@ public abstract class ConfigInstance {
         instance.save();
     }
 
-    public Object getValue(String group, String property)
-    {
-        return instance.getGroup(group).getProperty(property).getValue();
+    @SuppressWarnings("unchecked")
+    public <T> T getValue(String group, String property) {
+        return (T) instance.getGroup(group).getProperty(property).getValue();
+    }
+
+    public <T> T getSafeValue(String group, String property, T defValue) {
+        try {
+            return getValue(group, property);
+        } catch (NullPointerException e) {
+            System.out.println("[SmartyGUI] Failed to load property [" + group + "/" + property + "], using default value. Perhaps, the user updated modification?");
+            return defValue;
+        }
     }
 
     public abstract void saveConfig();

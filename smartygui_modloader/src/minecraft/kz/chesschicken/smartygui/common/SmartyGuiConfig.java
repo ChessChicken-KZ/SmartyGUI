@@ -31,9 +31,11 @@ public class SmartyGuiConfig extends ConfigInstance {
     public boolean enableShowBlock = true;
     public boolean enableArmorStatusHUD = true;
     public boolean enableInGameToolTip = true;
+    public boolean enableMCVersion = true;
     
     public boolean showBlockModernStyle = false;
     public boolean transparency = false;
+    public String mcVersionRS = "";
     public static boolean darkTheme = false;
     
     public int tickToolTip = 200;
@@ -85,11 +87,13 @@ public class SmartyGuiConfig extends ConfigInstance {
         Group modules = Group.createGroup("modules");
         modules.add(Property.createProperty("enableShowBlock", enableShowBlock), "Enable ShowBlock module. (a.k.a. Waila)");
         modules.add(Property.createProperty("enableArmorStatusHUD", enableArmorStatusHUD), "Enable ArmorStatusHUD module.");
-        modules.add(Property.createProperty("enableInGameToolTip", enableInGameToolTip), "Enable in game tooltip module.");
+        modules.add(Property.createProperty("enableInGameToolTip", enableInGameToolTip), "Enable in-game tooltip module.");
+        modules.add(Property.createProperty("enableMCVersion", enableMCVersion), "Enable in-game \"Minecraft Beta 1.7.3\" label.");
 
         Group hud_preferences = Group.createGroup("hud_preferences");
         hud_preferences.add(Property.createProperty("showBlockModernStyle", showBlockModernStyle), "Use modern style for ShowBlock.");
         hud_preferences.add(Property.createProperty("armorStatusHUDmode", armorStatusHUDmode), "Modes for ArmorStatusHUD. \n 0 - Bottom Right \n 1 - Bottom Left \n 2 - Top Right \n 3 - Top Left");
+        hud_preferences.add(Property.createProperty("replaceVersion", mcVersionRS), "Replace in-game \"Minecraft Beta 1.7.3\" label with custom one. \n Leave empty to have default one.");
         hud_preferences.add(Property.createProperty("transparency", transparency), "Transparency mode for ShowBlock.");
         hud_preferences.add(Property.createProperty("factorX", factorX), "X coordinate on the display by factor value.");
         hud_preferences.add(Property.createProperty("factorY", factorY), "Y coordinate on the display by factor value.");
@@ -112,25 +116,27 @@ public class SmartyGuiConfig extends ConfigInstance {
 
     @Override
     public void applyConfig() {
-        enableVersionCheck = (boolean) getValue("general", "enableVersionCheck");
-        enableDebugF3 = (boolean) getValue("general", "enableDebugF3");
-        iconTheme = (String) getValue("general", "iconTheme");
-        darkTheme = (boolean) getValue("general", "darkTheme");
+        enableVersionCheck = getSafeValue("general", "enableVersionCheck", true);
+        enableDebugF3 = getSafeValue("general", "enableDebugF3", true);
+        iconTheme = getSafeValue("general", "iconTheme", "default_theme");
+        darkTheme = getSafeValue("general", "darkTheme", false);
         
-        enableShowBlock = (boolean) getValue("modules", "enableShowBlock");
-        enableArmorStatusHUD = (boolean) getValue("modules", "enableArmorStatusHUD");
-        enableInGameToolTip = (boolean) getValue("modules", "enableInGameToolTip");
+        enableShowBlock = getSafeValue("modules", "enableShowBlock", true);
+        enableArmorStatusHUD = getSafeValue("modules", "enableArmorStatusHUD", true);
+        enableInGameToolTip = getSafeValue("modules", "enableInGameToolTip", true);
+        enableMCVersion = getSafeValue("modules", "enableMCVersion", true);
 
-        showBlockModernStyle = (boolean) getValue("hud_preferences", "showBlockModernStyle");
-        armorStatusHUDmode = (int) getValue("hud_preferences", "armorStatusHUDmode");
-        transparency = (boolean) getValue("hud_preferences", "transparency");
-        factorX = (int) getValue("hud_preferences", "factorX");
-        factorY = (int) getValue("hud_preferences", "factorY");
-        factorAnchor = (int) getValue("hud_preferences", "factorAnchor");
-        tickToolTip = (int) getValue("hud_preferences", "tickToolTip");
+        showBlockModernStyle = getSafeValue("hud_preferences", "showBlockModernStyle", false);
+        armorStatusHUDmode = getSafeValue("hud_preferences", "armorStatusHUDmode", 0);
+        mcVersionRS = getSafeValue("hud_preferences", "replaceVersion", "");
+        transparency = getSafeValue("hud_preferences", "transparency", false);
+        factorX = getSafeValue("hud_preferences", "factorX", 15);
+        factorY = getSafeValue("hud_preferences", "factorY", 15);
+        factorAnchor = getSafeValue("hud_preferences", "factorAnchor", 0);
+        tickToolTip = getSafeValue("hud_preferences", "tickToolTip", 200);
         
-        showBlockRGB[0] = (int) getValue("rgbShowBlock", "showBlockG1");
-        showBlockRGB[1] = (int) getValue("rgbShowBlock", "showBlockG2");
-        showBlockRGB[2] = (int) getValue("rgbShowBlock", "showBlockT");
+        showBlockRGB[0] = getSafeValue("rgbShowBlock", "showBlockG1", RenderUtils.getIntFromRGBA(0, 0, 0, 255));
+        showBlockRGB[1] = getSafeValue("rgbShowBlock", "showBlockG2", RenderUtils.getIntFromRGBA(0, 0, 0, 255));
+        showBlockRGB[2] = getSafeValue("rgbShowBlock", "showBlockT", 16777215);
     }
 }
