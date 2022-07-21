@@ -27,9 +27,9 @@ import java.util.List;
 public class SmartyGuiPlugins {
 	
 	private final SmartyGUI instance;
-	private List<AbstractSmartyPlugin> pluginList = new ArrayList<>();
+	private final List<AbstractSmartyPlugin> pluginList = new ArrayList<>();
 	
-	private EnumMap<EnumEventTypes, List<AbstractSmartyPlugin>> eventPluginMap = new EnumMap<>(EnumEventTypes.class);
+	private final EnumMap<EnumEventTypes, List<AbstractSmartyPlugin>> eventPluginMap = new EnumMap<>(EnumEventTypes.class);
 	
 	public SmartyGuiPlugins(SmartyGUI smartygui) {
 		this.instance = smartygui;
@@ -52,7 +52,7 @@ public class SmartyGuiPlugins {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T[] __getEventsReady(EnumEventTypes e, T[] a, Class<T> clazz) {
+	public <T> T[] __getEventsReady(EnumEventTypes e, Class<T> clazz) {
 		T[] lists = (T[]) Array.newInstance(clazz, eventPluginMap.get(e).size());
 		for(int i = 0; i < lists.length; i++)
 			lists[i] = (T) eventPluginMap.get(e).get(i);

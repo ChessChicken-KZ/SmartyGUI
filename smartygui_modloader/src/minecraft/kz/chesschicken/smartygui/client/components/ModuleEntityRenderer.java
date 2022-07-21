@@ -36,7 +36,7 @@ public class ModuleEntityRenderer extends ModuleRender {
 
     public ModuleEntityRenderer(Minecraft minecraft, SmartyGUI config) {
         super(minecraft, config);
-        this.entityDescPlugins = this.pluginManager.__getEventsReady(EnumEventTypes.ADDITIONAL_ENTITY_DESCRIPTION, new IAdditionalEntityDescription[0], IAdditionalEntityDescription.class);
+        this.entityDescPlugins = this.pluginManager.__getEventsReady(EnumEventTypes.ADDITIONAL_ENTITY_DESCRIPTION, IAdditionalEntityDescription.class);
     }
 
     /**
@@ -126,11 +126,11 @@ public class ModuleEntityRenderer extends ModuleRender {
      * @param anchor ANCHOR value.
      */
     public void doEntityRendering(int x, int y, int anchor) {
-    	int[] realXY = new int[] {0, 0};
+    	int[] realXY;
     	String h = getEntityBaseHealth();
     	
     	String[][] vals = null;
-        byte f = (byte) (h != null ? 1 : 0);
+        short f = (byte) (h != null ? 1 : 0);
         if(!_debug) {
 	        vals = new String[entityDescPlugins.length][];
 	        for(int q = 0; q < vals.length; q++)
@@ -161,17 +161,15 @@ public class ModuleEntityRenderer extends ModuleRender {
         
         if(!_debug) {
 	        f = (byte) (h != null ? 1 : 0);
-	        for(int q = 0; q < vals.length; q++) {
-	        	if(vals[q] == null)
-	        		continue;
-	        	for(String he : vals[q]) {
-	                textRenderer.drawString(he, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
-	                f++;
-	                
-	                if(f > 254)
-	                	break;
-	        	}
-	        }
+            for (String[] val : vals) {
+                if (val == null)
+                    continue;
+                for (String he : val) {
+                    textRenderer.drawString(he, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
+                    f++;
+                    if (f > 254) break;
+                }
+            }
         }
     }
 }

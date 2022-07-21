@@ -47,8 +47,8 @@ public class ModuleBlockRender extends ModuleRender {
     public ModuleBlockRender(Minecraft minecraft, SmartyGUI config) {
         super(minecraft, config);
         this.itemRenderer = new RenderItem();
-        this.blockDescPlugins = this.pluginManager.__getEventsReady(EnumEventTypes.ADDITIONAL_BLOCK_DESCRIPTION, new IAdditionalBlockDescription[0], IAdditionalBlockDescription.class);
-        this.renderOverridePlugins = this.pluginManager.__getEventsReady(EnumEventTypes.OVERRIDE_BLOCK_RENDER, new IOverrideBlockRender[0], IOverrideBlockRender.class);
+        this.blockDescPlugins = this.pluginManager.__getEventsReady(EnumEventTypes.ADDITIONAL_BLOCK_DESCRIPTION, IAdditionalBlockDescription.class);
+        this.renderOverridePlugins = this.pluginManager.__getEventsReady(EnumEventTypes.OVERRIDE_BLOCK_RENDER, IOverrideBlockRender.class);
     }
     
     /**
@@ -64,7 +64,7 @@ public class ModuleBlockRender extends ModuleRender {
     		try {
     			return new ItemStack(id, 1, 0).getItemName();
     		}catch (NullPointerException e1) {
-    			return "null";
+    			return "name-not-specified";
     		}
     	}
     }
@@ -123,10 +123,9 @@ public class ModuleBlockRender extends ModuleRender {
         if(currentBlockID == 0 || Block.blocksList[currentBlockID] == null)
             return;
 
-        int[] realXY = new int[] {0, 0};
-        
+        int[] realXY;
         String[][] vals = null;
-        byte f = 0;
+        short f = 0;
         
         if(!_debug) {
 	        vals = new String[blockDescPlugins.length][];
@@ -160,17 +159,15 @@ public class ModuleBlockRender extends ModuleRender {
         
         if(!_debug) {
 	        f = 0;
-	        for(int q = 0; q < vals.length; q++) {
-	        	if(vals[q] == null)
-	        		continue;
-	        	for(String h : vals[q]) {
-	                textRenderer.drawString(h, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
-	                f++;
-	                
-	                if(f > 254)
-	                	break;
-	        	}
-	        }
+            for (String[] val : vals) {
+                if (val == null)
+                    continue;
+                for (String h : val) {
+                    textRenderer.drawString(h, realXY[0] + 25, realXY[1] + 25 + (f * 10), config.showBlockRGB[2]);
+                    f++;
+                    if (f > 254) break;
+                }
+            }
         }
     }
 }

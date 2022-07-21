@@ -20,14 +20,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 
 /**
- * Specific abstract class that supports 
+ * Specific abstract class that supports being rendered in tick.
  */
 public abstract class ModuleRender {
 	
-    protected Minecraft minecraft;
-    protected SmartyGuiConfig config;
-    protected SmartyGuiPlugins pluginManager;
-    protected FontRenderer textRenderer;
+    protected final Minecraft minecraft;
+    protected final SmartyGuiConfig config;
+    protected final SmartyGuiPlugins pluginManager;
+    protected final FontRenderer textRenderer;
 
     public ModuleRender(Minecraft minecraft, SmartyGUI config) {
         this.minecraft = minecraft;
@@ -37,7 +37,7 @@ public abstract class ModuleRender {
     }
 
     /**
-     * Abstract method that usually called when the code needs to cleanup and update preferences.
+     * Abstract method that usually called when the code needs to clean-up and update preferences.
      */
     public abstract void clean();
 
