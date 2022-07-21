@@ -78,9 +78,9 @@ public class GuiDragInterface extends GuiScreen {
 		this.controlList.add(m[1] = new ButtonBase(9, bX_base + 22, bY_base + 66, 20, 20, "5x", "5x Moving Factor"));
 		this.controlList.add(m[2] = new ButtonBase(10, bX_base + 44, bY_base + 66, 20, 20, "10x", "10x Moving Factor"));
 		
-		/* ANCHLEFT */ this.controlList.add(g[9] = new ButtonImage(11, bX_base + 66, bY_base, 0, 16, "Select previous anchor"));
+		/* ANCHLEFT */ this.controlList.add(g[9] = new ButtonImage(11, bX_base + 66, bY_base, 48, 16, "Select previous anchor"));
 		/* ANCHCENTER */ this.controlList.add(g[10] = new ButtonBase(12, bX_base + 66, bY_base + 22, 20, 20, String.valueOf(this.instance.CONFIG.factorAnchor)));
-		/* ANCHRIGHT */ this.controlList.add(g[11] = new ButtonImage(13, bX_base + 66, bY_base + 44, 32, 16, "Select next anchor"));
+		/* ANCHRIGHT */ this.controlList.add(g[11] = new ButtonImage(13, bX_base + 66, bY_base + 44, 64, 16, "Select next anchor"));
 		
 		
 		updateScreen();
