@@ -119,6 +119,10 @@ public class SmartyGUI implements IMod<SmartyGUI> {
         if(renderEntity == null) renderEntity = new ModuleEntityRenderer(minecraft, this);
         if(renderStatus == null) renderStatus = new ModuleArmorRender(minecraft, this);
         if(renderToolTip == null) renderToolTip = new ModuleToolTipRender(minecraft, this);
+
+        if(CONFIG.enableMCVersion && !minecraft.isGamePaused && minecraft.currentScreen == null) {
+            minecraft.fontRenderer.drawStringWithShadow(CONFIG.mcVersionRS, 2, 2, 16777215);
+        }
         
         /* InGame ToolTip Part */
         if(CONFIG.enableInGameToolTip && !minecraft.isGamePaused && minecraft.currentScreen == null) {

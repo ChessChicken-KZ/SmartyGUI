@@ -35,7 +35,7 @@ public class SmartyGuiConfig extends ConfigInstance {
     
     public boolean showBlockModernStyle = false;
     public boolean transparency = false;
-    public String mcVersionRS = "";
+    public String mcVersionRS = "Minecraft Beta 1.7.3";
     public static boolean darkTheme = false;
     
     public int tickToolTip = 200;
@@ -93,7 +93,7 @@ public class SmartyGuiConfig extends ConfigInstance {
         Group hud_preferences = Group.createGroup("hud_preferences");
         hud_preferences.add(Property.createProperty("showBlockModernStyle", showBlockModernStyle), "Use modern style for ShowBlock.");
         hud_preferences.add(Property.createProperty("armorStatusHUDmode", armorStatusHUDmode), "Modes for ArmorStatusHUD. \n 0 - Bottom Right \n 1 - Bottom Left \n 2 - Top Right \n 3 - Top Left");
-        hud_preferences.add(Property.createProperty("replaceVersion", mcVersionRS), "Replace in-game \"Minecraft Beta 1.7.3\" label with custom one. \n Leave empty to have default one.");
+        hud_preferences.add(Property.createProperty("replaceVersion", mcVersionRS), "Replace in-game \"Minecraft Beta 1.7.3\" label with custom one.");
         hud_preferences.add(Property.createProperty("transparency", transparency), "Transparency mode for ShowBlock.");
         hud_preferences.add(Property.createProperty("factorX", factorX), "X coordinate on the display by factor value.");
         hud_preferences.add(Property.createProperty("factorY", factorY), "Y coordinate on the display by factor value.");
@@ -128,15 +128,15 @@ public class SmartyGuiConfig extends ConfigInstance {
 
         showBlockModernStyle = getSafeValue("hud_preferences", "showBlockModernStyle", false);
         armorStatusHUDmode = getSafeValue("hud_preferences", "armorStatusHUDmode", 0);
-        mcVersionRS = getSafeValue("hud_preferences", "replaceVersion", "");
+        mcVersionRS = getSafeValue("hud_preferences", "replaceVersion", "Minecraft Beta 1.7.3");
         transparency = getSafeValue("hud_preferences", "transparency", false);
         factorX = getSafeValue("hud_preferences", "factorX", 15);
         factorY = getSafeValue("hud_preferences", "factorY", 15);
         factorAnchor = getSafeValue("hud_preferences", "factorAnchor", 0);
         tickToolTip = getSafeValue("hud_preferences", "tickToolTip", 200);
-        
-        showBlockRGB[0] = getSafeValue("rgbShowBlock", "showBlockG1", RenderUtils.getIntFromRGBA(0, 0, 0, 255));
-        showBlockRGB[1] = getSafeValue("rgbShowBlock", "showBlockG2", RenderUtils.getIntFromRGBA(0, 0, 0, 255));
+
+        showBlockRGB[0] = getSafeValue("rgbShowBlock", "showBlockG1", -16777216);
+        showBlockRGB[1] = getSafeValue("rgbShowBlock", "showBlockG2", -16777216);
         showBlockRGB[2] = getSafeValue("rgbShowBlock", "showBlockT", 16777215);
     }
 }
