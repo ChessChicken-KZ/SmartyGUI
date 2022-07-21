@@ -68,12 +68,10 @@ public class SmartyGuiConfig extends ConfigInstance {
      */
     public int armorStatusHUDmode = 0;
 
-    public int[] showBlockRGB = new int[3] /* Should return 0 if nothing */;
+    public int[] showBlockRGB = {-16777216, -16777216, 16777215};
 
     public SmartyGuiConfig() {
         super("smartygui");
-        showBlockRGB[0] = showBlockRGB[1] = RenderUtils.getIntFromRGBA(0, 0, 0, 255);
-        showBlockRGB[2] = 16777215;
     }
 
     @Override
