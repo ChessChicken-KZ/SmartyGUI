@@ -48,7 +48,7 @@ public class SmartyGuiConfig extends ConfigInstance {
      * 1 - CENTER;
      * 2 - RIGHT;
      */
-    public int factorAnchor = 0;
+    public int factorAnchor = 5;
     
     /**
      * Keys for theme:
@@ -129,7 +129,7 @@ public class SmartyGuiConfig extends ConfigInstance {
         transparency = getSafeValue("hud_preferences", "transparency", false);
         factorX = getSafeValue("hud_preferences", "factorX", 15);
         factorY = getSafeValue("hud_preferences", "factorY", 15);
-        factorAnchor = getSafeValue("hud_preferences", "factorAnchor", 0);
+        factorAnchor = getSafeValue("hud_preferences", "factorAnchor", 5);
         tickToolTip = getSafeValue("hud_preferences", "tickToolTip", 200);
 
         showBlockRGB[0] = getSafeValue("rgbShowBlock", "showBlockG1", -16777216);
