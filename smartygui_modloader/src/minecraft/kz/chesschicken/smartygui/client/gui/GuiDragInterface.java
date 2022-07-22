@@ -131,7 +131,6 @@ public class GuiDragInterface extends GuiScreen {
 			instance.CONFIG.factorY = backupY = instance.getY();
 			instance.CONFIG.factorAnchor = backupA = instance.getAnchor();
 			instance.CONFIG.forceSave();
-			saveState = true;
 			break;
 		}
 		

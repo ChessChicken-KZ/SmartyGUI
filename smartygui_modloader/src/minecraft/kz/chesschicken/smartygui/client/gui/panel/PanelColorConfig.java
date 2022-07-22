@@ -100,7 +100,7 @@ public class PanelColorConfig extends BasePanel implements IRunQ1W9M {
 
     void shouldDeny() {
         eskerty = this.instance.CONFIG.transparency || this.instance.CONFIG.showBlockModernStyle;
-        ((WidgetButton) this.components.get(1)).active = ((WidgetButton) this.components.get(2)).active = !eskerty;
+        ((WidgetButton) this.components.get(0)).active = ((WidgetButton) this.components.get(1)).active = !eskerty;
     }
 
     public PanelColorConfig(SmartyGUI smartygui) {

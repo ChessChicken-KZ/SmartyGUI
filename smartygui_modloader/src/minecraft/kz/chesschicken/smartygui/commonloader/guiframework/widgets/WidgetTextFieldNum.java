@@ -34,12 +34,16 @@ public class WidgetTextFieldNum extends WidgetTextField {
     }
 
     boolean __isNum(char a) {
-        return a == '0' || a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9' || a == '\b';
+        return a == '0' || a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9';
     }
 
     @Override
     public void typeKey(char c, int i) {
         if (this.isEnabled && this.isFocused) {
+            if(c == '\b' && this.text.length() > 0) {
+                this.text = this.text.substring(0, this.text.length() - 1);
+                return;
+            }
             if(__isNum(c)) {
                 super.typeKey(c, i);
                 if(this.text.length() > 0 && runQ1W9M != null)

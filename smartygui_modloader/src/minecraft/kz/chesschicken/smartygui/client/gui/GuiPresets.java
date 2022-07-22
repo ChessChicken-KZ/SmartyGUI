@@ -27,7 +27,7 @@ public class GuiPresets extends GuiScreen {
 	private final GuiDragInterface homeScreen;
 	
 	private boolean shouldRevert = true;
-	private int[] axy = new int[3];
+	private final int[] axy = new int[3];
 	private ModuleBlockRender debug1;
 	
 	public GuiPresets(SmartyGUI smartygui, GuiDragInterface homeScreen) {
