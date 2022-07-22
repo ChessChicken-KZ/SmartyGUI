@@ -91,7 +91,7 @@ public class GameUtils {
 		}
     	
     	//Accessing "net.minecraft.src.Block" as a kind of test.
-    	boolean a = false;
+    	boolean a;
     	try {
             Class.forName("net.minecraft.src.Block");
             a = true;

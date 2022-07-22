@@ -42,7 +42,7 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 
 	@Override
 	public void methodInitPlugin(SmartyGUI instance) {
-		System.out.println("Vanilla module initializaing... magic happening...");
+		System.out.println("Vanilla module initializing... magic happening...");
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class PluginVanilla extends AbstractSmartyPlugin implements IAdditionalBl
 		
 		if(Block.jukebox.blockID == id) {
             TileEntityRecordPlayer jukebox = (TileEntityRecordPlayer)world.getBlockTileEntity(x, y, z);
-            String f = "Playing nothing.";
+            String f = "Playing Nothing";
             
             if(Item.itemsList[jukebox.record] instanceof ItemRecord)
             	f = "Playing - " + ((ItemRecord)Item.itemsList[jukebox.record]).recordName;

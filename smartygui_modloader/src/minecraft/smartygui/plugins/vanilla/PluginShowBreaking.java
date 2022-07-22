@@ -44,7 +44,7 @@ public class PluginShowBreaking extends AbstractSmartyPlugin implements IAdditio
 			this.mc = GameUtils.getMC();
 		
 		if(this.mc.ingameGUI.damageGuiPartialTime > 0.0F)
-			return new String[] { "Breaking: " + Math.round(this.mc.ingameGUI.damageGuiPartialTime * 100) + "%" };
+			return new String[] { "Progress: " + Math.round(this.mc.ingameGUI.damageGuiPartialTime * 100) + "%" };
 		
 		return null;
 	}
