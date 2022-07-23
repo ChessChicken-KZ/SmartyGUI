@@ -74,26 +74,42 @@ public class GuiPresets extends GuiScreen {
 			break;
 		}
 		
-		case 100:
-		case 101:
-		case 102:
-		case 103:
-		case 104:
-		case 105: {
-			if(var1.id == 100 || var1.id == 103) {
-				this.instance.applyNewAnchor(0);
-				this.instance.applyNewXY(var1.xPosition - 2, var1.yPosition);
-			}
-			if(var1.id == 101 || var1.id == 104) {
-				this.instance.applyNewAnchor(1);
-				this.instance.applyNewXY(var1.xPosition + 40, var1.yPosition + 10);
-			}
-			if(var1.id == 102 || var1.id == 105) {
-				this.instance.applyNewAnchor(2);
-				this.instance.applyNewXY(var1.xPosition + 80, var1.yPosition);
-			}
+		case 100: {
+			this.instance.applyNewAnchor(5);
+			this.instance.applyNewXY(var1.xPosition - 2, var1.yPosition);
 			break;
 		}
+
+		case 103: {
+			this.instance.applyNewAnchor(2);
+			this.instance.applyNewXY(var1.xPosition - 2, var1.yPosition + 20);
+			break;
+		}
+
+		case 104: {
+			this.instance.applyNewAnchor(1);
+			this.instance.applyNewXY(var1.xPosition + 40, var1.yPosition + 20);
+			break;
+		}
+
+		case 101: {
+			this.instance.applyNewAnchor(4);
+			this.instance.applyNewXY(var1.xPosition + 40, var1.yPosition);
+			break;
+		}
+
+		case 102: {
+			this.instance.applyNewAnchor(3);
+			this.instance.applyNewXY(var1.xPosition + 80, var1.yPosition);
+			break;
+		}
+		
+		case 105: {
+			this.instance.applyNewAnchor(0);
+			this.instance.applyNewXY(var1.xPosition + 80, var1.yPosition + 20);
+			break;
+		}
+
 		}
 	}
 	
