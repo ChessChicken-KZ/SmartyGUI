@@ -168,7 +168,7 @@ public class PanelColorConfig extends BasePanel implements IRunQ1W9M {
         }
         if (updateS)
             RenderUtils.renderShadowString(5, 5, 0xFFD800, "Changes have been saved!");
-        debugRenderer.doBlockRendering(this.width / 2, this.height * 6 / 8 + 20, 1);
+        debugRenderer.doBlockRendering(this.width / 2, this.height * 6 / 8 + 20, 4);
     }
 
     @Override
