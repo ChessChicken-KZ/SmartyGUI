@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
  */
 @ModDescription(
 		name = "SmartyGUI",
-		version = "ML-2.3",
+		version = "ML-2.4",
 		description = "SmartyGUI - Block/Entity viewer, armor status and tooltip HUD.",
 		icon = "/smartygui/icon.png"
 		)

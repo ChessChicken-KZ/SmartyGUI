@@ -103,7 +103,7 @@ public class GuiPresets extends GuiScreen {
 			this.instance.applyNewXY(var1.xPosition + 80, var1.yPosition);
 			break;
 		}
-		
+
 		case 105: {
 			this.instance.applyNewAnchor(0);
 			this.instance.applyNewXY(var1.xPosition + 80, var1.yPosition + 20);

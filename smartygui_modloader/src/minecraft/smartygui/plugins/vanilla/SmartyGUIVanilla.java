@@ -22,7 +22,7 @@ import net.minecraft.src.mod_SmartyGUI;
 @ModDescription(
 		name = "SmartyGUI - Vanilla Plugin Pack",
 		description = "A set of plugins for vanilla to enchance the gameplay with SmartyGUI.",
-		version = "0.1 - for SmartyGUI ML-2.3",
+		version = "0.1 - for SmartyGUI ML-2.4",
 		icon = "/smartygui/icon.png"
 		)
 public class SmartyGUIVanilla implements IMod<SmartyGUIVanilla> {
