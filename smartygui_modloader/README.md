@@ -22,6 +22,18 @@ The ML version of the project is under [Apache License 2.0](https://raw.githubus
 
 ## Changelog
 ```
+ML-2.4:
+    Bug fixes/General:
+    	— Fixed an issue with config parsing between various SmartyGUI versions.
+    	— Fixed a possible issue related to "backspace" input in some text fields.
+    	— Render code is now a bit optimised.
+    	— Config initialisation is a small bit optimised.
+    	— Fixed some typos in the mod.
+
+    New features:
+    	— Added "MC Version" label module.
+    	— New anchors for HUD (now 9 various types).
+
 ML-2.3:
     Bug fixes/General:
     	— Fixed ModMenu not detecting the mod's description.
